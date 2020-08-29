@@ -1,0 +1,166 @@
+﻿@page "/view/test_case"
+@model Asharea_viewer.Pages.view.test_caseModel
+@{
+    ViewData["Title"] = "Test Case";
+}
+@section NavTop {
+    <div id="nav-top" class="text-center">
+        <div class="btn-icon-1 my-auto btn">
+            <i class="fa fa-chevron-left"></i>
+        </div>
+        <div class="btn-box btn">
+            <i class="fa fa-plus-circle"></i>
+            Select
+        </div>
+        <div class="btn-box btn">
+            <i class="fa fa-edit"></i>
+            Test Case
+        </div>
+        <div class="btn-box btn">
+            <i class="fa fa-file-text-o"></i>
+            Test Report
+        </div>
+        <div class="btn-box btn" style="border-right: 1px solid;">
+            <i class="fa fa-certificate"></i>
+            Certification
+        </div>
+        <div class="btn-icon-1 my-auto btn">
+            <i class="fa fa-times-circle"></i>
+        </div>
+    </div>
+}
+
+<!-- Content -->
+<div class="container-fluid flex-grow-1 container-p-y" id="caseList">
+
+    <!-- Header -->
+    <div class="container-m-nx container-m-ny bg-white mb-4 text-center">
+        <div class="media col-md-10 col-lg-8 col-xl-7 py-5 mx-auto">
+            <div class="media-body ml-5">
+                <h1 class="font-weight-bold mb-4">gbXML V6.0 Level 3 Certificatin</h1>
+
+                <div class="text-muted mb-4" style="font-size: 20px;">
+                    Test Cases
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Header -->
+    <div class="row">
+        <div class="col col-sm-6 col-lg-4">
+            <div class="card">
+                <img src="~/imgs/icons/sample1.png" class="ui-w-120 mx-auto my-2" />
+                <div class="card-body">
+
+                    <h4 class="card-title">L-Shape Zone</h4>
+                    <p class="text-text">
+                        In BIM models, rectangular spaces can be successfully exported into the gbXML file format. In reality, spaces are often drawn in L shape, T shpae or other …
+                    </p>
+                    <a href="" class="btn btn-link">View History</a>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-6 col-lg-4">
+            <div class="card">
+                <img src="~/imgs/icons/sample1.png" class="ui-w-120 mx-auto my-2" />
+                <div class="card-body">
+
+                    <h4 class="card-title">L-Shape Zone</h4>
+                    <p class="text-text">
+                        In BIM models, rectangular spaces can be successfully exported into the gbXML file format. In reality, spaces are often drawn in L shape, T shpae or other …
+                    </p>
+                    <a href="" class="btn btn-link">View History</a>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-6 col-lg-4">
+            <div class="card">
+                <img src="~/imgs/icons/sample1.png" class="ui-w-120 mx-auto my-2" />
+                <div class="card-body">
+
+                    <h4 class="card-title">L-Shape Zone</h4>
+                    <p class="text-text">
+                        In BIM models, rectangular spaces can be successfully exported into the gbXML file format. In reality, spaces are often drawn in L shape, T shpae or other …
+                    </p>
+                    <a href="" class="btn btn-link">View History</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <a href="/view/test_report" class="btn btn-primary mx-auto my-3" id="nextBtn" style="width:150px">Next</a>
+    </div>
+</div>
+
+<!-- Content -->
+<div class="container-fluid flex-grow-1 container-p-y" id="uploadTestCase" hidden>
+
+    <!-- Header -->
+    <div class="container-m-nx container-m-ny bg-white mb-4 text-center">
+        <div class="media col-md-10 col-lg-8 col-xl-7 py-5 mx-auto">
+            <div class="media-body ml-5">
+                <h1 class="font-weight-bold mb-4">Now Learn How To Create This Test Case From Your Software</h1>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- Header -->
+    <div class="row">
+        <div class="col col-sm-6 col-lg-4">
+            <div class="card">
+                <img src="~/imgs/icons/sample1.png" class="ui-w-120 mx-auto my-2" />
+                <div class="card-body">
+
+                    <h4 class="card-title">L-Shape Zone</h4>
+                    <p class="text-text">
+                        In BIM models, rectangular spaces can be successfully exported into the gbXML file format. In reality, spaces are often drawn in L shape, T shpae or other …
+                    </p>
+                    <a href="" class="btn btn-link">View History</a>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-6 col-lg-4">
+            <div class="card">
+                <img src="~/imgs/icons/sample1.png" class="ui-w-120 mx-auto my-2" />
+                <div class="card-body">
+
+                    <h4 class="card-title">L-Shape Zone</h4>
+                    <p class="text-text">
+                        In BIM models, rectangular spaces can be successfully exported into the gbXML file format. In reality, spaces are often drawn in L shape, T shpae or other …
+                    </p>
+                    <a href="" class="btn btn-link">View History</a>
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-6 col-lg-4">
+            <div class="card">
+                <img src="~/imgs/icons/sample1.png" class="ui-w-120 mx-auto my-2" />
+                <div class="card-body">
+
+                    <h4 class="card-title">L-Shape Zone</h4>
+                    <p class="text-text">
+                        In BIM models, rectangular spaces can be successfully exported into the gbXML file format. In reality, spaces are often drawn in L shape, T shpae or other …
+                    </p>
+                    <a href="" class="btn btn-link">View History</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <a href="" class="btn btn-primary mx-auto my-3" style="width:150px">Next</a>
+    </div>
+</div>
+
+<script type="application/javascript">
+    $(function () {
+        $("#nextBtn").click(function(){
+            $("#testList").hide();
+            $("#uploadTestCase").show();
+        });
+    })
+   
+</script>

@@ -1,0 +1,48 @@
+﻿@page "/register_validate"
+@model Asharea_viewer.Pages.register_validateModel
+@{
+    ViewData["Title"] = "Register Validate";
+}
+<div class="page-loader">
+    <div class="bg-primary"></div>
+</div>
+
+<!-- Content -->
+
+<div class="authentication-wrapper authentication-2 px-4">
+    <div class="authentication-inner py-5">
+
+        <!-- Form -->
+        <form class="card">
+            <div class="p-4 p-sm-5">
+
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="">
+                        <div class="w-100 position-relative text-center">
+                            <img src="imgs/icons/gbxml.png" class="w-75"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- / Logo -->
+
+                <h5 class="text-center text-muted font-weight-normal mb-4">
+                    A verification link has been sent to your email account
+                </h5>
+
+                <hr class="mt-0 mb-4">
+
+                <p>
+                    Please click on the link that has just been sent to your email account to verify your email and continue the registration process.
+                </p>
+
+
+
+                <a href="/login" class="btn btn-primary btn-block">Login</a>
+
+            </div>
+        </form>
+        <!-- / Form -->
+
+    </div>
+</div>

@@ -1,0 +1,291 @@
+﻿@page "/software"
+@model Asharea_viewer.Pages.dashboard.softwareModel
+@{
+    ViewData["Title"] = "Software";
+}
+
+@section sideInfo {
+    <!-- Side info -->
+    <div class="card mb-4">
+        <div class="card-body text-center">
+            <img src="assets/img/avatars/profile_default.jpg" alt class="ui-w-80 rounded-circle mt-2 mb-3">
+            <h5 class="mb-2 u_full_name">Nellie Maxwell</h5>
+            <div class="text-muted small">Project Manager Autodesk</div>
+        </div>
+        <hr class="border-light m-0">
+        <div class="card-body">
+            <h5 class="mb-4 font-weight-bold text-dark">
+                Contact Information
+            </h5>
+            <div class="mb-2">
+                <span class="text-muted">Email Address:</span>
+                <div class="mt-2 font-weight-bold text-dark u_email">Mike.Mills@autodesk.com</div>
+            </div>
+          
+            <div class="mb-2">
+                <span class="text-muted">Phone</span>
+                <div class="font-weight-bold text-dark mt-2 u_phone">+0 (123) 456 7891</div>
+            </div>
+            
+            <div class="mb-2">
+                <span class="text-muted">Organization</span>
+                <div class="font-weight-bold text-dark mt-2 u_organization">1051 Audeskdesk way, San Jose, CA 96254</div>
+            </div>
+        </div>
+        <hr class="border-light m-0">
+        <div class="card-body">
+            <div class='mb-4'>
+                <span class="text-muted">Last Login:</span>&nbsp;
+                08:43am
+            </div>
+        </div>
+    </div>
+    <!-- / Side info -->
+}
+
+@section navArchor {
+    <h4 class="font-weight-bold py-3 mb-4">
+        <a class="text-muted" href="/software">Dashboard</a>
+    </h4>
+}
+<!-- / Info -->
+<div class="nav-tabs-top nav-responsive-sm">
+    <ul class="nav nav-tabs nav-justified tabs-alt" id="tab-text">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#software">Software</a>
+        </li>
+        <!--
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#events">Events</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#messages">Messages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#documents">Documents</a>
+        </li>
+    -->
+
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane fade show active" id="software">
+            <div class="card mb-4">
+                <h5 class="card-header with-elements">
+                    <div class="card-header-title">Software (5)</div>
+                    <div class="card-header-elements ml-auto">
+                        <button type="button" class="btn btn-outline-primary">
+                            <i class="ion ion-md-add"></i> Add
+                        </button>
+                    </div>
+                </h5>
+                <div class="card-body">
+                    <div class="pb-1 mb-3 row">
+                        <div class="col-2">
+                            <img class="ui-w-65" src="~/imgs/icons/revit.png" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="float-right icon-size">
+                                <i class="ion ion-md-eye"></i> <i class="ion ion-md-create ml-3"></i>
+                            </div>
+                            <a href="javascript:void(0)" class="font-weight-bold text-dark">Autodesk Revit</a>
+                            <i class="ion ion-md-calendar ml-4"></i><span class="text-muted ml-3">03/25/2020</span>
+                            <br>
+                            <small class="text-muted">Description: xxxxxxxxxxx</small>
+                            <br>
+                            <small class="text-muted">Certification Level: Lv2  <span class="font-weight-bold text-primary ml-5 btn">View</span> </small>
+                        </div>
+                    </div>
+                    <div class="pb-1 mb-3 row">
+                        <div class="col-2">
+                            <img class="ui-w-65" src="~/imgs/icons/autocad.png" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="float-right icon-size">
+                                <i class="ion ion-md-eye"></i> <i class="ion ion-md-create ml-3"></i>
+                            </div>
+                            <a href="javascript:void(0)" class="font-weight-bold text-dark">Autodesk Autocad</a>
+                            <i class="ion ion-md-calendar ml-4"></i><span class="text-muted ml-3">03/25/2020</span>
+                            <br>
+                            <small class="text-muted">Description: xxxxxxxxxxx</small>
+                            <br>
+                            <small class="text-muted">Certification Level: Lv2  <span class="font-weight-bold text-primary ml-5 btn" onclick="ViewCertificationProcess()">Start</span> </small>
+                        </div>
+                    </div>
+                    <div class="pb-1 mb-3 row">
+                        <div class="col-2">
+                            <img class="ui-w-65" src="~/imgs/icons/maya.png" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="float-right icon-size">
+                                <i class="ion ion-md-eye"></i> <i class="ion ion-md-create ml-3"></i>
+                            </div>
+                            <a href="javascript:void(0)" class="font-weight-bold text-dark">Autodesk Maya</a>
+                            <i class="ion ion-md-calendar ml-4"></i><span class="text-muted ml-3">03/25/2020</span>
+                            <br>
+                            <small class="text-muted">Description: xxxxxxxxxxx</small>
+                            <br>
+                            <small class="text-muted">Certification Level: Lv2  <span class="font-weight-bold text-primary ml-5 btn">Continue</span> </small>
+                        </div>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" class="card-footer d-block text-center text-body small font-weight-semibold">SHOW MORE</a>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="events">
+            <div class="card-body">
+                <h5 class="mb-4 font-weight-bold">
+                    Event (6)
+                </h5>
+                <div class="row">
+                    <div class="col col-sm-6 col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="text-center">
+                                    <h6>Asharea gbXML Webniar</h6>
+                                </div>
+                                <hr class="d-lg-none w-100 my-2">
+                                <small class="text-danger text-left py-3 d-block font-weight-bold">Sun, July 19,2020 1:15 PM PDT</small>
+                                <div class="text-center">
+                                    <h6>Asharea gbXML Webniar</h6>
+                                    <h6>Validator Education 101</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-sm-6 col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="text-center">
+                                    <h6>Asharea gbXML Webniar</h6>
+                                </div>
+                                <hr class="d-lg-none w-100 my-2">
+                                <small class="text-danger text-left py-3 d-block font-weight-bold">Sun, July 19,2020 1:15 PM PDT</small>
+                                <div class="text-center">
+                                    <h6>Asharea gbXML Webniar</h6>
+                                    <h6>Validator Education 101</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-sm-6 col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class="text-center">
+                                    <h6>Asharea gbXML Webniar</h6>
+                                </div>
+                                <hr class="d-lg-none w-100 my-2">
+                                <small class="text-danger text-left py-3 d-block font-weight-bold">Sun, July 19,2020 1:15 PM PDT</small>
+                                <div class="text-center">
+                                    <h6>Asharea gbXML Webniar</h6>
+                                    <h6>Validator Education 101</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="messages">
+            <div class="card-body">
+                <h5 class="mb-4 font-weight-bold">
+                    Messages (5)
+                </h5>
+                <div class="media pb-1 mb-3">
+                    <img src="assets/img/avatars/6-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                    <div class="media-body ml-3">
+                        <div class="mb-1">
+                            <strong class="font-weight-semibold">Mae Gibson</strong> &nbsp;
+                            <small class="text-muted float-right">58m ago</small>
+                        </div>
+                        <a href="javascript:void(0)" class="text-body">Sit meis deleniti eu, pri vidit meliore docendi ut.</a>
+                    </div>
+                </div>
+                <div class="media pb-1 mb-3">
+                    <img src="assets/img/avatars/4-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                    <div class="media-body ml-3">
+                        <div class="mb-1">
+                            <strong class="font-weight-semibold">Kenneth Frazier</strong> &nbsp;
+                            <small class="text-muted float-right">1h ago</small>
+                        </div>
+                        <a href="javascript:void(0)" class="text-body">Mea et legere fuisset, ius amet purto luptatum te.</a>
+                    </div>
+                </div>
+                <div class="media pb-1 mb-3">
+                    <img src="assets/img/avatars/5-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                    <div class="media-body ml-3">
+                        <div class="mb-1">
+                            <strong class="font-weight-semibold">Nelle Maxwell</strong> &nbsp;
+                            <small class="text-muted float-right">2h ago</small>
+                        </div>
+                        <a href="javascript:void(0)" class="text-body">Sit meis deleniti eu, pri vidit meliore docendi ut.</a>
+                    </div>
+                </div>
+                <div class="media">
+                    <img src="assets/img/avatars/1-small.png" class="d-block ui-w-40 rounded-circle" alt>
+                    <div class="media-body ml-3">
+                        <div class="mb-1">
+                            <strong class="font-weight-semibold">Mike Greene</strong> &nbsp;
+                            <small class="text-muted float-right">1d ago</small>
+                        </div>
+                        <a href="javascript:void(0)" class="text-body">Lorem ipsum dolor sit amet, vis erat denique in.</a>
+                    </div>
+                </div>
+                <a href="javascript:void(0)" class="card-footer d-block text-center text-body small font-weight-semibold mt-3">SHOW MORE</a>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="documents">
+            <div class="file-manager-container file-manager-row-view mt-3 mb-3">
+
+                <div class="file-manager-row-header row">
+                    <div class="file-item-name pb-2 col-4">Filename</div>
+                    <div class="file-item-owner pb-2 col-3">Owner</div>
+                    <div class="file-item-size pb-2 col-2">Size</div>
+                    <div class="file-item-changed pb-2 col">Date modified</div>
+                </div>
+
+                <div class="file-item">
+                    <div class="file-item-icon file-item-level-up fas fa-level-up-alt text-secondary"></div>
+                    <a href="javascript:void(0)" class="file-item-name">
+                        ..
+                    </a>
+                </div>
+
+                <div class="file-item row">
+
+                    <div class="file-item-icon far fa-folder text-secondary"></div>
+                    <a href="javascript:void(0)" class="file-item-name col-4">
+                        Images
+                    </a>
+                    <div class="file-item-owner col-3">Rosa</div>
+                    <div class="file-item-size col-2">1.2Mb</div>
+                    <div class="file-item-changed col">02/13/2018</div>
+
+                </div>
+
+                <div class="file-item row">
+
+                    <div class="file-item-icon far fa-folder text-secondary"></div>
+                    <a href="javascript:void(0)" class="file-item-name col-4">
+                        Scripts
+                    </a>
+                    <div class="file-item-owner col-3">David</div>
+                    <div class="file-item-size col-2">1.2Mb</div>
+                    <div class="file-item-changed col">02/15/2018</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        
+    });
+
+    function ViewCertificationProcess() {
+        window.location = '/certification';
+    }
+</script>

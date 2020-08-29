@@ -19,5 +19,12 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\imgs\" />
+    <Folder Include="Pages\auth\" />
+    <Folder Include="Pages\dashboard\" />
+    <Folder Include="wwwroot\imgs\icons\" />
+    <Folder Include="Pages\view\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Pages\_ViewImports.cshtml" />
   </ItemGroup>
 </Project>
