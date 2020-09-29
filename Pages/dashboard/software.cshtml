@@ -1,8 +1,6 @@
 ﻿@page "/software"
 @model Asharea_viewer.Pages.dashboard.softwareModel
-@{
-    ViewData["Title"] = "Software";
-}
+@{ ViewData["Title"] = "Software"; }
 
 @section sideInfo {
     <!-- Side info -->
@@ -21,12 +19,12 @@
                 <span class="text-muted">Email Address:</span>
                 <div class="mt-2 font-weight-bold text-dark u_email">Mike.Mills@autodesk.com</div>
             </div>
-          
+
             <div class="mb-2">
                 <span class="text-muted">Phone</span>
                 <div class="font-weight-bold text-dark mt-2 u_phone">+0 (123) 456 7891</div>
             </div>
-            
+
             <div class="mb-2">
                 <span class="text-muted">Organization</span>
                 <div class="font-weight-bold text-dark mt-2 u_organization">1051 Audeskdesk way, San Jose, CA 96254</div>
@@ -55,31 +53,32 @@
             <a class="nav-link active" data-toggle="tab" href="#software">Software</a>
         </li>
         <!--
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#events">Events</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#messages">Messages</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#documents">Documents</a>
-        </li>
-    -->
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#events">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#messages">Messages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#documents">Documents</a>
+            </li>
+        -->
 
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="software">
             <div class="card mb-4">
                 <h5 class="card-header with-elements">
-                    <div class="card-header-title">Software (5)</div>
+                    <div class="card-header-title">Software (<span id="software_cnt">0</span>)</div>
                     <div class="card-header-elements ml-auto">
-                        <button type="button" class="btn btn-outline-primary">
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#add-software-model">
                             <i class="ion ion-md-add"></i> Add
                         </button>
                     </div>
                 </h5>
-                <div class="card-body">
-                    <div class="pb-1 mb-3 row">
+                <div class="card-body" id="software_list">
+                    @*example 1*@
+                    @*<div class="pb-1 mb-3 row">
                         <div class="col-2">
                             <img class="ui-w-65" src="~/imgs/icons/revit.png" alt="">
                         </div>
@@ -94,41 +93,10 @@
                             <br>
                             <small class="text-muted">Certification Level: Lv2  <span class="font-weight-bold text-primary ml-5 btn">View</span> </small>
                         </div>
-                    </div>
-                    <div class="pb-1 mb-3 row">
-                        <div class="col-2">
-                            <img class="ui-w-65" src="~/imgs/icons/autocad.png" alt="">
-                        </div>
-                        <div class="col">
-                            <div class="float-right icon-size">
-                                <i class="ion ion-md-eye"></i> <i class="ion ion-md-create ml-3"></i>
-                            </div>
-                            <a href="javascript:void(0)" class="font-weight-bold text-dark">Autodesk Autocad</a>
-                            <i class="ion ion-md-calendar ml-4"></i><span class="text-muted ml-3">03/25/2020</span>
-                            <br>
-                            <small class="text-muted">Description: xxxxxxxxxxx</small>
-                            <br>
-                            <small class="text-muted">Certification Level: Lv2  <span class="font-weight-bold text-primary ml-5 btn" onclick="ViewCertificationProcess()">Start</span> </small>
-                        </div>
-                    </div>
-                    <div class="pb-1 mb-3 row">
-                        <div class="col-2">
-                            <img class="ui-w-65" src="~/imgs/icons/maya.png" alt="">
-                        </div>
-                        <div class="col">
-                            <div class="float-right icon-size">
-                                <i class="ion ion-md-eye"></i> <i class="ion ion-md-create ml-3"></i>
-                            </div>
-                            <a href="javascript:void(0)" class="font-weight-bold text-dark">Autodesk Maya</a>
-                            <i class="ion ion-md-calendar ml-4"></i><span class="text-muted ml-3">03/25/2020</span>
-                            <br>
-                            <small class="text-muted">Description: xxxxxxxxxxx</small>
-                            <br>
-                            <small class="text-muted">Certification Level: Lv2  <span class="font-weight-bold text-primary ml-5 btn">Continue</span> </small>
-                        </div>
-                    </div>
+                    </div>*@
+              
                 </div>
-                <a href="javascript:void(0)" class="card-footer d-block text-center text-body small font-weight-semibold">SHOW MORE</a>
+                @*<a href="javascript:void(0)" class="card-footer d-block text-center text-body small font-weight-semibold">SHOW MORE</a>*@
             </div>
         </div>
         <div class="tab-pane fade" id="events">
@@ -142,12 +110,12 @@
                             <div class="card-body">
 
                                 <div class="text-center">
-                                    <h6>Asharea gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webniar</h6>
                                 </div>
                                 <hr class="d-lg-none w-100 my-2">
                                 <small class="text-danger text-left py-3 d-block font-weight-bold">Sun, July 19,2020 1:15 PM PDT</small>
                                 <div class="text-center">
-                                    <h6>Asharea gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webniar</h6>
                                     <h6>Validator Education 101</h6>
                                 </div>
                             </div>
@@ -158,12 +126,12 @@
                             <div class="card-body">
 
                                 <div class="text-center">
-                                    <h6>Asharea gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webniar</h6>
                                 </div>
                                 <hr class="d-lg-none w-100 my-2">
                                 <small class="text-danger text-left py-3 d-block font-weight-bold">Sun, July 19,2020 1:15 PM PDT</small>
                                 <div class="text-center">
-                                    <h6>Asharea gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webniar</h6>
                                     <h6>Validator Education 101</h6>
                                 </div>
                             </div>
@@ -174,12 +142,12 @@
                             <div class="card-body">
 
                                 <div class="text-center">
-                                    <h6>Asharea gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webniar</h6>
                                 </div>
                                 <hr class="d-lg-none w-100 my-2">
                                 <small class="text-danger text-left py-3 d-block font-weight-bold">Sun, July 19,2020 1:15 PM PDT</small>
                                 <div class="text-center">
-                                    <h6>Asharea gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webniar</h6>
                                     <h6>Validator Education 101</h6>
                                 </div>
                             </div>
@@ -280,12 +248,116 @@
         </div>
     </div>
 </div>
+<!-- Modal template -->
+<div class="modal fade" id="add-software-model">
+    <div class="modal-dialog">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Software
+                    <span class="font-weight-light">Information</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="ui-w-65" style="padding: 10px">
+                        <img src="~/imgs/icons/revit.png" alt="" />
+                    </div>
+                    <div style="margin: auto 10px;">
+                        <button type="button" class="btn btn-primary btn-sm">Select Image</button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col mb-0">
+                        <label class="form-label" >Software name*</label>
+                        <input type="text" class="form-control" id="sw_name" placeholder="Autodesk Autocad">
+                    </div>
+                    <div class="form-group col mb-0">
+                        <label class="form-label" >Version*</label>
+                        <input type="text" class="form-control" id="sw_version" placeholder="Version 2">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label" >Description</label>
+                        <input type="text" class="form-control" id="sw_desc" placeholder="...">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save_software_btn">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+<template id="new_software_row">
+    <div class="pb-1 mb-3 row software_item">
+        <div class="col-2">
+            <img class="ui-w-65" src="~/imgs/icons/revit.png" alt="">
+        </div>
+        <div class="col">
+            <div class="float-right icon-size">
+                <i class="ion ion-md-create ml-3 edit_icon_btn"></i>
+            </div>
+            <a href="javascript:void(0)" class="font-weight-bold text-dark new_sw_name">Autodesk Revit</a>
+            <i class="ion ion-md-calendar ml-4"></i><span class="text-muted ml-3 new_sw_date">03/25/2020</span>
+            <br>
+            <small class="text-muted">Description: <span class="new_sw_desc"></span></small>
+            <br>
+            <small class="text-muted">Certification Level: <span class="new_sw_level">Lv2</span>  <span class="font-weight-bold text-primary ml-5 btn new_sw_status btn">Start</span> </small>
+        </div>
+    </div>
+</template>
 <script>
     $(function () {
+        let total_software = 0;
+        get_software().then(function (data) {
+            total_software = data.length;
+            $("#software_cnt").html(total_software);
+            $.each(data, function (_, item) {
+                $("#software_list").html();
+                add_new_software_item(item);
+            });
+        });
+        $(".new_sw_status").click(function () {
+            let id = $(this).attr("id");
+            localStorage.setItem("software_id", id);
+            window.location = '/certification';
+        })
+        $(document).ready(function () {
+            $("#software_list").on('click', '.new_sw_status', function () {
+                let id = $(this).attr("id");
+                localStorage.setItem("software_id", id);
+                window.location = '/certification';
+            });
+        });
         
+
+        $("#save_software_btn").click(function () {
+            console.log("save software");
+            let name = $("#sw_name").val();
+            let version = $("#sw_version").val();
+            let desc = $("#sw_desc").val();
+            add_software(name, desc, version).then(function (data) {
+                add_new_software_item(data);
+                total_software += 1;
+                $("#software_cnt").html(total_software);
+                $("#add-software-model").modal('toggle');
+            })
+        });
     });
 
-    function ViewCertificationProcess() {
-        window.location = '/certification';
+    function add_new_software_item(item) {
+        let holder = $(document.getElementById("new_software_row").content.cloneNode(true));
+        holder.find(".new_sw_name").html(item['name']);
+        holder.find(".new_sw_date").html(moment(item['createdDate']).format('MM/DD/YYYY'));
+        holder.find(".new_sw_desc").html(item['description']);
+        holder.find(".new_sw_level").html(item['certificationLevel'] ? item['certificationLevel'] : "N/A");
+        holder.find(".new_sw_status").html(item['status']).attr("id", item['id']);
+        $("#software_list").append(holder);
     }
+
 </script>

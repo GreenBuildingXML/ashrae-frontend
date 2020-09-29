@@ -6,7 +6,7 @@
 
 @section NavTop {
     <div id="nav-top" class="text-center">
-        <div class="btn-icon-1 my-auto btn">
+        <div class="btn-icon-1 my-auto btn" onclick="stepToPrev('test_case')">
             <i class="fa fa-chevron-left"></i>
         </div>
         <div class="btn-box btn">
@@ -17,15 +17,15 @@
             <i class="fa fa-edit"></i>
             Test Case
         </div>
-        <div class="btn-box btn">
+        <div class="btn-box btn active">
             <i class="fa fa-file-text-o"></i>
             Test Report
         </div>
-        <div class="btn-box btn" style="border-right: 1px solid;">
+        <div class="btn-box btn">
             <i class="fa fa-certificate"></i>
             Certification
         </div>
-        <div class="btn-icon-1 my-auto btn">
+        <div class="btn-icon-1 my-auto btn btn-box" onclick="closeVerification()">
             <i class="fa fa-times-circle"></i>
         </div>
     </div>
@@ -34,12 +34,12 @@
     <div class="w-100 main-container">
         <div class="main-side-bar">
             <div style="margin: 10rem 40px;">
-                <div class="icon-group">
-                    <div class="icon-item pull-left text-center">
+                <div class="row">
+                    <div class="icon-item col text-center">
                         <img src="~/imgs/gbxml_ui/warning.png" alt="">
                         <p>6 Errors</p>
                     </div>
-                    <div class="icon-item pull-right text-center">
+                    <div class="icon-item col text-center">
                         <img src="~/imgs/gbxml_ui/signs.png" alt="">
                         <p>4 Warnings</p>
                     </div>
@@ -68,6 +68,15 @@
                             <a class="dropdown-item" href="#">Warning 4</a>
                         </div>
                     </div>
+                </div>
+
+                <div style="padding-top: 40%;">
+                    <button class="btn btn-primary btn-block" type="button">
+                        Download Report
+                    </button>
+                    <button class="btn btn-secondary btn-block" type="button" id="getCertificationBtn">
+                        Get Certification
+                    </button>
                 </div>
             </div>
         </div>
@@ -151,7 +160,8 @@
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
-<script>MNU.urlSourceCode = "https://github.com/ladybug-tools/spider-gbxml-tools/tree/master/gbxml-viewer-basic/";
+<script>
+    MNU.urlSourceCode = "https://github.com/ladybug-tools/spider-gbxml-tools/tree/master/gbxml-viewer-basic/";
 
         FIL.divFileInfo = divFileInfo;
 
@@ -176,4 +186,17 @@
             divPopUpData.innerHTML = POP.getMenuHtmlPopUp();
 
     }
+
+    $(function () {
+        let selected_test_case = localStorage.getItem("selected_test_case");
+        let software_id = localStorage.getItem("software_id");
+        $("#getCertificationBtn").click(function () {
+            update_certification_lv2(software_id, selected_test_case, "success").then(function (data) {
+                console.log(data);
+            })
+            window.location = "/view/certification";
+        });
+    })
+
+
 </script>

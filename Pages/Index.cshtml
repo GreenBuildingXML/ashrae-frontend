@@ -26,6 +26,9 @@
             $.ajax({
                 'type': 'GET',
                 'url': get_root_Api() + 'api/AuthenticateUser',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', get_token());
+                },
                 'success': function (data) {
                     window.location.href = "./software";
                 },

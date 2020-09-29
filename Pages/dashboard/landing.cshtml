@@ -1,0 +1,95 @@
+﻿@page "/landing"
+@model Asharea_viewer.Pages.dashboard.landingModel
+@{ ViewData["Title"] = "Landing"; }
+@section sideInfo {
+    <!-- Side info -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="media">
+                <img src="assets/img/avatars/profile_default.jpg" alt class="ui-w-60 rounded-circle">
+                <div class="media-body pt-2 ml-3">
+                    <h5 class="mb-2 u_full_name">Nellie Maxwell</h5>
+
+                </div>
+            </div>
+            <div class="text-muted small mt-3">Software</div>
+            <h5 class="font-weight-bold mt-2 selected_software">Autodesk CAD</h5>
+            <hr class="border-light m-0">
+            <div class="text-muted small pt-3 text-uppercase">Certification Level</div>
+            <h5 class="mb-4 font-weight-bold mt-2 certification_level">
+                Level 1
+            </h5>
+            <div class="text-muted small pt-3 text-uppercase">Share your progress</div>
+            <div class="text-muted d-flex mt-3">
+                <div><i class="ion ion-md-desktop ml-4"></i></div>
+                <div><i class="ion ion-md-analytics ml-4"></i></div>
+                <div><i class="ion ion-md-eye ml-4"></i></div>
+            </div>
+            <div class="text-muted small pt-3 text-uppercase">Program newsletter</div>
+            <label class="custom-control custom-checkbox mt-3 text-muted ml-3">
+                <input type="checkbox" class="custom-control-input">
+                <span class="custom-control-label">Subscribe</span>
+            </label>
+
+        </div>
+    </div>
+    <!-- / Side info -->
+}
+
+@section navArchor {
+    <h4 class="font-weight-bold py-3 mb-4">
+        <a href="/software" class="text-muted font-weight-light">Dashboard / </a> <a href="/certification">Certification</a>
+    </h4>
+}
+<div class="card mb-4">
+    <ul class="list-group list-group-flush">
+
+        <li class="list-group-item py-4">
+            <div class="row text-center">
+                <div class="col-4">
+                    <img src="~/imgs/icons/diamond.png"></img>
+                    <h3 class="mt-3">Congratulation!</h3>
+                    <p class="text-center">You have achieved the certification for the software!</p>
+                    
+                </div>
+                <div class="col-8">
+                    <div class="mt-4">
+                        <h5 class="mb-2">
+                            <a href="javascript:void(0)" class="text-body">gbXML Level 2 Certification</a>&nbsp;
+                        </h5>
+                        <h4 class="pt-4">For: <span class="selected_software">AUTODESK REVIT 2020 R3</span> <span class="selected_version"></span></h4>
+                        <div>By <span class="u_full_name"></span></div>
+                        <div class="mt-3">
+                            On <span>July 10 2020</span>
+                        </div>
+                        <div class="mt-3">Certification ID: <strong>201927324</strong></div>
+
+                    </div>
+                 </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-4">
+                    <div class="progress" style="height: 1rem;">
+                        <div class="progress-bar bg-warning" style="width: 100%;">100%</div>
+                    </div>
+                </div>
+                <div class="col-8 text-center"><button class="btn btn-primary mx-auto" id="view-certification" style="width:200px">View Certification</button></div>
+            </div>
+        </li>
+    </ul>
+
+</div>
+<script>
+    $(function () {
+        let software_id = localStorage.getItem("software_id");
+        $("#view-certification").click(function () {
+            window.location = '/view/select';
+        });
+        get_one_software(software_id).then(function (data) {
+            $(".selected_software").html(data['name']);
+            $(".selected_version").html(data['version']);
+            $(".certification_level").html(data['certificationLevel'] ? data['certificationLevel'] : "N/A");
+
+        });
+    });
+</script>

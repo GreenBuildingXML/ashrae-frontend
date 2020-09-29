@@ -1,17 +1,13 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="en" class="default-style">
 <head>
     <meta name=description
           content="Open, view and examine gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript">
     <meta name=keywords content="gbXML,Spider,Ladybug.tools,Three.js,WebGL,JavaScript,GitHub,FOSS,3D,STEM">
     <meta name="date" content="2018-11-15">
     <title>@ViewData["Title"] - viewer</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/style.css" />
     <link rel="stylesheet" href="~/lib/spider_lib/r7/style.css">
-    <link rel="stylesheet" href="~/css/font-awesome.css" />
     <!-- Icon fonts -->
     <link rel="stylesheet" href="~/assets/vendor/fonts/fontawesome.css">
     <link rel="stylesheet" href="~/assets/vendor/fonts/ionicons.css">
@@ -27,7 +23,7 @@
     <link rel="stylesheet" href="~/assets/vendor/css/rtl/uikit.css">
     <link rel="stylesheet" href="~/assets/css/demo.css">
     <link rel="stylesheet" href="~/css/style.css">
-
+    <link rel="stylesheet" href="~/css/view.css">
     <!-- Load polyfills -->
     <script src="~/assets/vendor/js/polyfills.js"></script>
     <script>document['documentMode'] === 10 && document.write('<script src="https://polyfill.io/v3/polyfill.min.js?features=Intl.~locale.en"><\/script>')</script>
@@ -40,8 +36,10 @@
 
     <!-- Libs -->
     <link rel="stylesheet" href="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="~/assets/vendor/libs/smartwizard/smartwizard.css">
+    <link rel="stylesheet" href="~/assets/vendor/libs/dropzone/dropzone.css">
 </head>
-<body>
+<body style="background: white">
     <div>
         @RenderSection("NavTop", required: false)
     </div>
@@ -53,8 +51,21 @@
 
     <!-- Libs -->
     <script src="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
+    <script src="~/assets/vendor/libs/smartwizard/smartwizard.js"></script>
+    <script src="~/assets/vendor/libs/validate/validate.js"></script>
+    <script src="~/assets/vendor/libs/dropzone/dropzone.js"></script>
+    <script src="~/assets/vendor/libs/flow-js/flow.js"></script>
     <!-- Demo -->
     <script src="~/assets/js/demo.js"></script>
+    <script src="~/assets/js/forms_wizard.js"></script>
+    <script src="~/js/common.js"></script>
+    <script src="~/js/dropzone.js"></script>
+    <script src="~/js/software.js"></script>
+    <script>function stepToPrev(page) {
+            window.location = '/view/' + page;
+        }
+        function closeVerification() {
+            window.location = '/certification';
+        }</script>
 </body>
 </html>

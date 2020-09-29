@@ -1,8 +1,6 @@
 ﻿@page "/certification"
 @model Asharea_viewer.Pages.dashboard.certificationModel
-@{
-    ViewData["Title"] = "Certification";
-}
+@{ ViewData["Title"] = "Certification"; }
 @section sideInfo {
     <!-- Side info -->
     <div class="card mb-4">
@@ -14,11 +12,11 @@
 
                 </div>
             </div>
-            <div class="text-muted small mt-3">Project Manager Autodesk</div>
-            <h5 class="font-weight-bold mt-2">Autodesk CAD</h5>
+            <div class="text-muted small mt-3">Software</div>
+            <h5 class="font-weight-bold mt-2 selected_software">Autodesk CAD</h5>
             <hr class="border-light m-0">
             <div class="text-muted small pt-3 text-uppercase">Certification Level</div>
-            <h5 class="mb-4 font-weight-bold mt-2">
+            <h5 class="mb-4 font-weight-bold mt-2 certification_level">
                 Level 1
             </h5>
             <div class="text-muted small pt-3 text-uppercase">Share your progress</div>
@@ -48,43 +46,61 @@
 
         <li class="list-group-item py-4">
             <div class="media flex-wrap">
-                <div class="circle-icon border-success">
+                <div class="circle-icon badge border-success" id="level1_image">
                     <img src="~/imgs/icons/shield.png"></img>
                 </div>
                 <div class="media-body ml-sm-4">
                     <h5 class="mb-2">
-                        <a href="javascript:void(0)" class="text-body">Level 1 test</a>&nbsp;
+                        <a href="javascript:void(0)" class="text-body">Level 1 Certification</a>&nbsp;
                     </h5>
 
-                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio ligula, rhoncus scelerisque ullamcorper iaculis.</div>
-                    <div>software: <strong>Autodesk Revit</strong></div>
-                    <div class="mt-3">
-                       @*<button class="btn btn-primary ui-w-120" data-toggle="modal" data-target="#upload-modal">Validate</button>*@
-                        <button class="btn btn-primary ui-w-120">Validate</button>
+                    <div id="start_level1">
+                        <div>Start the level 1 gbXML certification validation for</div>
+                        <div>software: <strong class="selected_software">Autodesk Revit</strong></div>
+                        <div class="mt-3">
+                            <button class="btn btn-primary ui-w-120" id="upload_file_btn">Validate</button>
+                        </div>
+                    </div>
+                    <div id="complete_level1" style="display:none;">
+                        <div><strong class="selected_software">Autodesk Revit</strong> pass the level1 Certification</div>
+                        <div class="mt-2">Certification ID: <span id="level1_certification_id">201927324</span></div>
                     </div>
                 </div>
             </div>
         </li>
         <li class="list-group-item py-4">
             <div class="media flex-wrap">
-                <div class="circle-icon border-warning">
+                <div class="circle-icon badge border-warning" id="level2_image">
                     <img src="~/imgs/icons/shield.png"></img>
                 </div>
                 <div class="media-body ml-sm-4">
                     <h5 class="mb-2">
-                        <a href="javascript:void(0)" class="text-body">Level 2 test</a>&nbsp;
+                        <a href="javascript:void(0)" class="text-body">Level 2 Certification</a>&nbsp;
                     </h5>
 
-                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec odio ligula, rhoncus scelerisque ullamcorper iaculis.</div>
-                    <div>software: <strong>Autodesk Revit</strong></div>
-                    <div class="mt-3">
-                        <button class="btn btn-primary ui-w-120" onclick="validateProduct()">Validate</button>
+                    <div id="start_level2">
+                        <div>Start the level 2 gbXML cerfication vlaidation for</div>
+                        <div>software: <strong class="selected_software">Autodesk Revit</strong></div>
+                        <div class="mt-3">
+                            <button class="btn btn-primary ui-w-120" id="start_level2_btn">Validate</button>
+                        </div>
+                    </div>
+                    <div id="complete_level2" style="display:none;">
+                        <div style="font-size:.8rem;font-weight:bold;" class="mt-2"><span class="level2_percentage">30%</span> COMPLETED!</div>
+                        <div class="progress my-3" id="progress-bar-custom">
+                            <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated level2_percentage" style="width: 0;">30%</div>
+                        </div>
+                        <div>Great Job! You have completed <span class="level2_percentage">30%</span>  of the test cases.</div>
+                        <div>Keep the good Work!</div>
+                        <div class="mt-3">
+                            <button class="btn btn-primary ui-w-120" id="process_level2_btn">Continue</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </li>
     </ul>
-  
+
 </div>
 <!-- Modal template -->
 <div class="modal fade" id="upload-modal">
@@ -93,41 +109,114 @@
             <div class="modal-header">
                 <h5 class="modal-title mx-auto text-center">
                     <i class="lnr lnr-laptop d-block font-weight-light" style="font-size: 50px;"></i>
-                    New Model
+                    Upload test case
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
             </div>
             <div class="modal-body">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <form action="/upload" class="dropzone needsclick" id="dropzone-demo">
-                            <div class="dz-message needsclick">
-                                Drop files here or click to upload
-                                <span class="note needsclick">
-                                    (This is just a demo dropzone. Selected files are
-                                    <strong>not</strong> actually uploaded.)
-                                </span>
-                            </div>
-                            <div class="fallback">
-                                <input name="file" type="file" multiple>
-                            </div>
-                        </form>
+                       
+                        <div action="#" id="dropzone-demo" class="dropzone">
+                            <div class="dz-message" data-dz-message><span>Drag files here or browse to upload</span></div>
+                        </div>
                     </div>
                 </div>
+                <div style="text-align:right">
+                    @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+                    <button type="button" class="btn btn-primary" id="validate_xml_btn">Validate</button>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
-            </div>
+
         </form>
     </div>
 </div>
-<script src="~/assets/js/forms_file-upload.js"></script>
 <script>
     $(function () {
-        @*init_dropzone('dropzone-demo', true);*@
+        let software_id = localStorage.getItem("software_id");
+        get_one_software(software_id).then(function (data) {
+            $(".selected_software").html(data['name']);
+            $(".certification_level").html(data['certificationLevel'] ? data['certificationLevel'] : "N/A");
+
+        });
+        let total_tests = 5;
+        get_certification(software_id).then(function (data) {
+            let is_level1_passed = data['isLevel1Passed'];
+            let is_level2_passed = data['isLevel2Passed'];
+            let passed_test = data['passedTests'];
+            if (is_level1_passed) {
+                $("#start_level1").hide();
+                $("#complete_level1").show();
+                $("#level1_image").removeClass("border-success circle-icon");
+                $("#level1_image img").attr("src", "/imgs/icons/level1_badge.png");
+                $("#level1_certification_id").html(data['level1CertificationId']);
+            } else {
+                $("#start_level2_btn").prop('disabled', true);
+            }
+            if (passed_test > 0) {
+                $("#start_level2").hide();
+                $("#complete_level2").show();
+                let percentage = passed_test / total_tests * 100;
+                $(".level2_percentage").html(percentage + "%");
+                $("#progress-bar-custom .level2_percentage").css("width", percentage + "%");
+                $("#process_level2_btn").attr("is_passed", is_level2_passed).html(is_level2_passed ? "View" : "Continue");
+                if (is_level2_passed) {
+                    $("#level2_image").removeClass("border-warning circle-icon");
+                    $("#level2_image img").attr("src", "/imgs/icons/diamond.png").css("width","80%");
+                }
+            }
+        });        
+        
+        $("#validate_xml_btn").click(function () {
+            let dropzone = document.getElementById('dropzone-demo').dropzone;
+            let file = dropzone.files[0];
+            readFileContent(file).then(content => {
+                let result = validateXML(content);
+                if (result) {
+                    update_certification_lv1(software_id).then(function (data) {
+                        console.log(data);
+                        $(".certification_level").html("Lv1");
+                        $("#start_level1").hide();
+                        $("#complete_level1").show();
+                        $("#level1_image").removeClass("border-success circle-icon");
+                        $("#level1_image img").attr("src", "/imgs/icons/level1_badge.png");
+                        $("#level1_certification_id").html(data['level1CertificationId']);
+                        $("#start_level2_btn").prop('disabled', false);
+                        $("#upload-modal").modal('toggle');
+                    })
+                    
+                }
+            }).catch(error => console.log(error))
+            
+        });
+        $("#upload_file_btn").click(function () {
+            $("#upload-modal").modal('toggle');
+        });
+        init_dropzone('dropzone-demo',false);
+        $('#upload-modal').on('shown.bs.modal', function (e) {
+            
+        })
     });
-    function validateProduct() {
-        window.location = '/view/test_case';
+
+    $("#process_level2_btn").click(function () {
+        let is_passed = $(this).attr("is_passed");
+        let url = "/view/select";
+        @*is_passed ? url = "" : "/view/select";*@
+        window.location = url;
+    });
+
+    $("#start_level2_btn").click(function () {
+        window.location = '/view/select';
+    });
+
+
+    function readFileContent(file) {
+        const reader = new FileReader()
+        return new Promise((resolve, reject) => {
+            reader.onload = event => resolve(event.target.result)
+            reader.onerror = error => reject(error)
+            reader.readAsText(file)
+        })
     }
+    
 </script>

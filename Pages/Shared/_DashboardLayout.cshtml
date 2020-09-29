@@ -38,6 +38,7 @@
 
     <!-- Libs -->
     <link rel="stylesheet" href="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="~/assets/vendor/libs/sweetalert2/sweetalert2.css">
     <link rel="stylesheet" href="~/assets/vendor/libs/dropzone/dropzone.css">
     <link rel="stylesheet" href="~/assets/vendor/libs/flow-js/flow.css">
     <!-- Page -->
@@ -178,7 +179,7 @@
                     <nav class="layout-footer bg-footer-theme">
                         <div class="container-fluid d-flex flex-wrap justify-content-between text-center container-p-x pb-3">
                             <div class="pt-3">
-                                <span class="footer-text font-weight-bolder">Asharea</span> © 2020
+                                <span class="footer-text font-weight-bolder">Ashrae</span> © 2020
                             </div>
                             <div>
                                 <a href="javascript:void(0)" class="footer-link pt-3">About Us</a>
@@ -206,11 +207,16 @@
     <script src="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="~/assets/vendor/libs/dropzone/dropzone.js"></script>
     <script src="~/assets/vendor/libs/flow-js/flow.js"></script>
+    <script src="~/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+    <script src="~/assets/vendor/libs/moment/moment.js"></script>
     <!-- Demo -->
     <script src="~/assets/js/demo.js"></script>
     <script src="~/assets/js/pages_file-manager.js"></script>
-    <script src="~/js/dropzone.js"></script>
+    @*<script src="~/assets/js/forms_file-upload.js"></script>*@
+    <script src="~/js/software.js"></script>
+    <script src="~/js/gbxml_validate.js"></script>
     <script src="~/js/common.js"></script>
+    <script src="~/js/dropzone.js"></script>
     <script>
         $(function () {
             $("body").on('click', '.logout_btn', function () {
@@ -220,12 +226,11 @@
             });
             get_user_info().then(function (data) {
                 $(".u_full_name").html(data['fullname']);
-                $(".u_email").html(data['email']);
-                $(".u_organization").html(data['organization']);
-                $(".u_phone").html(data['phone']);
-             })
-        })
-
+                $(".u_email").html(data['email'] ? data['email'] : "N/A");
+                $(".u_organization").html(data['organization'] ? data['organization'] : "N/A");
+                $(".u_phone").html(data['phone'] ? data['phone'] : "N/A");
+            })
+    })
     </script>
 
 </body>
