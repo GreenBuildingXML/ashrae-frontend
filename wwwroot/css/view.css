@@ -1,0 +1,43 @@
+﻿.new_tc_image {
+    width: auto !important;
+    height: 20vh;
+}
+
+.new_tc_name {
+    min-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.new_tc_desc {
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 200px;
+    text-overflow: ellipsis;
+}
+
+#test_case_list {
+    overflow-y: scroll;
+    height: 60vh;
+    border: 1px solid lightgrey;
+    padding: 15px;
+}
+
+.test_case_row .card {
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+    .test_case_row .card:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+.test_case_row .selected {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    border: 2px solid black;
+}
+
+.green-border {
+    border: 2px solid green;
+}

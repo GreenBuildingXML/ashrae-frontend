@@ -23,8 +23,11 @@
     <Folder Include="Pages\dashboard\" />
     <Folder Include="wwwroot\imgs\icons\" />
     <Folder Include="Pages\view\" />
+    <Folder Include="wwwroot\json\" />
+    <Folder Include="wwwroot\imgs\test_case\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Pages\_ViewImports.cshtml" />
+    <Content Remove="wwwroot\assets\js\forms_file-upload.js" />
   </ItemGroup>
 </Project>
