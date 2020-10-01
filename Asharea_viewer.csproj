@@ -15,6 +15,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
+    <PackageReference Include="DOEgbxml" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,9 +28,15 @@
     <Folder Include="Pages\view\" />
     <Folder Include="wwwroot\json\" />
     <Folder Include="wwwroot\imgs\test_case\" />
+    <Folder Include="Data\model\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Pages\_ViewImports.cshtml" />
     <Content Remove="wwwroot\assets\js\forms_file-upload.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="VectorMath">
+      <HintPath>..\..\RP1810-Validator-master\packages\VectorMath.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

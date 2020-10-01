@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="~/assets/vendor/libs/sweetalert2/sweetalert2.css">
     <link rel="stylesheet" href="~/assets/vendor/libs/dropzone/dropzone.css">
     <link rel="stylesheet" href="~/assets/vendor/libs/flow-js/flow.css">
+    <link rel="stylesheet" href="~/assets/vendor/libs/spinkit/spinkit.css">
     <!-- Page -->
     <link rel="stylesheet" href="~/assets/vendor/css/pages/file-manager.css">
 </head>
@@ -213,12 +214,13 @@
     <script src="~/assets/js/demo.js"></script>
     <script src="~/assets/js/pages_file-manager.js"></script>
     @*<script src="~/assets/js/forms_file-upload.js"></script>*@
+    <script src="~/assets/vendor/libs/block-ui/block-ui.js"></script>
     <script src="~/js/software.js"></script>
     <script src="~/js/gbxml_validate.js"></script>
     <script src="~/js/common.js"></script>
+    <script src="~/js/custom_loading.js"></script>
     <script src="~/js/dropzone.js"></script>
-    <script>
-        $(function () {
+    <script>$(function () {
             $("body").on('click', '.logout_btn', function () {
                 logout().then(function () {
                     window.location.href = "./login";
@@ -230,8 +232,7 @@
                 $(".u_organization").html(data['organization'] ? data['organization'] : "N/A");
                 $(".u_phone").html(data['phone'] ? data['phone'] : "N/A");
             })
-    })
-    </script>
+        })</script>
 
 </body>
 </html>

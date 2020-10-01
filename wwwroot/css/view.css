@@ -1,4 +1,5 @@
-﻿.new_tc_image {
+﻿/*select model css*/
+.new_tc_image {
     width: auto !important;
     height: 20vh;
 }
@@ -19,10 +20,24 @@
 
 #test_case_list {
     overflow-y: scroll;
-    height: 60vh;
-    border: 1px solid lightgrey;
-    padding: 15px;
+    height: 67vh;
+    padding: 25px 10%;
+    background-color: #EAEAEA;
 }
+
+/* always show scrollbars */
+
+#test_case_list::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+
+#test_case_list::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, .5);
+    box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
 
 .test_case_row .card {
     cursor: pointer;

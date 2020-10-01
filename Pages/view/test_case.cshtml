@@ -39,60 +39,22 @@
             </div>
         </div>
     </div>
-    <div id="smartwizard-1" class="smartwizard-example">
-        <ul style="height:0;">
-            <li>
-                <a href="#smartwizard-1-step-1" class="mb-3">
-                </a>
-            </li>
-            <li>
-                <a href="#smartwizard-1-step-2" class="mb-3">
-                </a>
-            </li>
-           
-        </ul>
-        <div class="mb-3">
-            <div id="smartwizard-1-step-1" class="card animated fadeIn" style="border: none;">
-                <div class="card-body">
+    <div>
+        <div class="card-body">
+            <div class="row">
+                <div>
                     <div class="row">
-                        <div class="col-2" class="text-center">
-                            <span style="line-height: 12; font-size:20px;">Step 1</span>
-                        </div>
-                        <div class="col-10">
-                            <div class="row">
-                                <img src="~/imgs/icons/sample1.png" class="image-custom-1 my-2" />
-                                <img src="~/imgs/icons/sample2.png" class="image-custom-1 my-2" />
-                                <img src="~/imgs/icons/sample3.png" class="image-custom-1 my-2" />
-                            </div>
-
-                            <div>
-                                <p style="font-size:12px;line-height:17px;" class="mt-3">
-                                    The Green Building XML schema (gbXML) is an open schema developed to facilitate transfer of building data stored in Building Information Models (BIM) to engineering analysis tools. gbXML is being integrated into a range of software CAD and engineering tools and supported by leading 3D BIM vendors.
-                                </p>
-                            </div>
+                        <div style="margin: auto">
+                            <img src="~/imgs/icons/sample1.png" class="image-custom-1 my-2" />
+                            <img src="~/imgs/icons/sample2.png" class="image-custom-1 my-2" />
+                            <img src="~/imgs/icons/sample3.png" class="image-custom-1 my-2" />
                         </div>
                     </div>
-                </div>
-            </div>
-            <div id="smartwizard-1-step-2" class="card animated fadeIn" style="border: none;">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-2" class="text-center">
-                            <span style="line-height: 12; font-size:20px;">Step 2</span>
-                        </div>
-                        <div class="col-10">
-                            <div class="row">
-                                <img src="~/imgs/icons/sample3.png" class="image-custom-1 my-2" />
-                                <img src="~/imgs/icons/sample2.png" class="image-custom-1 my-2" />
-                                <img src="~/imgs/icons/sample1.png" class="image-custom-1 my-2" />
-                            </div>
 
-                            <div>
-                                <p style="font-size:12px;line-height:17px;" class="mt-3">
-                                    The Green Building XML schema (gbXML) is an open schema developed to ...
-                                </p>
-                            </div>
-                        </div>
+                    <div>
+                        <p style="font-size:12px;line-height:17px;" class="mt-3">
+                            The Green Building XML schema (gbXML) is an open schema developed to facilitate transfer of building data stored in Building Information Models (BIM) to engineering analysis tools. gbXML is being integrated into a range of software CAD and engineering tools and supported by leading 3D BIM vendors.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -133,6 +95,8 @@
 </div>
 <script>
     $(function () {
+        var selected_test_case = localStorage.getItem("selected_test_case");
+        console.log(selected_test_case);
         $("#upload_file_btn").click(function () {
             $("#upload-modal").modal('toggle');
         });
@@ -142,7 +106,26 @@
         })
 
         $('#upload-file').click(function () {
-            window.location = '/view/confirm';
+            let dropzone = document.getElementById('dropzone-demo-1').dropzone;
+            let file = dropzone.files[0];
+            loading_page();
+            readFileContent(file).then(content => {
+                let result = validateXML(content);
+                if (result) {
+                    @*update_certification_lv1(software_id).then(function (data) {*@
+                        setTimeout(function () {
+                            unloading_page();
+                            pop_info("Success", "You have passed the level1 Certification");
+                            $("#upload-modal").modal('toggle');
+                            window.location = '/view/confirm';
+                        }, 5000);
+
+
+                    @*})*@
+
+                }
+            }).catch(error => console.log(error))
+            
         })
     })
 

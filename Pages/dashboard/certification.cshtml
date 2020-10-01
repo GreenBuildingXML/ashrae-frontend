@@ -170,19 +170,27 @@
         $("#validate_xml_btn").click(function () {
             let dropzone = document.getElementById('dropzone-demo').dropzone;
             let file = dropzone.files[0];
+            loading_page();
             readFileContent(file).then(content => {
                 let result = validateXML(content);
                 if (result) {
                     update_certification_lv1(software_id).then(function (data) {
-                        console.log(data);
-                        $(".certification_level").html("Lv1");
-                        $("#start_level1").hide();
-                        $("#complete_level1").show();
-                        $("#level1_image").removeClass("border-success circle-icon");
-                        $("#level1_image img").attr("src", "/imgs/icons/level1_badge.png");
-                        $("#level1_certification_id").html(data['level1CertificationId']);
-                        $("#start_level2_btn").prop('disabled', false);
-                        $("#upload-modal").modal('toggle');
+                        if (data) {
+                            $(".certification_level").html("Lv1");
+                            $("#start_level1").hide();
+                            $("#complete_level1").show();
+                            $("#level1_image").removeClass("border-success circle-icon");
+                            $("#level1_image img").attr("src", "/imgs/icons/level1_badge.png");
+                            $("#level1_certification_id").html(data['level1CertificationId']);
+                            $("#start_level2_btn").prop('disabled', false);
+                            setTimeout(function () {
+                                unloading_page();
+                                pop_info("Success", "You have passed the level1 Certification");
+                                $("#upload-modal").modal('toggle');
+                            }, 5000);
+                        }
+                        
+                        
                     })
                     
                 }
@@ -210,13 +218,6 @@
     });
 
 
-    function readFileContent(file) {
-        const reader = new FileReader()
-        return new Promise((resolve, reject) => {
-            reader.onload = event => resolve(event.target.result)
-            reader.onerror = error => reject(error)
-            reader.readAsText(file)
-        })
-    }
+ 
     
 </script>

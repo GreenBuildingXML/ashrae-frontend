@@ -32,11 +32,12 @@ function validateXML(txt) {
             txt = "Error Code: " + xmlDoc.parseError.errorCode + "\n";
             txt = txt + "Error Reason: " + xmlDoc.parseError.reason;
             txt = txt + "Error Line: " + xmlDoc.parseError.line;
-            pop_info("Failure", txt);
+            unloading_with_message("Failure", txt);
+
             return false;
         }
         else {
-            pop_info("Success", "You have passed the level1 Certification");
+            
             return true;
         }
     }
@@ -48,21 +49,24 @@ function validateXML(txt) {
             var xmlDoc = parser.parseFromString(text, "application/xml");
         }
         catch (err) {
-            pop_info("Failure", err.message);
+            unloading_with_message("Failure", err.message);
+
             return false;
         }
 
         if (xmlDoc.getElementsByTagName("parsererror").length > 0) {
             checkErrorXML(xmlDoc.getElementsByTagName("parsererror")[0]);
-            pop_info("Failure", xt);
+            unloading_with_message("Failure", xt);
+
             return false;
         }
         else {
-            pop_info("Success", "You have passed the level1 Certification");
             return true;
         }
     }
     else {
-        pop_info("Failure",'Your browser cannot handle XML validation');
+      
+        unloading_with_message("Failure", 'Your browser cannot handle XML validation');
+        return false;
     }
 }

@@ -31,11 +31,11 @@
 }
 
 <!-- Content -->
-<div class="container-fluid flex-grow-1 container-p-y"  style="width:80%;"  id="caseList">
+<div class="container-fluid flex-grow-1 container-p-y"  id="caseList">
 
     <!-- Header -->
-    <div class="container-m-nx container-m-ny bg-white mb-4 text-center">
-        <div class="media col-md-10 col-lg-8 col-xl-7 pt-5 mx-auto">
+    <div class="container-m-nx container-m-ny bg-white pb-3 text-center">
+        <div class="media pt-5 mx-auto">
             <div class="media-body ml-5">
                 <h1 class="font-weight-bold mb-4">gbXML V6.0 Level 2 Certificatin</h1>
 
@@ -55,16 +55,15 @@
     </div>
 </div>
 <template id="new_test_case_row">
-    <div class="col col-sm-6 col-lg-4 test_case_row mb-2">
+    <div class="col col-sm-6 col-lg-4 test_case_row my-2">
         <div class="card">
             <img src="~/imgs/icons/sample1.png" class="mx-auto my-2 new_tc_image" />
             <div class="card-body">
-                <h4 class="card-title new_tc_name">L-Shape Zone</h4>
-                <p class="text-text new_tc_desc">
-                    In BIM models, rectangular spaces can be successfully exported into the gbXML file format. In reality, spaces are often drawn in L shape, T shpae or other …
+                <h4 class="card-title new_tc_label">L-Shape Zone</h4>
+                <p class="text-text new_tc_name">
                 </p>
-                <div style="height: 40px;">
-                    <button class="btn btn-outline-primary float-left">View</button>
+                <div style="height: 35px;">
+                    <button class="btn btn-outline-primary float-left" style="display: none">View</button>
                     <div class="btn btn-link float-right badge-icon"></div>
                 </div>
                 
@@ -93,10 +92,8 @@
                         $("#test_case_list").html();
                         let holder = $(document.getElementById("new_test_case_row").content.cloneNode(true));
                         let id = item['id'];
-                        console.log(id);
                         try {
                             let result = test_results[id];
-                            console.log(result === "success");
                             if (result === "success") {
                                 holder.find(".card").addClass("green-border passed");
                                 holder.find(".badge-icon").append('<img src="/imgs/icons/award.png">');
@@ -109,9 +106,9 @@
                         
                         
                         holder.find(".test_case_row").attr("id", item['id']);
-                        holder.find(".new_tc_name").html(item['name']);
+                        holder.find(".new_tc_label").html(item['label']);
                         holder.find(".new_tc_image").attr("src", "/imgs/test_case/" + item['image']);
-                        holder.find(".new_tc_desc").html(item['description']);
+                        holder.find(".new_tc_name").html(item['name']);
 
                         $("#test_case_list").append(holder);
                     });

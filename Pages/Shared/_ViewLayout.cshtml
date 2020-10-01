@@ -38,8 +38,12 @@
     <link rel="stylesheet" href="~/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="~/assets/vendor/libs/smartwizard/smartwizard.css">
     <link rel="stylesheet" href="~/assets/vendor/libs/dropzone/dropzone.css">
+    <link rel="stylesheet" href="~/assets/vendor/libs/spinkit/spinkit.css">
+    <link rel="stylesheet" href="~/assets/vendor/libs/sweetalert2/sweetalert2.css">
+
+
 </head>
-<body style="background: white">
+<body style="background: white;height:100vh; overflow: auto">
     <div>
         @RenderSection("NavTop", required: false)
     </div>
@@ -55,12 +59,17 @@
     <script src="~/assets/vendor/libs/validate/validate.js"></script>
     <script src="~/assets/vendor/libs/dropzone/dropzone.js"></script>
     <script src="~/assets/vendor/libs/flow-js/flow.js"></script>
+    <script src="~/assets/vendor/libs/block-ui/block-ui.js"></script>
+    <script src="~/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+
     <!-- Demo -->
     <script src="~/assets/js/demo.js"></script>
     <script src="~/assets/js/forms_wizard.js"></script>
     <script src="~/js/common.js"></script>
     <script src="~/js/dropzone.js"></script>
     <script src="~/js/software.js"></script>
+    <script src="~/js/gbxml_validate.js"></script>
+    <script src="~/js/custom_loading.js"></script>
     <script>function stepToPrev(page) {
             window.location = '/view/' + page;
         }
