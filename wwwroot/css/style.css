@@ -154,6 +154,7 @@ html {
 .image-custom-1 {
     height: 150px;
     width: auto !important;
+    padding-right: 15px;
 }
 
 .dropzone .progress {

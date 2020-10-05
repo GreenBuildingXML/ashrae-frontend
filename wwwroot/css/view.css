@@ -18,7 +18,7 @@
     text-overflow: ellipsis;
 }
 
-#test_case_list {
+.scroll-container {
     overflow-y: scroll;
     height: 67vh;
     padding: 25px 10%;
@@ -55,4 +55,9 @@
 
 .green-border {
     border: 2px solid green;
+}
+
+/*gbxml viewer*/
+#output-list .output-item p{
+    font-size: small;
 }
