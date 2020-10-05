@@ -7,15 +7,15 @@
 function get_root() {
 
     //return "http://localhost:8080/";
-    return "https://ashrae-viewer.azurewebsites.net/";
+    return "https://gbxml-viewer.azurewebsites.net/";
     //return "http://ashrae.biimport.com/";
 }
 
 
 function get_root_Api() {
 
-    return "http://localhost:8786/";
-    //return "https://ashrae-api.azurewebsites.net/";
+    //return "http://localhost:8786/";
+    return "https://gbxml-api.azurewebsites.net/";
     //return "http://biimport.com/";
 }
 
@@ -78,10 +78,17 @@ function get_user_info(userId) {
 }
 
 function process_error(data) {
-    if (data['status'] === 401) {
-        window.location.href = "./login" + "?redirect=" + encodeURIComponent(window.location.href);
-    } else{
-        pop_info("Error", data['responseJSON']['message']);
+    console.log(data['status']);
+    if (data['status'] === 401 || data['status'] == 403) {
+        window.location.href = "/login" + "?redirect=" + encodeURIComponent(window.location.href);
+    } else {
+        if (data['responseJSON'] && data['responseJSON']['message']) {
+            pop_info("Error", data['responseJSON']['message']);
+        } else {
+            window.location.href = "/login";
+
+        }
+        
     }
 }
 
@@ -102,4 +109,48 @@ function readFileContent(file) {
         reader.onerror = error => reject(error)
         reader.readAsText(file)
     })
+}
+/**
+ * Filter contains allowed file type in lower case, has leading dot(.)
+ */
+function assemble_file_upload_formdata_separate(files, filters) {
+    if (!files) {
+        return -1;
+    }
+
+    let res = [];
+    for (let i = 0; i < files.length; i++) {
+        let file_name = files[i].name;
+        if (filters) {
+            let type = get_file_type_lowercase(file_name);
+            if (!filters.includes(type)) {
+                continue;
+            }
+        }
+
+        let form_data = new FormData();
+        form_data.append("file_0", files[i]);
+        form_data.append("file_0_name", file_name);
+        form_data.append("file_num", '1');
+        res.push({
+            'name': file_name,
+            'form': form_data
+        });
+    }
+
+    return res;
+}
+
+function downloadURI(uri, name) {
+    let link = document.createElement("a");
+    link.download = name;
+    link.href = uri;
+    link.click();
+}
+
+function downloader(data, type, name) {
+    let blob = new Blob([data], { type });
+    let url = window.URL.createObjectURL(blob);
+    downloadURI(url, name);
+    window.URL.revokeObjectURL(url);
 }

@@ -2,6 +2,7 @@
 @model Asharea_viewer.Pages.view.comfirmModel
 @{
     ViewData["Title"] = "Confirm";
+    ViewData["test"] = "Index";
 }
 
 @section NavTop {
@@ -31,7 +32,7 @@
     </div>
 }
 <div>
-    <div class="w-100 main-container">
+    <div class="w-100 main-container" style="height: 100vh">
         <div class="main-side-bar">
             <div style="margin: 10rem 40px;">
                 <div style="padding-top: 40%;">
@@ -46,72 +47,96 @@
         </div>
         <div class="main-content">
             <main id="container" class="">
+                <div id="divMenuInWorld" title="This is called the 'in-world menu'">
 
+                    <div id="divTitle"></div>
+
+                    <p>
+
+                        <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="THR.controls.autoRotate =!THR.controls.autoRotate" ; title="toggle the scene spinning">rotation</button>
+
+                        <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceMeshes.visible =!GBX.surfaceMeshes.visible" ; title="toggle the flat bits">surfaces</button>
+
+                        <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceEdges.visible =!GBX.surfaceEdges.visible" ; title="toggle the side lines">edges</button>
+
+                        <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); title="Go to the home view">reset view</button>
+
+                    </p>
+
+                    <div id=divLog></div>
+
+                </div>
             </main>
         </div>
     </div>
 </div>
+<!-- Copyright 2019 Ladybug Tools authors. MIT License -->
 
-<nav id="navMenu" style="top: 55px">
 
-    <header>
 
-        <div id="divHeader">
+<div id="divContainer">
 
+    <div id="divContainerHeader" class="w3-theme-d2 w3-hover-theme">
+    </div>
+
+    <div id="divContents"></div>
+
+</div>
+@*<div id="divMenuLeft" class=w3-theme-l5>
+
+        <p id="pMenuLeftHeader" class="w3-theme-d2 w3-hover-theme" title="There's a lot to move here. Be slow and gentle!" style=text-align:right;>
+
+            left menu / click to move
+
+        </p>
+
+        <div id="divMenuContents">
+
+            <details open>
+                <h2>
+                    <a href="" title="Reload gbXML Viewer">
+                        <script>document.write(document.title);</script>
+                    </a>
+                </h2>
+
+                <div id=divRowButtonsStyle></div>
+
+                <p id=dragArea class=dragDropArea>
+                    drag or drop gbXML files here<br>
+                    or <input type="file" id="inpFile" onchange="GBX.openGbxmlFile(this);"><br>
+                    or enter a default file path &nbsp;<a href=#../assets/file-open.md>&#x24D8;</a>
+                    <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter'>
+
+                    or explore sample files<br>
+
+                <p>
+
+                    <hr>
+
+            </details>
+            <div id="divMenuItems"></div>
 
         </div>
 
-    </header>
+    </div>*@
 
-    <details open>
 
-        <summary>File Open</summary>
+@*<div id="divHamburgerLeft" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavLeft(); title="click to hide this menu"> slide &#9776; </div>*@
+<div id="divHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick="COR.toggleNavRight()" ;> &#9776; </div>
 
-        <div id="divFileOpen" class="dragDropArea"></div>
 
-    </details>
+<div id="divHeadsUp" class=w3-theme-l5>
 
-    <details>
+    <div id=divHeadsUpHeader class="w3-theme-d2 w3-hover-theme" title="Open JavaScript console to see more data">
+        right menu / click here to move
+    </div>
 
-        <summary title="Update what you see in the display">Settings</summary>
-
-        <div id="divSettings"></div>
-
-    </details>
-
-    <details ontoggle=divRendererInfo.innerHTML =THRU.getRendererInfo();>
-        <!-- not essential -->
-
-        <summary title="Info on what Three.js is animating">Renderer Info</summary>
-
-        <div id="divRendererInfo"></div>
-
-    </details>
-
-    <details ontoggle=divSceneInfo.innerHTML =THRU.getSceneInfo();>
-        <!-- not essential -->
-
-        <summary title="Info on what is in the Three.js scene">Scene Info</summary>
-
-        <div id="divSceneInfo"></div>
-
-    </details>
-
-    <div id="divFileInfo"></div>
-
-</nav>
-
-<nav>
-    <button id="butHamburger" onclick=MNU.toggleNavLeft(); title="click to hide this menu" style="top: 55px;"> slide &#9776;</button>
-</nav>
-
-<div id="divPopUp" style="top: 55px;">
-
-    <div id="divPopUpData"></div>
-
-    <div id="divMessage"></div>
+    <div id=divHUDheader class=mnuRightDiv></div>
+    <div id=divHUDItems class=mnuRightDiv></div>
+    <div id=divHUDfooter class=mnuRightDiv></div>
 
 </div>
+
 <!-- Modal template -->
 <div class="modal fade" id="upload-modal">
     <div class="modal-dialog modal-lg">
@@ -126,78 +151,163 @@
             <div class="modal-body">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <form action="files" class="dropzone needsclick" id="dropzone-demo-1">
-                            <div class="dz-message needsclick">
-                                Drop files here or click to upload
-                                @*<span class="note needsclick">
-                                        (This is just a demo dropzone. Selected files are
-                                        <strong>not</strong> actually uploaded.)
-                                    </span>*@
-                            </div>
-                            @*<div class="fallback">
-                                    <input name="file" type="file" multiple>
-                                </div>*@
-                        </form>
+                        <div action="#" id="dropzone-demo-2" class="dropzone">
+                            <div class="dz-message" data-dz-message><span>Drag files here or browse to upload</span></div>
+                        </div>
                     </div>
                 </div>
                 <div style="text-align:right">
                     @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
-                    <button type="button" class="btn btn-primary" id="upload-file">Upload</button>
+                    <button type="button" class="btn btn-primary" id="reupload-file">Upload</button>
                 </div>
             </div>
 
         </form>
     </div>
 </div>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r105/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r105/examples/js/controls/OrbitControls.js"></script>
-<script src="~/lib/spider_lib/r7/mnu-menu.js"></script>
-<script src="~/lib/spider_lib/r7/thr-threejs.js"></script>
-<script src="~/lib/spider_lib/r7/thru-threejs-utilities.js"></script>
-<script src="~/lib/spider_lib/r7/gbx-gbxml-loader.js"></script>
-<script src="~/lib/spider_lib/r7/fil-open-file-gbxml.js"></script>
-<script src="~/lib/spider_lib/r7/pop-up-gbxml.js"></script>
-<script src="~/lib/spider_lib/r7/gal-sample-files-gallery-gbxml.js"></script>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r108/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r108/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/showdownjs/showdown@1.9.0/dist/showdown.min.js"></script>
+<script src="https://ladybug-tools.github.io/spider-gbxml-tools/lib/mas-menu-app-switch/mas-menu-app-switch-0-00.js"></script>
+<script src="~/lib/spider_lib/gv-cor/gv-cor.js"></script>
+<script src="~/lib/spider_lib/gv-gbx/gv-gbx.js"></script>
+<script src="~/lib/spider_lib/gv-thr/gv-thr.js"></script>
+<script src="~/lib/spider_lib/gv-gbv/gv-gbv.js"></script>
+<script src="~/lib/spider_lib/gv-hud/gv-hud.js"></script>
 <script>
-    MNU.urlSourceCode = "https://github.com/ladybug-tools/spider-gbxml-tools/tree/master/gbxml-viewer-basic/";
-
-    FIL.divFileInfo = divFileInfo;
-
-
-    init();
-    THR.animate();
-
-
-    function init() {
-
-        divFileOpen.innerHTML = FIL.getFileOpen(); // if needed: set file info target
-
-        divSettings.innerHTML = THRU.getSettings();
-
-
-        THR.getThreejs();
-
-        THRU.setHelpers();
-
-        THRU.addSomeLights();
-
-        divPopUpData.innerHTML = POP.getMenuHtmlPopUp();
-
-    }
-
+    // gbxml viewer init
+    var APP = {};
     $(function () {
+        var selected_test_case = localStorage.getItem("selected_test_case");
+        let software_id = localStorage.getItem("software_id");
+        get_gbxml_link(software_id, selected_test_case).then(function (link) {
+            console.log(link);
+            GBX.defaultURL = link;
+            COR.initCore();
+            THR.initThree();
+            HUD.initHeadsUp();
+
+            THR.animate();
+            COR.onHashChange(); // loads splash screen and gets things rolling
+
+            initApp(); // loads default gbXML
+
+        });
+
         $("#generate_report_btn").click(function () {
             window.location = "/view/test_report";
         });
-    })
 
-    $("#reupload_file_btn").click(function () {
-        $("#upload-modal").modal('toggle');
-    });
-    $('#upload-file').click(function () {
-        window.location = '/view/confirm';
+        $("#reupload_file_btn").click(function () {
+            $("#upload-modal").modal('toggle');
+        });
+        $('#upload-file').click(function () {
+            window.location = '/view/confirm';
+        });
+        init_dropzone('dropzone-demo-2', false);
+        $('#reupload-file').click(function () {
+            let dropzone = document.getElementById('dropzone-demo-2').dropzone;
+            let files = dropzone.files;
+            let file = files[0];
+            if (!file) {
+                pop_info("Notice", "Please upload the test case");
+                return;
+            }
+            loading_page();
+            readFileContent(file).then(content => {
+                let result = validateXML(content);
+                if (result) {
+                    upload_gbxml_file(software_id, selected_test_case, files).then(function (data) {
+                        console.log(data);
+                        setTimeout(function () {
+                            unloading_page();
+                            GBX.openFile(file);
+                            $("#upload-modal").modal('toggle');
+                        }, 3000);
+                    })
+
+                }
+            }).catch(error => console.log(error))
+
+        })
+
     })
+    function initApp() {
+
+        color = 'blue';
+        stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+        stylesheetW3schools.onload = function () {
+            classElement = document.querySelector('.w3-theme-d1');
+            APP.backgroundColor = getComputedStyle(classElement).backgroundColor;
+
+        }
+
+        @*MNUdivAppSwitch.innerHTML = MAS.getAppSwitch();*@
+
+        @*const thrFilePath = localStorage.getItem('thrFilePath');*@
+
+        @*inpFilePath.value = thrFilePath;*@
+
+        @*GBX.defaultURL = parent.inpFilePath.value ? parent.inpFilePath.value : GBX.defaultURL; // for testing
+        if (location.hash && location.hash.endsWith('.xml')) {
+
+            const url = location.hash.slice(1);
+
+            COR.requestFileAndProgress(url, GBX.callbackGbXML);
+
+        } else {
+        }*@
+        COR.requestFile(GBX.defaultURL, GBX.callbackGbXML);
+
+        THR.controls.enableKeys = false;
+
+    }
+
+
+
+    function onloadThreejs() {
+
+        divLog.innerHTML += '<div>milliseconds to load: ' + (Date.now() - COR.timeStart).toLocaleString() + '<div>';
+
+        @*APP.resetMenu();*@
+    }
+
+
+    APP.callbackJson = function (xhr) {
+
+        const response = xhr.target.response;
+        GBV.surfaceChanges = JSON.parse(response)
+
+        SAV.getUpdates();
+
+    };
+
+
+
+    APP.resetMenu = function () {
+
+        menuButtons = document.querySelectorAll("button.app-menu");
+
+        menuButtons.forEach(element => {
+            element.style.backgroundColor = ''; element.style.fontStyle = ''; element.style.fontWeight = '';
+        });
+
+        menuDetails = document.querySelectorAll("details.app-menu");
+
+        menuDetails.forEach(element => element.remove());
+
+    };
+
+
+    function setStyle(color) {
+
+        stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+        localStorage.setItem('GbxmlViewerStyleColor', color);
+
+    }
+
+
+
 </script>

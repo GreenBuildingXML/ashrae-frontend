@@ -71,7 +71,7 @@
                 window.location.href = "./register_validate";
             },
             error: function (error) {
-                pop_info("Error",error.message);
+                process_error(error);
             }
         });
         return false;  // prevent form submit jump to action link

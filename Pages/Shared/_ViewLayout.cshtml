@@ -41,6 +41,8 @@
     <link rel="stylesheet" href="~/assets/vendor/libs/spinkit/spinkit.css">
     <link rel="stylesheet" href="~/assets/vendor/libs/sweetalert2/sweetalert2.css">
 
+    <link rel="stylesheet" type="text/css" href="~/css/gbxml.css">
+    <link rel="stylesheet" id="stylesheetW3schools" type="text/css">
 
 </head>
 <body style="background: white;height:100vh; overflow: auto">
@@ -61,7 +63,8 @@
     <script src="~/assets/vendor/libs/flow-js/flow.js"></script>
     <script src="~/assets/vendor/libs/block-ui/block-ui.js"></script>
     <script src="~/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
-
+    <!-- Load the element definition -->
+    <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
     <!-- Demo -->
     <script src="~/assets/js/demo.js"></script>
     <script src="~/assets/js/forms_wizard.js"></script>
@@ -70,7 +73,8 @@
     <script src="~/js/software.js"></script>
     <script src="~/js/gbxml_validate.js"></script>
     <script src="~/js/custom_loading.js"></script>
-    <script>function stepToPrev(page) {
+    <script>
+        function stepToPrev(page) {
             window.location = '/view/' + page;
         }
         function closeVerification() {

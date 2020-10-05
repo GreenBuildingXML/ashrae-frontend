@@ -5,7 +5,7 @@
 }
 @section NavTop {
     <div id="nav-top" class="text-center">
-        <div class="btn-icon-1 my-auto btn">
+        <div class="btn-icon-1 my-auto btn"  onclick="closeVerification()">
             <i class="fa fa-chevron-left"></i>
         </div>
         <div class="btn-box btn active">
@@ -31,7 +31,7 @@
 }
 
 <!-- Content -->
-<div class="container-fluid flex-grow-1 container-p-y"  id="caseList">
+<div class="container-fluid flex-grow-1 container-p-y" style="width:90%;" id="caseList">
 
     <!-- Header -->
     <div class="container-m-nx container-m-ny bg-white pb-3 text-center">
@@ -47,7 +47,7 @@
 
     </div>
     <!-- Header -->
-    <div class="row" id="test_case_list">
+    <div class="row scroll-container" id="test_case_list">
         
     </div>
     <div class="row">
@@ -63,7 +63,7 @@
                 <p class="text-text new_tc_name">
                 </p>
                 <div style="height: 35px;">
-                    <button class="btn btn-outline-primary float-left" style="display: none">View</button>
+                    <button class="btn btn-outline-primary float-left view_history" style="display: none">View</button>
                     <div class="btn btn-link float-right badge-icon"></div>
                 </div>
                 
@@ -97,6 +97,7 @@
                             if (result === "success") {
                                 holder.find(".card").addClass("green-border passed");
                                 holder.find(".badge-icon").append('<img src="/imgs/icons/award.png">');
+                                holder.find(".view_history").show();
                             }
                             if (result === "failure") {
                                 holder.find(".badge-icon").append('<img src="/imgs/icons/wrong.png">');
@@ -115,12 +116,19 @@
                 }
             });
         })
-        
+        $("#test_case_list").on('click', '.test_case_row .view_history', function () {
+            let selected = $(this).closest(".test_case_row").attr("id");
+            console.log(selected);
+            localStorage.setItem("selected_test_case", selected);
+            localStorage.setItem("view_history", true);
+            window.location = "/view/test_report";
+        });
         $("#test_case_list").on('click', '.test_case_row .card:not(.passed)', function () {
             $("#test_case_list .test_case_row .card").removeClass("selected");
             $(this).addClass("selected");
             $("#nextBtn").removeAttr('disabled');
             let selected = $(this).parent().attr("id");
+            localStorage.setItem("view_history", false);
             localStorage.setItem("selected_test_case", selected);
 
         });

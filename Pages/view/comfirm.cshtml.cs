@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+
 namespace Asharea_viewer.Pages.view
 {
     public class comfirmModel : PageModel
@@ -12,5 +13,7 @@ namespace Asharea_viewer.Pages.view
         public void OnGet()
         {
         }
+
+       
     }
 }

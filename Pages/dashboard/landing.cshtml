@@ -62,7 +62,7 @@
                         <div class="mt-3">
                             On <span>July 10 2020</span>
                         </div>
-                        <div class="mt-3">Certification ID: <strong>201927324</strong></div>
+                        <div class="mt-3">Certification ID: <strong id="certification_id">201927324</strong></div>
 
                     </div>
                  </div>
@@ -73,7 +73,7 @@
                         <div class="progress-bar bg-warning" style="width: 100%;">100%</div>
                     </div>
                 </div>
-                <div class="col-8 text-center"><button class="btn btn-primary mx-auto" id="view-certification" style="width:200px">View Certification</button></div>
+                <div class="col-8 text-center"><button class="btn btn-primary mx-auto" id="view-certification" style="width:200px">View</button></div>
             </div>
         </li>
     </ul>
@@ -88,8 +88,11 @@
         get_one_software(software_id).then(function (data) {
             $(".selected_software").html(data['name']);
             $(".selected_version").html(data['version']);
-            $(".certification_level").html(data['certificationLevel'] ? data['certificationLevel'] : "N/A");
-
+            $(".certification_level").html(getCertificationLevel(data['certificationLevel']));
+            
+            get_certification(software_id).then(function (data) {
+                $("#certification_id").html(data['level2CertificationId']);
+            })
         });
     });
 </script>

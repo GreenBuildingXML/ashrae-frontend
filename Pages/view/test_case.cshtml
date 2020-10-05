@@ -29,7 +29,7 @@
 }
 
 <!-- Content -->
-<div class="container-fluid flex-grow-1 container-p-y" style="width:80%;" id="caseList">
+<div class="container-fluid flex-grow-1 container-p-y" style="width:90%;" id="caseList">
 
     <!-- Header -->
     <div class="container-m-nx container-m-ny bg-white text-center">
@@ -39,29 +39,22 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="scroll-container">
+        <div id="markdown"></div>
         <div class="card-body">
             <div class="row">
                 <div>
                     <div class="row">
-                        <div style="margin: auto">
-                            <img src="~/imgs/icons/sample1.png" class="image-custom-1 my-2" />
-                            <img src="~/imgs/icons/sample2.png" class="image-custom-1 my-2" />
-                            <img src="~/imgs/icons/sample3.png" class="image-custom-1 my-2" />
+                        <div style="display: flex;" class="text-center" id="test-image-list">
+                           
                         </div>
-                    </div>
-
-                    <div>
-                        <p style="font-size:12px;line-height:17px;" class="mt-3">
-                            The Green Building XML schema (gbXML) is an open schema developed to facilitate transfer of building data stored in Building Information Models (BIM) to engineering analysis tools. gbXML is being integrated into a range of software CAD and engineering tools and supported by leading 3D BIM vendors.
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="row">
-        <button class="btn btn-primary mx-auto my-3" id="upload_file_btn" style="width:200px">Upload Your Test Case</button>
+        <button class="btn btn-primary mx-auto my-3" id="upload_file_btn" style="width:200px;">Upload Your Test Case</button>
     </div>
 </div>
 
@@ -96,37 +89,53 @@
 <script>
     $(function () {
         var selected_test_case = localStorage.getItem("selected_test_case");
-        console.log(selected_test_case);
+        let software_id = localStorage.getItem("software_id");
+
+        var test_md = "/test/" + selected_test_case + "/" + selected_test_case + ".md";
+        $("#markdown").append("<zero-md src=" + test_md + "></zero-md>");
+        for (var i = 1; i <= 3; i++){
+            var image_path = "/test/" + selected_test_case + "/f" + i + ".png";
+            $("#test-image-list").append("<div><img src=" + image_path +" class='image-custom-1 my-2' /><p>Figure "+ i + "</p></div>");
+        }
+    
+        var is_view_history = localStorage.getItem("view_history");
+        console.log(is_view_history);
+        if (is_view_history != "false") {
+            $("#upload_file_btn").hide();
+        }
         $("#upload_file_btn").click(function () {
             $("#upload-modal").modal('toggle');
         });
         init_dropzone('dropzone-demo-1', false);
         $('#upload-modal').on('shown.bs.modal', function (e) {
-            
+
         })
 
         $('#upload-file').click(function () {
             let dropzone = document.getElementById('dropzone-demo-1').dropzone;
-            let file = dropzone.files[0];
+            let files = dropzone.files;
+            let file = files[0];
+            if (!file) {
+                pop_info("Notice", "Please upload the test case");
+                return;
+            }
             loading_page();
             readFileContent(file).then(content => {
                 let result = validateXML(content);
                 if (result) {
-                    @*update_certification_lv1(software_id).then(function (data) {*@
+                    upload_gbxml_file(software_id, selected_test_case, files).then(function (data) {
                         setTimeout(function () {
                             unloading_page();
-                            pop_info("Success", "You have passed the level1 Certification");
                             $("#upload-modal").modal('toggle');
                             window.location = '/view/confirm';
                         }, 5000);
-
-
-                    @*})*@
+                    })
 
                 }
             }).catch(error => console.log(error))
-            
+
         })
     })
 
 </script>
+

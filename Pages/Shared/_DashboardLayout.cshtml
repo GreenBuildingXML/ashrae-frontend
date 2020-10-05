@@ -227,7 +227,7 @@
                 });
             });
             get_user_info().then(function (data) {
-                $(".u_full_name").html(data['fullname']);
+                $(".u_full_name").html(data['fullname'] != "null null"? data["fullname"]: "test user");
                 $(".u_email").html(data['email'] ? data['email'] : "N/A");
                 $(".u_organization").html(data['organization'] ? data['organization'] : "N/A");
                 $(".u_phone").html(data['phone'] ? data['phone'] : "N/A");

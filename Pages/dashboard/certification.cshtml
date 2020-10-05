@@ -8,16 +8,15 @@
             <div class="media">
                 <img src="assets/img/avatars/profile_default.jpg" alt class="ui-w-60 rounded-circle">
                 <div class="media-body pt-2 ml-3">
-                    <h5 class="mb-2 u_full_name">Nellie Maxwell</h5>
+                    <h5 class="mb-2 u_full_name"></h5>
 
                 </div>
             </div>
             <div class="text-muted small mt-3">Software</div>
-            <h5 class="font-weight-bold mt-2 selected_software">Autodesk CAD</h5>
+            <h5 class="font-weight-bold mt-2 selected_software"></h5>
             <hr class="border-light m-0">
             <div class="text-muted small pt-3 text-uppercase">Certification Level</div>
             <h5 class="mb-4 font-weight-bold mt-2 certification_level">
-                Level 1
             </h5>
             <div class="text-muted small pt-3 text-uppercase">Share your progress</div>
             <div class="text-muted d-flex mt-3">
@@ -94,6 +93,7 @@
                         <div>Keep the good Work!</div>
                         <div class="mt-3">
                             <button class="btn btn-primary ui-w-120" id="process_level2_btn">Continue</button>
+                            <button class="btn btn-secondary ui-w-120" id="view_certification_btn" style="display: none;">Certification</button>
                         </div>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
         let software_id = localStorage.getItem("software_id");
         get_one_software(software_id).then(function (data) {
             $(".selected_software").html(data['name']);
-            $(".certification_level").html(data['certificationLevel'] ? data['certificationLevel'] : "N/A");
+            $(".certification_level").html(getCertificationLevel(data['certificationLevel']));
 
         });
         let total_tests = 5;
@@ -161,12 +161,15 @@
                 $("#progress-bar-custom .level2_percentage").css("width", percentage + "%");
                 $("#process_level2_btn").attr("is_passed", is_level2_passed).html(is_level2_passed ? "View" : "Continue");
                 if (is_level2_passed) {
+                    $("#view_certification_btn").show();
                     $("#level2_image").removeClass("border-warning circle-icon");
                     $("#level2_image img").attr("src", "/imgs/icons/diamond.png").css("width","80%");
                 }
             }
         });        
-        
+        $("#view_certification_btn").click(function () {
+            window.location = '/landing';
+        })
         $("#validate_xml_btn").click(function () {
             let dropzone = document.getElementById('dropzone-demo').dropzone;
             let file = dropzone.files[0];
@@ -176,7 +179,7 @@
                 if (result) {
                     update_certification_lv1(software_id).then(function (data) {
                         if (data) {
-                            $(".certification_level").html("Lv1");
+                            $(".certification_level").html("Level1");
                             $("#start_level1").hide();
                             $("#complete_level1").show();
                             $("#level1_image").removeClass("border-success circle-icon");
@@ -216,6 +219,8 @@
     $("#start_level2_btn").click(function () {
         window.location = '/view/select';
     });
+
+    
 
 
  
