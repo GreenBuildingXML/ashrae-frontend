@@ -21,8 +21,8 @@
 .scroll-container {
     overflow-y: scroll;
     height: 67vh;
-    padding: 25px 10%;
-    background-color: #EAEAEA;
+    padding: 25px 6%;
+    background-color: #f6f6f6;
 }
 
 /* always show scrollbars */
@@ -61,3 +61,85 @@
 #output-list .output-item p{
     font-size: small;
 }
+
+.test-badge {
+    font-size: 15px;
+    margin-left: 10px;
+    padding: 5px;
+}
+
+/*view progress bar*/
+#progress {
+    padding: 0;
+    list-style-type: none;
+    font-family: arial;
+    font-size: 12px;
+    clear: both;
+    line-height: 1em;
+    margin: 0 -1px;
+    text-align: center;
+    width: 100%;
+}
+#progress li:first-child {
+    width: 5%;
+    color:#357bfb;
+    background: white;
+}
+
+#progress li:last-child {
+    width: 7%;
+    color: #357bfb;
+    background: white;
+}
+#progress li:not(:first-child):not(:last-child) {
+    width: calc((88% - 18px)/4);
+}
+#progress li {
+    float: left;
+    padding: 15px 0;
+    color: #acb5c2;
+    position: relative;
+    border-top: 1px solid darkgrey;
+    border-bottom: 1px solid darkgrey;
+/*    margin: 0 1px;*/
+    height: 55px;
+    font-size: large;
+    background: #f4f5fa;
+}
+
+#progress li:not(:first-child):before {
+    content: '';
+    border-left: 26px solid darkgrey;
+    border-top: 26px solid transparent;
+    border-bottom: 26px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+}
+#progress li:not(:last-child):after {
+    content: '';
+    border-left: 26px solid #f4f5fa;
+    border-top: 26px solid transparent;
+    border-bottom: 26px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    z-index: 20;
+}
+
+#progress li.active {
+    background: #357bfb;
+    color: white;
+}
+
+#progress li.active:after {
+    border-left-color: #357bfb;
+    
+}
+
+#progress li:first-child:after {
+    border-left-color: white;
+}
+
+/*end of view progress bar*/

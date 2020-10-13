@@ -50,6 +50,26 @@ function add_software(name, desc, version) {
         }
     });
 }
+function update_software(id, name, desc, version) {
+    return $.ajax({
+        type: 'PUT',
+        url: get_root_Api() + 'api/UpdateSoftware',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', get_token());
+        },
+        data: {
+            id: id,
+            name: name,
+            description: desc,
+            version: version
+        },
+        success: function (data) {
+        },
+        error: function (error) {
+            process_error(error);
+        }
+    });
+}
 
 function get_certification(id) {
     return $.ajax({
@@ -87,7 +107,7 @@ function update_certification_lv1(id) {
     });
 }
 
-function update_certification_lv2(id, test_case_id, status) {
+function update_certification_lv2(id, test_case_id, status, file_type) {
     return $.ajax({
         type: 'PUT',
         url: get_root_Api() + 'api/ValidateLevel2',
@@ -97,7 +117,8 @@ function update_certification_lv2(id, test_case_id, status) {
         data: {
             id: id,
             testCaseId: test_case_id,
-            status: status
+            status: status,
+            type: file_type
         },
         success: function (data) {
         },
@@ -126,12 +147,15 @@ function upload_gbxml_file(id, test_case_id, files) {
         success: function (data) {
         },
         error: function (error) {
+            unloading_page();
             process_error(error);
+
         }
     });
 }
 
-function get_gbxml_link(id, test_case_id) {
+function get_gbxml_link(id, test_case_id, file_type) {
+    file_type = file_type != null ? file_type : "gbxml";
     return $.ajax({
         type: 'GET',
         url: get_root_Api() + 'api/getTestgbXMLFile',
@@ -140,7 +164,8 @@ function get_gbxml_link(id, test_case_id) {
         },
         data: {
             id: id,
-            testName: test_case_id
+            testName: test_case_id,
+            type: file_type
         },
         success: function (data) {
         },
@@ -153,10 +178,10 @@ function get_gbxml_link(id, test_case_id) {
 function getCertificationLevel(lv) {
     var level = "N/A";
     switch(lv) {
-        case "Lv1":
+        case "LEVEL1":
             level = "Level1";
             break;
-        case "Lv2":
+        case "LEVEL2":
             level = "Level2";
             break;
         default:

@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html lang="en" class="default-style">
+<html lang="en" class="default-style" style="height:100vh; overflow:hidden">
 <head>
     <meta name=description
           content="Open, view and examine gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript">
@@ -45,7 +45,7 @@
     <link rel="stylesheet" id="stylesheetW3schools" type="text/css">
 
 </head>
-<body style="background: white;height:100vh; overflow: auto">
+<body style="background: white;min-height:100vh; overflow-y:scroll">
     <div>
         @RenderSection("NavTop", required: false)
     </div>
@@ -66,6 +66,7 @@
     <!-- Load the element definition -->
     <script type="module" src="https://cdn.jsdelivr.net/gh/zerodevx/zero-md@1/src/zero-md.min.js"></script>
     <!-- Demo -->
+    <script src="~/assets/vendor/libs/moment/moment.js"></script>
     <script src="~/assets/js/demo.js"></script>
     <script src="~/assets/js/forms_wizard.js"></script>
     <script src="~/js/common.js"></script>
@@ -73,8 +74,7 @@
     <script src="~/js/software.js"></script>
     <script src="~/js/gbxml_validate.js"></script>
     <script src="~/js/custom_loading.js"></script>
-    <script>
-        function stepToPrev(page) {
+    <script>function stepToPrev(page) {
             window.location = '/view/' + page;
         }
         function closeVerification() {

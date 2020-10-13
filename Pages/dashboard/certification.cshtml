@@ -139,7 +139,7 @@
             $(".certification_level").html(getCertificationLevel(data['certificationLevel']));
 
         });
-        let total_tests = 5;
+        let total_tests = 19;
         get_certification(software_id).then(function (data) {
             let is_level1_passed = data['isLevel1Passed'];
             let is_level2_passed = data['isLevel2Passed'];
@@ -156,7 +156,7 @@
             if (passed_test > 0) {
                 $("#start_level2").hide();
                 $("#complete_level2").show();
-                let percentage = passed_test / total_tests * 100;
+                let percentage = Math.round(passed_test / total_tests * 100) ;
                 $(".level2_percentage").html(percentage + "%");
                 $("#progress-bar-custom .level2_percentage").css("width", percentage + "%");
                 $("#process_level2_btn").attr("is_passed", is_level2_passed).html(is_level2_passed ? "View" : "Continue");

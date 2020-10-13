@@ -249,6 +249,50 @@
     </div>
 </div>
 <!-- Modal template -->
+<div class="modal fade" id="update-software-model">
+    <div class="modal-dialog">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Software
+                    <span class="font-weight-light">Information</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="ui-w-65 software-icon" style="padding: 10px">
+                        <img src="~/imgs/icons/gbxml_icon.png" alt="" />
+                    </div>
+                    <div style="margin: auto 10px;">
+                        <button type="button" class="btn btn-primary btn-sm">Select Image</button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col mb-0">
+                        <label class="form-label" >Software name*</label>
+                        <input type="text" class="form-control" id="new_sw_name" placeholder="Autodesk Autocad">
+                    </div>
+                    <div class="form-group col mb-0">
+                        <label class="form-label" >Version*</label>
+                        <input type="text" class="form-control" id="new_sw_version" placeholder="Version 2">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label" >Description</label>
+                        <input type="text" class="form-control" id="new_sw_desc" placeholder="...">
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="update_software_btn">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="modal fade" id="add-software-model">
     <div class="modal-dialog">
         <form class="modal-content">
@@ -261,8 +305,8 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="ui-w-65" style="padding: 10px">
-                        <img src="~/imgs/icons/revit.png" alt="" />
+                    <div class="ui-w-65 software-icon" style="padding: 10px">
+                        <img src="~/imgs/icons/gbxml_icon.png" alt="" />
                     </div>
                     <div style="margin: auto 10px;">
                         <button type="button" class="btn btn-primary btn-sm">Select Image</button>
@@ -270,17 +314,17 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col mb-0">
-                        <label class="form-label" >Software name*</label>
+                        <label class="form-label">Software name*</label>
                         <input type="text" class="form-control" id="sw_name" placeholder="Autodesk Autocad">
                     </div>
                     <div class="form-group col mb-0">
-                        <label class="form-label" >Version*</label>
+                        <label class="form-label">Version*</label>
                         <input type="text" class="form-control" id="sw_version" placeholder="Version 2">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
-                        <label class="form-label" >Description</label>
+                        <label class="form-label">Description</label>
                         <input type="text" class="form-control" id="sw_desc" placeholder="...">
                     </div>
                 </div>
@@ -295,11 +339,11 @@
 </div>
 <template id="new_software_row">
     <div class="pb-1 mb-3 row software_item">
-        <div class="col-2">
-            <img class="ui-w-65" src="~/imgs/icons/revit.png" alt="">
+        <div class="col-2 software-icon">
+            <img class="ui-w-65" src="~/imgs/icons/gbxml_icon.png" alt="">
         </div>
         <div class="col">
-            <div class="float-right icon-size">
+            <div class="float-right icon-size btn">
                 <i class="ion ion-md-create ml-3 edit_icon_btn"></i>
             </div>
             <a href="javascript:void(0)" class="font-weight-bold text-dark new_sw_name">Autodesk Revit</a>
@@ -333,8 +377,34 @@
                 localStorage.setItem("software_id", id);
                 window.location = '/certification';
             });
+            $("#software_list").on('click', '.edit_icon_btn', function () {
+                let id = $(this).attr("id");
+                console.log(id);
+                get_one_software(id).then(function (data) {
+                    $("#new_sw_name").val(data['name']);
+                    $("#new_sw_desc").val(data['description']);
+                    $("#new_sw_version").val(data['version']);
+                    $("#update_software_btn").attr("sw_id", id);
+                    $("#update-software-model").modal('toggle');
+                })
+                
+            });
         });
-        
+
+        $("#update_software_btn").click(function () {
+            console.log("update software");
+            let id = $(this).attr("sw_id");
+            let name = $("#new_sw_name").val();
+            let version = $("#new_sw_version").val();
+            let desc = $("#new_sw_desc").val();
+            update_software(id, name, desc, version).then(function (data) {
+                console.log(data);
+                $(".software_item[id='" + id + "']").find(".new_sw_name").html(name);
+                $(".software_item[id='" + id + "']").find(".new_sw_desc").html(desc);
+                $(".software_item[id='" + id + "']").find(".new_sw_version").html(version);
+                $("#update-software-model").modal('toggle');
+            })
+        });
 
         $("#save_software_btn").click(function () {
             console.log("save software");
@@ -357,6 +427,8 @@
         holder.find(".new_sw_desc").html(item['description']);
         holder.find(".new_sw_level").html(item['certificationLevel'] ? item['certificationLevel'] : "N/A");
         holder.find(".new_sw_status").html(item['status']).attr("id", item['id']);
+        holder.find(".edit_icon_btn").attr("id", item['id']);
+        holder.find(".software_item").attr("id", item['id']);
         $("#software_list").append(holder);
     }
 

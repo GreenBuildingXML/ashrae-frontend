@@ -3,33 +3,36 @@
 @{ ViewData["Title"] = "Test Case"; }
 @section NavTop {
     <div id="nav-top" class="text-center">
-        <div class="btn-icon-1 my-auto btn" onclick="stepToPrev('select')">
-            <i class="fa fa-chevron-left"></i>
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-plus-circle"></i>
-            Select
-        </div>
-        <div class="btn-box btn active">
-            <i class="fa fa-edit"></i>
-            Test Case
-        </div>
-        <div class="btn-box btn">
-            <i class="far fa-file-alt"></i>
-            Test Report
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-certificate"></i>
-            Certification
-        </div>
-        <div class="btn-icon-1 my-auto btn btn-box" onclick="closeVerification()">
-            <i class="fa fa-times-circle"></i>
-        </div>
+        <ul id="progress">
+            <li class="btn-icon-1" onclick="stepToPrev('select')">
+                <i class="fa fa-chevron-left"></i>
+            </li>
+            <li>
+                <i class="fa fa-plus-circle"></i>
+                Select
+            </li>
+            <li class="active">
+                <i class="fa fa-edit"></i>
+                Test Case
+            </li>
+            <li>
+                <i class="far fa-file-alt"></i>
+                Test Report
+            </li>
+            <li>
+                <i class="fa fa-certificate"></i>
+                Certification
+            </li>
+            <li class="btn-icon-1 pl-4" onclick="closeVerification()">
+                <i class="fa fa-times"></i>
+            </li>
+        </ul>
     </div>
+
 }
 
 <!-- Content -->
-<div class="container-fluid flex-grow-1 container-p-y" style="width:90%;" id="caseList">
+<div class="flex-grow-1 container-p-y" id="caseList">
 
     <!-- Header -->
     <div class="container-m-nx container-m-ny bg-white text-center">
@@ -54,7 +57,7 @@
         </div>
     </div>
     <div class="row">
-        <button class="btn btn-primary mx-auto my-3" id="upload_file_btn" style="width:200px;">Upload Your Test Case</button>
+        <button class="btn btn-primary mx-auto my-3" id="upload_file_btn" style="width:250px;font-size:large;">Upload Your Test Case</button>
     </div>
 </div>
 
@@ -90,10 +93,14 @@
     $(function () {
         var selected_test_case = localStorage.getItem("selected_test_case");
         let software_id = localStorage.getItem("software_id");
-
+        
         var test_md = "/test/" + selected_test_case + "/" + selected_test_case + ".md";
         $("#markdown").append("<zero-md src=" + test_md + "></zero-md>");
-        for (var i = 1; i <= 3; i++){
+        var img_cnt = 3;
+        if (selected_test_case == "test13") {
+            img_cnt = 4;
+        }
+        for (var i = 1; i <= img_cnt; i++){
             var image_path = "/test/" + selected_test_case + "/f" + i + ".png";
             $("#test-image-list").append("<div><img src=" + image_path +" class='image-custom-1 my-2' /><p>Figure "+ i + "</p></div>");
         }
@@ -124,15 +131,22 @@
                 let result = validateXML(content);
                 if (result) {
                     upload_gbxml_file(software_id, selected_test_case, files).then(function (data) {
+                        let type = getExtension(file.name);
+                        console.log(type);
+                        localStorage.setItem("file_type", type);
                         setTimeout(function () {
                             unloading_page();
                             $("#upload-modal").modal('toggle');
                             window.location = '/view/confirm';
-                        }, 5000);
+                        }, 3000);
                     })
 
                 }
-            }).catch(error => console.log(error))
+            }).catch(error => {
+                unloading_page();
+                console.log(error);
+            }
+            )
 
         })
     })

@@ -7,43 +7,51 @@
 
 @section NavTop {
     <div id="nav-top" class="text-center">
-        <div class="btn-icon-1 my-auto btn" onclick="stepToPrev('test_case')">
-            <i class="fa fa-chevron-left"></i>
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-plus-circle"></i>
-            Select
-        </div>
-        <div class="btn-box btn active">
-            <i class="fa fa-edit"></i>
-            Test Case
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-file-text-o"></i>
-            Test Report
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-certificate"></i>
-            Certification
-        </div>
-        <div class="btn-icon-1 my-auto btn btn-box" onclick="closeVerification()">
-            <i class="fa fa-times-circle"></i>
-        </div>
+        <ul id="progress">
+            <li class="btn-icon-1" onclick="stepToPrev('test_case')">
+                <i class="fa fa-chevron-left"></i>
+            </li>
+            <li>
+                <i class="fa fa-plus-circle"></i>
+                Select
+            </li>
+            <li class="active">
+                <i class="fa fa-edit"></i>
+                Test Case
+            </li>
+            <li >
+                <i class="far fa-file-alt"></i>
+                Test Report
+            </li>
+            <li>
+                <i class="fa fa-certificate"></i>
+                Certification
+            </li>
+            <li class="btn-icon-1 pl-4" onclick="closeVerification()">
+                <i class="fa fa-times"></i>
+            </li>
+        </ul>
     </div>
 }
-<div>
-    <div class="w-100 main-container" style="height: 100vh">
+    <div class="w-100 main-container">
         <div class="main-side-bar">
             <div style="margin: 10rem 40px;">
-                <div style="padding-top: 40%;">
-                    <button class="btn btn-primary btn-block" type="button" id="generate_report_btn">
+                <div class="text-center">
+                    <img src="~/imgs/icons/upload.png"></img>
+                    <h1 class="text-white mt-3">LV2: Case <span id="test-no"></span></h1>
+                </div>
+                <div style="padding-top: 20%;">
+                    <button class="btn btn-primary btn-block" style="font-size:large" type="button" id="generate_report_btn">
                         Confrim Upload
                     </button>
-                    <button class="btn btn-secondary btn-block" type="button" id="reupload_file_btn">
-                        ReUpload
+                    <button class="btn btn-secondary btn-block mt-4" style="font-size:large" type="button" id="reupload_file_btn">
+                        Upload Again
                     </button>
                 </div>
+
+
             </div>
+            <div><h4 class="text-white mt-3 text-center">Powered by BuildSim</h4></div>
         </div>
         <div class="main-content">
             <main id="container" class="">
@@ -51,7 +59,7 @@
 
                     <div id="divTitle"></div>
 
-                    <p>
+                    <p style="margin-top: 10px;">
 
                         <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="THR.controls.autoRotate =!THR.controls.autoRotate" ; title="toggle the scene spinning">rotation</button>
 
@@ -69,7 +77,6 @@
             </main>
         </div>
     </div>
-</div>
 <!-- Copyright 2019 Ladybug Tools authors. MIT License -->
 
 
@@ -174,13 +181,17 @@
 <script src="~/lib/spider_lib/gv-thr/gv-thr.js"></script>
 <script src="~/lib/spider_lib/gv-gbv/gv-gbv.js"></script>
 <script src="~/lib/spider_lib/gv-hud/gv-hud.js"></script>
+
+
 <script>
     // gbxml viewer init
     var APP = {};
     $(function () {
         var selected_test_case = localStorage.getItem("selected_test_case");
         let software_id = localStorage.getItem("software_id");
-        get_gbxml_link(software_id, selected_test_case).then(function (link) {
+        var file_type = localStorage.getItem("file_type");
+        $("#test-no").html(selected_test_case);
+        get_gbxml_link(software_id, selected_test_case, file_type).then(function (link) {
             console.log(link);
             GBX.defaultURL = link;
             COR.initCore();
@@ -219,6 +230,9 @@
                 if (result) {
                     upload_gbxml_file(software_id, selected_test_case, files).then(function (data) {
                         console.log(data);
+                        let type = getExtension(file.name);
+                        console.log(type);
+                        localStorage.setItem("file_type", type);
                         setTimeout(function () {
                             unloading_page();
                             GBX.openFile(file);
@@ -227,7 +241,11 @@
                     })
 
                 }
-            }).catch(error => console.log(error))
+            }).catch(error => {
+                console.log(error)
+                unloading_page();
+                }
+            )
 
         })
 
@@ -268,7 +286,7 @@
 
     function onloadThreejs() {
 
-        divLog.innerHTML += '<div>milliseconds to load: ' + (Date.now() - COR.timeStart).toLocaleString() + '<div>';
+        divLog.innerHTML += '<div>Loading Time (Millisecond): ' + (Date.now() - COR.timeStart).toLocaleString() + '<div>';
 
         @*APP.resetMenu();*@
     }

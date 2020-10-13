@@ -90,7 +90,7 @@ html {
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    background: #ccc;
+    background: #494949;
 }
 
 .btn-box {
@@ -99,7 +99,7 @@ html {
 }
 
 .btn-icon-1 {
-    width: 100px;
+    font-size: x-large;
 }
 
 .btn-box {
@@ -149,7 +149,9 @@ html {
     width: 60%;
 }
 
-
+.text-medium {
+    font-size: medium;
+}
 
 .image-custom-1 {
     height: 150px;
@@ -160,4 +162,9 @@ html {
 .dropzone .progress {
     /* progress bar covers file name */
     display: none !important;
+}
+
+/*software page*/
+.software-icon img {
+    width: 80px;
 }

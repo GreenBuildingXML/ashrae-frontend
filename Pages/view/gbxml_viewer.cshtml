@@ -4,50 +4,59 @@
 
 @section NavTop {
     <div id="nav-top" class="text-center">
-        <div class="btn-icon-1 my-auto btn" onclick="stepToPrev('test_case')">
-            <i class="fa fa-chevron-left"></i>
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-plus-circle"></i>
-            Select
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-edit"></i>
-            Test Case
-        </div>
-        <div class="btn-box btn active">
-            <i class="fa fa-file-text-o"></i>
-            Test Report
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-certificate"></i>
-            Certification
-        </div>
-        <div class="btn-icon-1 my-auto btn btn-box" onclick="closeVerification()">
-            <i class="fa fa-times-circle"></i>
-        </div>
+        <ul id="progress">
+            <li class="btn-icon-1" onclick="stepToPrev('test_case')">
+                <i class="fa fa-chevron-left"></i>
+            </li>
+            <li>
+                <i class="fa fa-plus-circle"></i>
+                Select
+            </li>
+            <li >
+                <i class="fa fa-edit"></i>
+                Test Case
+            </li>
+            <li class="active">
+                <i class="far fa-file-alt"></i>
+                Test Report
+            </li>
+            <li>
+                <i class="fa fa-certificate"></i>
+                Certification
+            </li>
+            <li class="btn-icon-1 pl-4" onclick="closeVerification()">
+                <i class="fa fa-times"></i>
+            </li>
+        </ul>
     </div>
 }
-<div>
-    <div class="w-100 main-container" style="height: 100vh">
-        <div class="main-side-bar">
-            <div style="margin: 3rem 40px;">
-                <div class="row" id="error-badge" style="display:none;">
-                    <div class="icon-item col text-center">
-                        <img src="~/imgs/gbxml_ui/warning.png" alt="">
-                        <p style="font-size: 25px;"><span id="errors_cnt"></span> Errors</p>
-                    </div>
+<div class="w-100 main-container">
+    <div class="main-side-bar">
+        <div id="container-1" style="margin: 3rem 40px;">
+            <div class="row" id="error-badge" style="display:none;">
+                <div class="icon-item col text-center text-white">
+                    <img src="~/imgs/gbxml_ui/warning.png" alt="">
+                    <p style="font-size: 25px;"><span id="errors_cnt"></span> Errors</p>
                 </div>
-                <div class="row" id="success-badge" style="display:none;">
-                    <div class="icon-item col text-center">
-                        <img src="~/imgs/icons/diamond.png" alt="">
-                        <p class="text-success font-weight-bold" style="font-size: 25px;">Pass !</p>
-                    </div>
+            </div>
+            <div class="row" id="success-badge" style="display:none;">
+                <div class="icon-item col text-center">
+                    <img src="~/imgs/icons/diamond.png" alt="">
+                    <p class="text-white font-weight-bold" style="font-size: 25px;">Pass !</p>
                 </div>
-                <div id="output-list" style="height: 300px; overflow-y:scroll;background: beige;padding: 5px;">
-             
+            </div>
+            <div class="row">
+                <div class="icon-item col text-center text-white">
+                    <p>Total tests: <span id="total-tests-cnt"></span></p>
+                    <p>Failed tests: <span id="fail-tests-cnt"></span></p>
+                    <p>Successful tests: <span id="success-tests-cnt"></span></p>
                 </div>
-                @*<div>
+            </div>
+            <button class="btn btn-warning btn-block text-medium" type="button" id="view-detail-btn">
+                Detail Result
+            </button>
+
+            @*<div>
                     <div class="dropdown mt-3">
                         <button class="btn btn-danger dropdown-toggle btn-block" type="button" id="dropdownMenuButton"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -61,48 +70,71 @@
                     </div>
                 </div>*@
 
-            <div style="padding-top: 20%;">
-                <button class="btn btn-primary btn-block" type="button" id="download-report-btn">
-                    Download Report
-                </button>
-                <button class="btn btn-info btn-block" type="button" id="download-log-btn">
-                    Download Log
-                </button>
-                <button class="btn btn-secondary btn-block" type="button" id="finish-btn" style="display: none;">
-                    Complete
-                </button>
-                <button class="btn btn-secondary btn-block" type="button" id="reupload-btn" style="display: none;">
-                    ReUpload
-                </button>
-                <button class="btn btn-secondary btn-block" type="button" id="getCertificationBtn" style="display: none;">
-                    Get Certification
-                </button>
-            </div>
-            </div>
+        <div style="padding-top: 20%;">
+            <button class="btn btn-primary btn-block text-medium" type="button" id="download-report-btn">
+                Download Report
+            </button>
+            <button class="btn btn-info btn-block text-medium" type="button" id="download-log-btn">
+                Download Log
+            </button>
+            <button class="btn btn-secondary btn-block text-medium" type="button" id="reupload-btn" style="display: none;">
+                Upload Again
+            </button>
+            <button class="btn btn-secondary btn-block text-medium" type="button" id="finish-btn" style="display: none;">
+                Complete
+            </button>
+            @*<button class="btn btn-secondary btn-block text-medium" type="button" id="getCertificationBtn" style="display: none;">
+                Complete
+            </button>*@
         </div>
-        <div class="main-content">
-            <main id="container" class="">
-                <div id="divMenuInWorld" title="This is called the 'in-world menu'">
 
-                    <div id="divTitle"></div>
+        </div>
 
-                    <p>
-
-                        <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="THR.controls.autoRotate =!THR.controls.autoRotate" ; title="toggle the scene spinning">rotation</button>
-
-                        <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceMeshes.visible =!GBX.surfaceMeshes.visible" ; title="toggle the flat bits">surfaces</button>
-
-                        <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceEdges.visible =!GBX.surfaceEdges.visible" ; title="toggle the side lines">edges</button>
-
-                        <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); title="Go to the home view">reset view</button>
-
-                    </p>
-
-                    <div id=divLog></div>
+        <div id="container-2" style="display:none;">
+            <div class="my-3">
+                <h1 class="text-white text-center"> Detail Result </h1>
+                <div id="output-list" class="my-3" style="height: 72vh; overflow-y:scroll;background: beige;padding: 5px;">
 
                 </div>
-            </main>
+            </div>
+            <div>
+                <button class="btn btn-warning btn-block text-medium mt-4" style="width: 150px; margin: auto;" type="button" id="back-btn">
+                    Back
+                </button>
+            </div>
         </div>
+        <div style=""><h4 class="text-white mt-3 text-center">Powered by BuildSim</h4></div>
+
+    </div>
+    <div class="main-content">
+        <main id="container" class="">
+            <div id="divMenuInWorld" title="This is called the 'in-world menu'">
+
+                <div id="divTitle"></div>
+
+                <p style="margin-top: 10px;">
+
+                    <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="THR.controls.autoRotate =!THR.controls.autoRotate" ; title="toggle the scene spinning">rotation</button>
+
+                    <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceMeshes.visible =!GBX.surfaceMeshes.visible" ; title="toggle the flat bits">surfaces</button>
+
+                    <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceEdges.visible =!GBX.surfaceEdges.visible" ; title="toggle the side lines">edges</button>
+
+                    <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); title="Go to the home view">reset view</button>
+
+                </p>
+
+                <div id=divLog></div>
+
+            </div>
+        </main>
+    </div>
+</div>
+
+<div  style="position: absolute; left: 340px; top: 60px;">
+    <div class="btn-group btn-group-toggle" role="group">
+        <button type="button" class="btn text-medium btn-primary" id="switch-to-test">Test Model</button>
+        <button type="button" class="btn text-medium btn-secondary" id="switch-to-standard">Standard Model</button>
     </div>
 </div>
 <!-- Copyright 2019 Ladybug Tools authors. MIT License -->
@@ -172,10 +204,30 @@
 
 </div>
 <template id="output-item-row">
-    <div class="output-item">
-        <h4><span class="test-title"></span><span class="isPassed" style="color: blue;"> </span></h4> 
-        <p></p>
+    <div class="card mb-2">
+        <div class="card-header">
+            <div class="collapsed d-flex justify-content-between text-body collapse-title" data-toggle="collapse" href="#accordion2-2">
+                <div>
+                    <span class="test-title"></span>
+                    <span class="isPassed"></span>
+                </div>
+                <div class="collapse-icon"></div>
+            </div>
+        </div>
+        <div id="accordion2-2" class="collapse collapse-content" data-parent="#output-list">
+            <div class="card-body">
+                <div class="test-desc"></div>
+                <ul class="tests-list list-group mt-2" style="background-color: lightyellow">
+                </ul>
+            </div>
+        </div>
     </div>
+</template>
+<template id="test-info-row">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="test-info" style="font-size: 14px;"></div>
+        <div class="test-badge badge-success btn"></div>
+    </li>
 </template>
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r108/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r108/examples/js/controls/OrbitControls.js"></script>
@@ -191,19 +243,34 @@
     var APP = {};
     var log_result = "";
     var tests = [];
-    var total_tests = 5;
+    // total tests setttings;
+    var total_tests = 19;
     var passedTests = 0;
+    var test_link = "";
+    var standard_link = "";
+    var next_model = "";
+    var isOverallPassed = false;
+    var is_view_history = false;
     $(function () {
+
         let selected_test_case = localStorage.getItem("selected_test_case");
         let software_id = localStorage.getItem("software_id");
-        var is_view_history = localStorage.getItem("view_history");
+        is_view_history = localStorage.getItem("view_history");
+        var file_type = localStorage.getItem("file_type");
 
+        standard_link = buildLink(selected_test_case);
         console.log(selected_test_case + " : " + software_id);
+        if (location.hash.indexOf("standard-cases") != -1) {
+            next_model = "Test Model";
+        } else {
+            next_model = "Standard Model";
+        }
+
         get_certification(software_id).then(function (data) {
             passedTests = data['passedTests'];
             var test_results = data['testResult'];
-            get_gbxml_link(software_id, selected_test_case).then(function (link) {
-
+            get_gbxml_link(software_id, selected_test_case, file_type).then(function (link) {
+                link = link + + Math.random();
                 $.ajax({
                     type: 'GET',
                     url: "@Url.Action("ValidategbXML")",
@@ -213,26 +280,43 @@
                     },
                     success: function (data) {
                         console.log(data);
-                        var overallPassed = data['isOverallPassed'];
+                        overallPassed = data['isOverallPassed'];
                         tests = data['tests'];
                         log_result = data['log'];
-                        $.each(tests, function (_, test) {
+                        var failed_tests = data['failCounter'];
+                        var successful_tests = data['successCounter'];
+                        $("#total-tests-cnt").html(failed_tests + successful_tests);
+                        $("#fail-tests-cnt").html(failed_tests);
+                        $("#success-tests-cnt").html(successful_tests);
+                        $.each(tests, function (i, test) {
                             let holder = $(document.getElementById("output-item-row").content.cloneNode(true));
+                            holder.find(".collapse-title").attr("href", "#accordion-" + i);
+                            holder.find(".collapse-content").attr("id", "accordion-" + i);
                             holder.find(".test-title").html(test['title'] + ": ");
-                            holder.find("p").html(test['result']);
-                            holder.find(".isPassed").html(test['isPassed']? "success": "failure");
+                            holder.find(".test-desc").html(test['result']);
+                            if (test['isPassed']) {
+                                holder.find(".isPassed").html("success").addClass("text-success");
+                            } else {
+                                holder.find(".isPassed").html("failure").addClass("text-danger");
+                                holder.find(".card-header").addClass("bg-warning");
+                            }
+                            if (test.infos) {
+                                $.each(test.infos, function (_, info) {
+                                    let holder2 = $(document.getElementById("test-info-row").content.cloneNode(true));
+                                    if (info['key']) {
+                                        holder2.find(".test-badge").html(info['key']).attr("key", info['key']);
+                                    }
+                                    holder2.find(".test-info").html(info['content']);
+                                    holder.find(".tests-list").append(holder2);
+                                })
+                            }
+
                             $("#output-list").append(holder);
                         });
+                        $("#finish-btn").show();
                         if (overallPassed) {
                             $("#success-badge").show();
                             $("#error-badge").hide();
-                            if (passedTests >= total_tests - 1 && is_view_history != "true") {
-                                $("#finish-btn").hide();
-                                $("#getCertificationBtn").show();
-                            } else {
-                                $("#finish-btn").show();
-                                $("#getCertificationBtn").hide();
-                            }
                         } else {
                             $("#error-badge").show();
                             $("#success-badge").hide();
@@ -243,6 +327,7 @@
                         process_error(error);
                     }
                 });
+                test_link = link;
                 GBX.defaultURL = link;
                 COR.initCore();
                 THR.initThree();
@@ -254,24 +339,74 @@
                 initApp(); // loads default gbXML
 
             });
+
+            $("#output-list").on('click', '.test-badge', function () {
+                var key = $(this).attr("key");
+                console.log("surface id: " + key);
+                reset_view();
+                try {
+
+                    var obj = GBV.showSpaceStorey(key);
+                    if (!obj) {
+                        reset_view();
+                        var obj2 = HUD.updateSurface(key);
+                        if (!obj2) {
+                            pop_info("Notice", "We can't find the current id, please switch to " + next_model + " model!");
+
+                        }
+                    }
+                } catch (err) {
+                    console.log(err);
+                    reset_view();
+                    var obj = HUD.updateSurface(key);
+                    if (!obj) {
+                        pop_info("Notice", "We can't find the current id, please switch to " + next_model + " model!");
+
+                    }
+                }
+
+
+
+            })
+        })
+        $("#switch-to-standard").click(function () {
+            console.log("switch to standard model");
+            next_model = "Test Model";
+            buttonToggle("standard");
+            window.location.href = "/view/test_report#" + standard_link + Math.random();
+        })
+        $("#switch-to-test").click(function () {
+            console.log("switch to test model");
+            next_model = "Standard Model";
+            buttonToggle("test");
+            window.location.href = "/view/test_report#" + test_link + Math.random();
+        })
+        $("#view-detail-btn").click(function () {
+            $("#container-1").hide();
+            $("#container-2").show();
+        })
+        $("#back-btn").click(function () {
+            $("#container-2").hide();
+            $("#container-1").show();
         })
         $("#reupload-btn").click(function () {
-            update_certification_lv2(software_id, selected_test_case, "failure").then(function (data) {
-                window.location = "/view/select";
-            })
+            updatelv2(software_id, selected_test_case, "failure", file_type, "/view/test_case");
         })
         $("#finish-btn").click(function () {
-            update_certification_lv2(software_id, selected_test_case, "success").then(function (data) {
-                window.location = "/certification";
-            })
+            if (overallPassed) {
+                updatelv2(software_id, selected_test_case, "success", file_type, "/view/select");
+            } else {
+                updatelv2(software_id, selected_test_case, "failure", file_type, "/view/select");
+
+            }
+
         })
-        $("#getCertificationBtn").click(function () {
-            update_certification_lv2(software_id, selected_test_case, "success").then(function (data) {
-                console.log(data);
-                window.location = "/view/certification";
+        @*$("#getCertificationBtn").click(function () {
+            update_certification_lv2(software_id, selected_test_case, "success", file_type).then(function (data) {
+                window.location = "/view/select";
             })
 
-        });
+        });*@
 
         $("#download-report-btn").click(function () {
             @*document.location = 'data:Application/text,' + encodeURIComponent(JSON.stringify(tests));*@
@@ -285,7 +420,31 @@
             downloader(log_result, type, name)
         })
     })
+    function buttonToggle(cur_model) {
+        $("#switch-to-test").removeClass("btn-primary btn-secondary");
+        $("#switch-to-standard").removeClass("btn-primary btn-secondary");
+        switch (cur_model) {
+            case "standard":
+                $("#switch-to-test").addClass("btn-secondary");
+                $("#switch-to-standard").addClass("btn-primary");
+                break;
+            case "test":
+                $("#switch-to-standard").addClass("btn-secondary");
+                $("#switch-to-test").addClass("btn-primary");
+                break;
+        }
+            
 
+
+    }
+    function updatelv2(software_id, selected_test_case, status, file_type, redirect_link) {
+        update_certification_lv2(software_id, selected_test_case, status, file_type).then(function (data) {
+            window.location = redirect_link;
+        })
+    }
+    function reset_view() {
+        GBX.setAllVisible();
+    }
     function initApp() {
 
         color = 'blue';
@@ -293,11 +452,27 @@
 
         stylesheetW3schools.onload = function () {
 
+            classElement = document.querySelector('.w3-theme-d1');
             APP.backgroundColor = getComputedStyle(classElement).backgroundColor;
 
         }
-        @* MNUdivAppSwitch.innerHTML = MAS.getAppSwitch();*@
-        COR.requestFile(GBX.defaultURL, GBX.callbackGbXML);
+         @*MNUdivAppSwitch.innerHTML = MAS.getAppSwitch();*@
+
+        @*const thrFilePath = localStorage.getItem('thrFilePath');
+
+         inpFilePath.value = thrFilePath;*@
+
+        @*GBX.defaultURL = parent.inpFilePath.value ? parent.inpFilePath.value : GBX.defaultURL;*@
+        // for testing
+        if (location.hash && (location.hash.indexOf(".gbxml") != -1 || location.hash.indexOf(".xml") != 1)) {
+            const url = location.hash.slice(1);
+            cosole.log("test url:" + url);
+            COR.requestFile(url, GBX.callbackGbXML);
+
+        } else {
+            COR.requestFile(GBX.defaultURL, GBX.callbackGbXML);
+        }
+
         THR.controls.enableKeys = false;
 
     }
@@ -306,7 +481,7 @@
 
     function onloadThreejs() {
 
-        divLog.innerHTML += '<div>milliseconds to load: ' + (Date.now() - COR.timeStart).toLocaleString() + '<div>';
+        divLog.innerHTML += '<div>Loading Time (Millisecond): ' + (Date.now() - COR.timeStart).toLocaleString() + '<div>';
 
         APP.resetMenu();
     }
@@ -344,6 +519,14 @@
 
         localStorage.setItem('GbxmlViewerStyleColor', color);
 
+    }
+
+    function buildLink(test_id) {
+        var url = "https://ashraedev01.file.core.windows.net/gbxml-test-file/standard-cases/";
+        url += test_id + ".gbxml";
+        url += "?sv=2019-12-12&ss=bfqt&srt=sco&sp=rwdlacupx&se=2022-01-04T14:49:59Z&st=2020-10-02T05:49:59Z&spr=https&sig=IH52C5thjGkKceqf0dPGxclZ302gpSqiUOqbeJQVxHw%3D";
+        url += "&random=" + Math.random();
+        return url;
     }
 
 

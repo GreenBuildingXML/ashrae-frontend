@@ -1,7 +1,7 @@
 ﻿[
   {
     "id": "test1",
-    "label":  "Test 1",
+    "label": "Test 1",
     "name": "Multiple exterior wall elements",
     "description": "Often time, BIM modelers put multiple wall elements together to form an exterior wall. There are many reasons to use such technique such as creating a wall with uneven surface, or separate one layer, for instance, the exterior insulation finishes system, from the primary structure, for manufacturer quantity take-off. In these cases, the exported gbXML model should capture the multiple layers of walls and combine them into one assembly for performance analysis.",
     "image": "test1.png"
@@ -33,5 +33,104 @@
     "name": "Raised floor and drop ceiling",
     "description": "Raised floor and drop ceilings are commonly seen structures in many commercial buildings. Raised floor provides an elevated floor above the substrate to create a hidden passage for various reasons such as air flows or mechanical and electrical service passage. Similarly, drop ceiling creates a plenum space to hide building infrastructures such as piping, wiring and duck work. It is important to identify these spaces as plenum and exported into gbXML. This test case will include both structures in a two-story BIM model. The first story will have an 8” drop ceiling space with 4” thick ceiling. The second story will have an 8” raised floor space with 4” thick flooring.",
     "image": "test5.png"
+  },
+  {
+    "id": "test6",
+    "label": "Test 6",
+    "name": "Envelope Information",
+    "description": "",
+    "image": "test6.png"
+  },
+  {
+    "id": "test7",
+    "label": "Test 7",
+    "name": "HVAC system and schedule",
+    "description": "",
+    "image": "test7.png"
+  },
+  {
+    "id": "test8",
+    "label": "Test 8",
+    "name": "Appressed Floor and Ceiling with Thicknes",
+    "description": "",
+    "image": "test8.png"
+  },
+  {
+    "id": "test9",
+    "label": "Test 9",
+    "name": "Interior Window",
+    "description": "",
+    "image": "test8.png"
+  },
+  {
+    "id": "test10",
+    "label": "Test 10",
+    "name": "Atrium Space",
+    "description": "",
+    "image": "test10.png"
+  },
+  {
+    "id": "test11",
+    "label": "Test 11",
+    "name": "Dormer on the roof",
+    "description": "",
+    "image": "test11.png"
+  },
+  {
+    "id": "test12",
+    "label": "Test 12",
+    "name": "Concave Space",
+    "description": "",
+    "image": "test12.png"
+  },
+  {
+    "id": "test13",
+    "label": "Test 13",
+    "name": "Balcony",
+    "description": "",
+    "image": "test13.png"
+  },
+  {
+    "id": "test14",
+    "label": "Test 14",
+    "name": "Roof overhang",
+    "description": "",
+    "image": "test14.png"
+  },
+  {
+    "id": "test15",
+    "label": "Test 15",
+    "name": "Curtain Wall",
+    "description": "",
+    "image": "test15.png"
+  },
+  {
+    "id": "test16",
+    "label": "Test 16",
+    "name": "Shaft Openings",
+    "description": "",
+    "image": "test16.png"
+  },
+  {
+    "id": "test17",
+    "label": "Test 17",
+    "name": "Curvy Wall",
+    "description": "",
+    "image": "test17.png"
+  },
+  {
+    "id": "test18",
+    "label": "Test 18",
+    "name": "Window frame",
+    "description": "",
+    "image": "test18.png"
+  },
+  {
+    "id": "test19",
+    "label": "Test 19",
+    "name": "Room inside a room",
+    "description": "",
+    "image": "test19.png"
   }
+
 ]

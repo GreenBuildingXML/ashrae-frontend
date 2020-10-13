@@ -154,3 +154,7 @@ function downloader(data, type, name) {
     downloadURI(url, name);
     window.URL.revokeObjectURL(url);
 }
+
+function getExtension(filename) {
+    return filename.split('.').pop().toLowerCase();
+}

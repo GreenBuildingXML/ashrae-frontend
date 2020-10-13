@@ -5,28 +5,30 @@
 }
 @section NavTop {
     <div id="nav-top" class="text-center">
-        <div class="btn-icon-1 my-auto btn" onclick="stepToPrev('test_report')">
-            <i class="fa fa-chevron-left"></i>
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-plus-circle"></i>
-            Select
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-edit"></i>
-            Test Case
-        </div>
-        <div class="btn-box btn">
-            <i class="far fa-file-alt"></i>
-            Test Report
-        </div>
-        <div class="btn-box btn active">
-            <i class="fa fa-certificate"></i>
-            Certification
-        </div>
-        <div class="btn-icon-1 my-auto btn btn-box" onclick="closeVerification()">
-            <i class="fa fa-times-circle"></i>
-        </div>
+        <ul id="progress">
+            <li class="btn-icon-1" onclick="stepToPrev('select')">
+                <i class="fa fa-chevron-left"></i>
+            </li>
+            <li>
+                <i class="fa fa-plus-circle"></i>
+                Select
+            </li>
+            <li >
+                <i class="fa fa-edit"></i>
+                Test Case
+            </li>
+            <li>
+                <i class="far fa-file-alt"></i>
+                Test Report
+            </li>
+            <li class="active">
+                <i class="fa fa-certificate"></i>
+                Certification
+            </li>
+            <li class="btn-icon-1 pl-4" onclick="closeVerification()">
+                <i class="fa fa-times"></i>
+            </li>
+        </ul>
     </div>
 }
 
@@ -39,19 +41,19 @@
             <div class="media-body ml-5">
                 <h1 class="font-weight-bold mb-4">Congratulations!</h1>
 
-                <h3 class="font-weight-bold mb-4">
-                    Revit
+                <h3 class="font-weight-bold mb-4" >
+                    <span id="sw_name"></span> <span id="sw_version"></span>
                 </h3>
                 <img src="~/imgs/icons/diamond.png" class="ui-w-120 mx-auto my-2" />
-                <div class="badge-text">Completed</div>
+                <div class="badge-text" id="sw_status"></div>
                 <h1 class="font-weight-bold mb-4 mt-4">gbXML Level 2 Certification</h1>
                 <div class="badge-text">
-                    on @DateTime.Now
+                    on <span id="sw_date"></span>
                 </div>
-                @*<div class="row mt-4" id="badge-license">
-                    <div class="col"> Certification ID: 201927324</div>
-                    <div class="col"> Expires: September 11, 2020</div>
-                </div>*@
+                <div class="row mt-4 text-center">
+                    <div class="col"> Certification ID: <span id="lv2-certification-id"></span></div>
+                    @*<div class="col"> Expires: September 11, 2020</div>*@
+                </div>
                 <div class="row mt-4">
                     @*<div class="col"><button class="btn btn-primary mx-auto my-3"  style="width:150px" onclick="stepToPrev('test_report')">Go back</button></div>*@
                     <div class="col"><button class="btn btn-primary mx-auto my-3" id="complete-certification" style="width:150px">Complete</button></div>
@@ -66,8 +68,19 @@
 
 <script>
     $(function () {
+        let software_id = localStorage.getItem("software_id");
         $("#complete-certification").click(function () {
-            window.location = '/landing';
+            window.location = '/view/select';
+        })
+        get_one_software(software_id).then(function (data) {
+            $("#sw_name").html(data['name']);
+            $("#sw_version").html(data['version']);
+            $("#sw_status").html(data['status']);
+            $("#sw_date").html(moment(data['modifiedDate']).format('MM/DD/YYYY'));
+            get_certification(software_id).then(function (data) {
+                $("#lv2-certification-id").html(data['level2CertificationId']);
+            });
+
         })
     })
 
