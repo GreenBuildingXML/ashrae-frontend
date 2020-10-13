@@ -39,6 +39,8 @@ namespace Asharea_viewer.Data.controller
             bool overallPassed = parser.overallPassTest;
             var table_result = parser.table;
             var log_result = parser.log;
+            var fail_cnt = parser.failCounter;
+            var success_cnt = parser.successCounter;
             HtmlDocument document = new HtmlDocument();
             document.LoadHtml(output);
             List<Test> tests = new List<Test>();
@@ -70,8 +72,8 @@ namespace Asharea_viewer.Data.controller
                     {
                         foreach (HtmlNode node in info_nodes)
                         {
-                            HtmlNode key = node.SelectSingleNode(".//a[@class='model-link']");
-                            var key_str = key == null ? null : key.InnerText.Split(':')[0];
+                            HtmlNode key = node.SelectSingleNode(".//a");
+                            var key_str = key == null ? null : key.Attributes["class"].Value;
                             var info_str = node.InnerText;
                             Info info = new Info(key_str, info_str);
                             infos.Add(info);
@@ -87,7 +89,7 @@ namespace Asharea_viewer.Data.controller
             }
             //Console.WriteLine(JsonConvert.SerializeObject(tests));
             Console.WriteLine("End of testing...\n");
-            TestResult tr = new TestResult(overallPassed, tests.ToArray(), output, table_result, log_result);
+            TestResult tr = new TestResult(overallPassed, fail_cnt, success_cnt, tests.ToArray(), output, table_result, log_result);
             //Console.WriteLine(JsonConvert.SerializeObject(tr));
             return tr;
             

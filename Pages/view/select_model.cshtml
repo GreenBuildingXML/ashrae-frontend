@@ -5,7 +5,7 @@
 }
 @section NavTop {
     <div id="nav-top" class="text-center">
-        <div class="btn-icon-1 my-auto btn"  onclick="closeVerification()">
+        @*<div class="btn-icon-1 my-auto btn" onclick="closeVerification()">
             <i class="fa fa-chevron-left"></i>
         </div>
         <div class="btn-box btn active">
@@ -26,15 +26,40 @@
         </div>
         <div class="btn-icon-1 my-auto btn btn-box" onclick="closeVerification()">
             <i class="fa fa-times-circle"></i>
-        </div>
+        </div>*@
+        <ul id="progress">
+            <li class="btn-icon-1" onclick="closeVerification()">
+                <i class="fa fa-chevron-left"></i>
+            </li>
+            <li class="active">
+                <i class="fa fa-plus-circle"></i>
+                Select
+            </li>
+            <li >
+                <i class="fa fa-edit"></i>
+                Test Case
+            </li>
+            <li>
+                <i class="far fa-file-alt"></i>
+                Test Report
+            </li>
+            <li>
+                <i class="fa fa-certificate"></i>
+                Certification
+            </li>
+            <li class="btn-icon-1 pl-4" onclick="closeVerification()">
+                <i class="fa fa-times"></i>
+            </li>
+        </ul>
     </div>
+
 }
 
 <!-- Content -->
-<div class="container-fluid flex-grow-1 container-p-y" style="width:90%;" id="caseList">
+<div class="flex-grow-1 container-p-y" style="" id="caseList">
 
     <!-- Header -->
-    <div class="container-m-nx container-m-ny bg-white pb-3 text-center">
+    <div class="container-m-nx container-m-ny bg-white py-3 text-center">
         <div class="media pt-5 mx-auto">
             <div class="media-body ml-5">
                 <h1 class="font-weight-bold mb-4">gbXML V6.0 Level 2 Certificatin</h1>
@@ -51,12 +76,15 @@
         
     </div>
     <div class="row">
-        <button class="btn btn-primary mx-auto my-3" id="nextBtn" style="width:150px" disabled>Next</a>
+        <div class="mx-auto">
+            <button class="btn btn-primary my-3" id="nextBtn" style="width:150px;font-size:large;" disabled>Next</button>
+            <button class="btn btn-primary my-3" id="get-certification-btn" style="width:250px;font-size:large;display:none;">Get Certification</button>
+        </div>
     </div>
 </div>
 <template id="new_test_case_row">
-    <div class="col col-sm-6 col-lg-4 test_case_row my-2">
-        <div class="card">
+    <div class="col col-md-4 col-lg-4 test_case_row my-2">
+        <div class="card m-3">
             <img src="~/imgs/icons/sample1.png" class="mx-auto my-2 new_tc_image" />
             <div class="card-body">
                 <h4 class="card-title new_tc_label">L-Shape Zone</h4>
@@ -81,10 +109,17 @@
             $("#uploadTestCase").show();
             window.location = "/view/test_case";
         });
+        $("#get-certification-btn").click(function () {
+            window.location = "/view/certification";
+        });
 
         get_certification(software_id).then(function (data) {
-            console.log(data);
             var test_results = data['testResult'];
+            var is_passed = data['isLevel2Passed'];
+            if (is_passed) {
+                $("#get-certification-btn").show();
+                $("#nextBtn").hide();
+            }
             $.getJSON({
                 url: "/json/test_cases.json",
                 success: function (data2) {
@@ -93,14 +128,17 @@
                         let holder = $(document.getElementById("new_test_case_row").content.cloneNode(true));
                         let id = item['id'];
                         try {
-                            let result = test_results[id];
+                            let result = test_results[id].split(';')[0];
+                            let file_type = test_results[id].split(';')[1] != null ? test_results[id].split(';')[1] : "gbxml";
                             if (result === "success") {
                                 holder.find(".card").addClass("green-border passed");
                                 holder.find(".badge-icon").append('<img src="/imgs/icons/award.png">');
-                                holder.find(".view_history").show();
+                                holder.find(".view_history").attr("type", file_type).show();
                             }
                             if (result === "failure") {
                                 holder.find(".badge-icon").append('<img src="/imgs/icons/wrong.png">');
+                                holder.find(".view_history").attr("type", file_type).show();
+
                             }
                         } catch (err) {
                         }
@@ -108,7 +146,7 @@
                         
                         holder.find(".test_case_row").attr("id", item['id']);
                         holder.find(".new_tc_label").html(item['label']);
-                        holder.find(".new_tc_image").attr("src", "/imgs/test_case/" + item['image']);
+                        holder.find(".new_tc_image").attr("src", "/test/" + item['id'] + "/f1.png");
                         holder.find(".new_tc_name").html(item['name']);
 
                         $("#test_case_list").append(holder);
@@ -118,7 +156,9 @@
         })
         $("#test_case_list").on('click', '.test_case_row .view_history', function () {
             let selected = $(this).closest(".test_case_row").attr("id");
+            let selected_type = $(this).attr("type");
             console.log(selected);
+            localStorage.setItem("file_type", selected_type);
             localStorage.setItem("selected_test_case", selected);
             localStorage.setItem("view_history", true);
             window.location = "/view/test_report";
