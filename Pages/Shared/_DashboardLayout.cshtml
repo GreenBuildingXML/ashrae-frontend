@@ -57,11 +57,11 @@
                 <!-- Brand demo (see ~/assets/css/demo/demo.css) -->
                 <div class="app-brand demo">
                     <span class="app-brand-logo demo bg-primary">
-                        <img src="assets/img/avatars/profile_default.jpg" class="d-block ui-w-30 rounded-circle" alt>
+                        <img src="assets/img/avatars/profile_default.jpg" class="d-block ui-w-30 rounded-circle user-image" alt>
 
                     </span>
 
-                    <a href="index.html" class="app-brand-text demo sidenav-text font-weight-normal ml-2 u_full_name">Nellie Maxwell</a>
+                    <a href="index.html" class="app-brand-text demo sidenav-text font-weight-normal ml-2 u_full_name"></a>
                     <a href="javascript:void(0)" class="layout-sidenav-toggle sidenav-link text-large ml-auto">
                         <i class="ion ion-md-menu align-middle"></i>
                     </a>
@@ -151,7 +151,7 @@
                             <div class="demo-navbar-user nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
                                     <span class="d-inline-flex flex-lg-row-reverse align-items-center align-middle">
-                                        <img src="assets/img/avatars/profile_default.jpg" alt class="d-block ui-w-30 rounded-circle">
+                                        <img src="assets/img/avatars/profile_default.jpg" alt class="d-block ui-w-30 rounded-circle user-image">
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
@@ -227,10 +227,11 @@
                 });
             });
             get_user_info().then(function (data) {
-                $(".u_full_name").html(data['fullname'] != "null null"? data["fullname"]: "test user");
+                $(".u_full_name").html(data["fullname"]);
                 $(".u_email").html(data['email'] ? data['email'] : "N/A");
                 $(".u_organization").html(data['organization'] ? data['organization'] : "N/A");
                 $(".u_phone").html(data['phone'] ? data['phone'] : "N/A");
+                $(".user-image").attr("src", data['picUrl']);
             })
         })</script>
 

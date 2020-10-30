@@ -76,7 +76,88 @@ function get_user_info(userId) {
         }
     });
 }
+function update_user_info(first_name, last_name, organization, phone) {
+    return $.ajax({
+        type: 'PUT',
+        url: get_root_Api() + 'api/UpdateUserInfo',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', get_token());
+        },
+        data: {
+            "firstName": first_name,
+            "lastName": last_name,
+            "organization": organization,
+            "phone": phone
+        },
+        success: function (data) {
 
+        },
+        error: function (error) {
+            process_error(error);
+        }
+    });
+}
+function update_profile_image(file) {
+    let fd = new FormData();
+    fd.append('image', file);
+    return $.ajax({
+        type: 'POST',
+        url: get_root_Api() + 'api/UploadProfileImage',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', get_token());
+        },
+        data: fd,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+            
+        },
+        error: function (data) {
+            process_error(data);
+        }
+    });
+}
+function get_cropped_image(file) {
+    let fd = new FormData();
+    fd.append('image', file);
+    return $.ajax({
+        type: 'POST',
+        url: get_root_Api() + 'api/GetCroppedImage',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', get_token());
+        },
+        data: fd,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+
+        },
+        error: function (data) {
+            process_error(data);
+        }
+    });
+}
+function update_software_image(software_id, file) {
+    let fd = new FormData();
+    fd.append('image', file);
+    fd.append('id', software_id);
+    return $.ajax({
+        type: 'POST',
+        url: get_root_Api() + 'api/UploadProjectImage',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', get_token());
+        },
+        data: fd,
+        processData: false,
+        contentType: false,
+        success: function (data) {
+
+        },
+        error: function (data) {
+            process_error(data);
+        }
+    });
+}
 function process_error(data) {
     console.log(data['status']);
     if (data['status'] === 401 || data['status'] == 403) {

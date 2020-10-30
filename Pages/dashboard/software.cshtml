@@ -6,9 +6,10 @@
     <!-- Side info -->
     <div class="card mb-4">
         <div class="card-body text-center">
-            <img src="assets/img/avatars/profile_default.jpg" alt class="ui-w-80 rounded-circle mt-2 mb-3">
+            <img src="assets/img/avatars/profile_default.jpg" alt="" class="ui-w-80 rounded-circle mt-2 mb-3 user-image">
             <h5 class="mb-2 u_full_name"></h5>
-            <div class="text-muted small">Project Manager Autodesk</div>
+            <div class="text-muted small"></div>
+            <button class="btn-outline-primary btn btn-round mt-3" id="edit_profile_btn"><i class="fas fa-user-edit"></i> Edit Profile</button>
         </div>
         <hr class="border-light m-0">
         <div class="card-body">
@@ -259,26 +260,27 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="ui-w-65 software-icon" style="padding: 10px">
+                    <div class="ui-w-65 software-icon" style="padding: 10px" id="update-software-image">
                         <img src="~/imgs/icons/gbxml_icon.png" alt="" />
                     </div>
                     <div style="margin: auto 10px;">
-                        <button type="button" class="btn btn-primary btn-sm">Select Image</button>
+                        <input type="file" id="software-image-upload" hidden accept="image/*" />
+                        <label for="software-image-upload" class="btn btn-primary btn-sm">Select Image</label>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col mb-0">
-                        <label class="form-label" >Software name*</label>
+                        <label class="form-label">Software name*</label>
                         <input type="text" class="form-control" id="new_sw_name" placeholder="Autodesk Autocad">
                     </div>
                     <div class="form-group col mb-0">
-                        <label class="form-label" >Version*</label>
+                        <label class="form-label">Version*</label>
                         <input type="text" class="form-control" id="new_sw_version" placeholder="Version 2">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col">
-                        <label class="form-label" >Description</label>
+                        <label class="form-label">Description</label>
                         <input type="text" class="form-control" id="new_sw_desc" placeholder="...">
                     </div>
                 </div>
@@ -287,6 +289,54 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" id="update_software_btn">Update</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="modal fade" id="edit-profile-model">
+    <div class="modal-dialog">
+        <form class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Profile
+                    <span class="font-weight-light">Information</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="ui-w-65" style="padding: 10px">
+                        <img src="assets/img/avatars/profile_default.jpg" alt="" class="ui-w-80 rounded-circle mt-2 mb-3 user-image"/>
+                    </div>
+                    <div style="margin: auto 10px;">
+                        <input type="file" id="profile-upload" hidden accept="image/*"/>
+                        <label for="profile-upload" class="btn btn-primary btn-sm">Select Image</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col mb-0">
+                        <label class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="mem_first_name">
+                    </div>
+                    <div class="form-group col mb-0">
+                        <label class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="mem_last_name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label class="form-label">Organization</label>
+                        <input type="text" class="form-control" id="mem_organization" placeholder="...">
+                    </div>
+                    <div class="form-group col">
+                        <label class="form-label">phone</label>
+                        <input type="text" class="form-control" id="mem_phone">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="update_profile_btn">Update</button>
             </div>
         </form>
     </div>
@@ -304,10 +354,11 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="ui-w-65 software-icon" style="padding: 10px">
-                        <img src="~/imgs/icons/gbxml_icon.png" alt="" />
+                        <img src="~/imgs/icons/gbxml_icon.png" alt="" id="add-software-image"/>
                     </div>
                     <div style="margin: auto 10px;">
-                        <button type="button" class="btn btn-primary btn-sm">Select Image</button>
+                        <input type="file" id="software-image-add" hidden accept="image/*" />
+                        <label for="software-image-add" class="btn btn-primary btn-sm">Select Image</label>
                     </div>
                 </div>
                 <div class="form-row">
@@ -356,6 +407,7 @@
 <script>
     $(function () {
         let total_software = 0;
+        let selected_id;
         get_software().then(function (data) {
             total_software = data.length;
             $("#software_cnt").html(total_software);
@@ -377,7 +429,7 @@
             });
             $("#software_list").on('click', '.edit_icon_btn', function () {
                 let id = $(this).attr("id");
-                console.log(id);
+                selected_id = id;
                 get_one_software(id).then(function (data) {
                     $("#new_sw_name").val(data['name']);
                     $("#new_sw_desc").val(data['description']);
@@ -395,6 +447,7 @@
             let name = $("#new_sw_name").val();
             let version = $("#new_sw_version").val();
             let desc = $("#new_sw_desc").val();
+            
             update_software(id, name, desc, version).then(function (data) {
                 console.log(data);
                 $(".software_item[id='" + id + "']").find(".new_sw_name").html(name);
@@ -403,21 +456,90 @@
                 $("#update-software-model").modal('toggle');
             })
         });
-
+        $("#edit_profile_btn").click(function () {
+            get_user_info().then(function (data) {
+                $("#mem_first_name").val(data['firstName']);
+                $("#mem_last_name").val(data['lastName']);
+                $("#mem_organization").val(data['organization']);
+                $("#mem_phone").val(data['phone']);
+            });
+            $("#edit-profile-model").modal('toggle');
+        });
+        $("#update_profile_btn").click(function () {
+            let first_name = $("#mem_first_name").val();
+            let last_name = $("#mem_last_name").val();
+            let organization = $("#mem_organization").val();
+            let phone = $("#mem_phone").val();
+            update_user_info(first_name, last_name, organization, phone).then(function (data) {
+                $(".u_full_name").html(data["fullname"]);
+                $(".u_email").html(data['email'] ? data['email'] : "N/A");
+                $(".u_organization").html(data['organization'] ? data['organization'] : "N/A");
+                $(".u_phone").html(data['phone'] ? data['phone'] : "N/A");
+                $("#edit-profile-model").modal('toggle');
+            })
+        })
+        $("#profile-upload").on('change', function () {
+            let input = this;
+            if (input.files && input.files[0]) {
+                update_profile_image(input.files[0]).then(function (data) {
+                    $('.user-image').attr('src', data);
+                })
+            }
+        });
+        $("#software-image-upload").on('change', function () {
+            let input = this;
+            if (input.files && input.files[0]) {
+                update_software_image(selected_id, input.files[0]).then(function (data) {
+                    $("#update-software-image img").attr("src", data);
+                    $(".software_item[id='" + selected_id + "'] img").attr('src', data);
+                })
+            }
+        });
+        let selected_file;
+        $("#software-image-add").on('change', function () {
+            let input = this;
+            if (input.files && input.files[0]) {
+                selected_file = input.files[0];
+                get_cropped_image(input.files[0]).then(function (data) {
+                    $('#add-software-image').attr('src', data);
+                })
+            }
+        })
         $("#save_software_btn").click(function () {
             console.log("save software");
             let name = $("#sw_name").val();
             let version = $("#sw_version").val();
             let desc = $("#sw_desc").val();
             add_software(name, desc, version).then(function (data) {
-                add_new_software_item(data);
+                if (selected_file) {
+                    update_software_image(data['id'], selected_file).then(function (image_src) {
+                        data['picUrl'] = image_src;
+                        add_new_software_item(data);
+                        $("#add-software-model").modal('toggle');
+                    })
+                } else {
+                    add_new_software_item(data);
+                    $("#add-software-model").modal('toggle');
+                }
+                
                 total_software += 1;
                 $("#software_cnt").html(total_software);
-                $("#add-software-model").modal('toggle');
+                
             })
         });
-    });
 
+    });
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#add-software-image').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]); // convert to base64 string
+        }
+    }
     function add_new_software_item(item) {
         let holder = $(document.getElementById("new_software_row").content.cloneNode(true));
         holder.find(".new_sw_name").html(item['name'] + " " + item['version']);
@@ -427,6 +549,10 @@
         holder.find(".new_sw_status").html(item['status']).attr("id", item['id']);
         holder.find(".edit_icon_btn").attr("id", item['id']);
         holder.find(".software_item").attr("id", item['id']);
+        if (item['picUrl']) {
+            holder.find(".software-icon img").attr("src", item['picUrl']);
+        }
+        
         $("#software_list").append(holder);
     }
 
