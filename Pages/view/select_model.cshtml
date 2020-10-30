@@ -60,7 +60,7 @@
 
     <!-- Header -->
     <div class="container-m-nx container-m-ny bg-white py-3 text-center">
-        <div class="media pt-5 mx-auto">
+        <div class="media pt-3 mx-auto">
             <div class="media-body ml-5">
                 <h1 class="font-weight-bold mb-4">gbXML V6.0 Level 2 Certification</h1>
 
@@ -72,8 +72,21 @@
 
     </div>
     <!-- Header -->
+    <div class="row" style="padding: 0px 8% 5px 8%;">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons" id="cases-filter-btn">
+            <label class="btn btn-outline-primary active">
+                <input type="radio" name="btn-radio" value="all" checked=""> All
+            </label>
+            <label class="btn btn-outline-primary">
+                <input type="radio" name="btn-radio" value="passed"> Passed
+            </label>
+            <label class="btn btn-outline-primary ">
+                <input type="radio" name="btn-radio" value="failed"> Failed
+            </label>
+        </div>
+    </div>
     <div class="row scroll-container" id="test_case_list">
-        
+
     </div>
     <div class="row">
         <div class="mx-auto">
@@ -131,11 +144,13 @@
                             let result = test_results[id].split(';')[0];
                             let file_type = test_results[id].split(';')[1] != null ? test_results[id].split(';')[1] : "gbxml";
                             if (result === "success") {
+                                holder.find(".test_case_row").addClass("passed");
                                 holder.find(".card").addClass("green-border viewed");
                                 holder.find(".badge-icon").append('<img src="/imgs/icons/award.png">');
                                 holder.find(".view_history").attr("type", file_type).show();
                             }
                             if (result === "failure") {
+                                holder.find(".test_case_row").addClass("failed");
                                 holder.find(".card").addClass("red-border viewed");
                                 holder.find(".badge-icon").append('<img src="/imgs/icons/wrong.png">');
                                 holder.find(".view_history").attr("type", file_type).show();
@@ -164,6 +179,22 @@
             localStorage.setItem("view_history", true);
             window.location = "/view/test_case";
         });*@
+        $('#cases-filter-btn .btn').on('click', function () {
+            let selected = $(this).find('input').val();
+            $(".test_case_row").hide();
+            switch (selected) {
+                case "all":
+                    $(".test_case_row").show();
+                    break;
+                case "failed":
+                    $("#test_case_list .failed").show();
+                    break;
+
+                case "passed":
+                    $("#test_case_list .passed").show();
+                    break;
+            }
+        });
         $("#test_case_list").on('click', '.test_case_row .card', function () {
             $("#test_case_list .test_case_row .card").removeClass("selected");
             $(this).addClass("selected");
