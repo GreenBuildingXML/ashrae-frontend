@@ -62,7 +62,7 @@
     <div class="container-m-nx container-m-ny bg-white py-3 text-center">
         <div class="media pt-5 mx-auto">
             <div class="media-body ml-5">
-                <h1 class="font-weight-bold mb-4">gbXML V6.0 Level 2 Certificatin</h1>
+                <h1 class="font-weight-bold mb-4">gbXML V6.0 Level 2 Certification</h1>
 
                 <div class="text-muted mb-4" style="font-size: 20px;">
                     Test Cases
@@ -91,7 +91,7 @@
                 <p class="text-text new_tc_name">
                 </p>
                 <div style="height: 35px;">
-                    <button class="btn btn-outline-primary float-left view_history" style="display: none">View</button>
+                    <button class="btn float-left view_history" style="display: none"></button>
                     <div class="btn btn-link float-right badge-icon"></div>
                 </div>
                 
@@ -131,11 +131,12 @@
                             let result = test_results[id].split(';')[0];
                             let file_type = test_results[id].split(';')[1] != null ? test_results[id].split(';')[1] : "gbxml";
                             if (result === "success") {
-                                holder.find(".card").addClass("green-border passed");
+                                holder.find(".card").addClass("green-border viewed");
                                 holder.find(".badge-icon").append('<img src="/imgs/icons/award.png">');
                                 holder.find(".view_history").attr("type", file_type).show();
                             }
                             if (result === "failure") {
+                                holder.find(".card").addClass("red-border viewed");
                                 holder.find(".badge-icon").append('<img src="/imgs/icons/wrong.png">');
                                 holder.find(".view_history").attr("type", file_type).show();
 
@@ -154,21 +155,29 @@
                 }
             });
         })
-        $("#test_case_list").on('click', '.test_case_row .view_history', function () {
+        @*$("#test_case_list").on('click', '.test_case_row .view_history', function () {
             let selected = $(this).closest(".test_case_row").attr("id");
             let selected_type = $(this).attr("type");
             console.log(selected);
             localStorage.setItem("file_type", selected_type);
             localStorage.setItem("selected_test_case", selected);
             localStorage.setItem("view_history", true);
-            window.location = "/view/test_report";
-        });
-        $("#test_case_list").on('click', '.test_case_row .card:not(.passed)', function () {
+            window.location = "/view/test_case";
+        });*@
+        $("#test_case_list").on('click', '.test_case_row .card', function () {
             $("#test_case_list .test_case_row .card").removeClass("selected");
             $(this).addClass("selected");
             $("#nextBtn").removeAttr('disabled');
             let selected = $(this).parent().attr("id");
-            localStorage.setItem("view_history", false);
+            let selected_type = $(this).find(".view_history").attr("type");
+            console.log(selected_type);
+            if (selected_type != null) {
+                localStorage.setItem("view_history", true);
+                localStorage.setItem("file_type", selected_type);
+            } else {
+                localStorage.setItem("view_history", false);
+            }
+            
             localStorage.setItem("selected_test_case", selected);
 
         });

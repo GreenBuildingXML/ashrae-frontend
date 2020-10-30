@@ -316,8 +316,7 @@
 								<br>`
 								+ ( data.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
 									encodeURI( data.CADObjectId ) + `"); title="Show all surfaces in this CAD object" >` + data.CADObjectId + `</button><br>` : `` ) +
-									`<input oninput=HUD.updateSelect(this,selCadId); placeholder="cad id">
-									<select id=selCadId onchange=HUD.updateCadId(this); onclick=HUD.updateCadId(this);>` + GBX.surfacesCadObj +`</select><br>` +
+									`<select id=selCadId onchange=HUD.updateCadId(this);>` + GBX.surfacesCadObj +`</select><br>` +
 									`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
 									` ln <i title="length" >` + height.toFixed( 3 ) + `</i> wd <i title="width" >` + width.toFixed( 3 ) + `</i>` +
 							`<div>
@@ -340,9 +339,9 @@
 		GBX.surfaceMeshes.children.forEach( function( element ) { element.visible = element.userData.data.id === id ? true : false; } );
 
 		const surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
-		console.log('surfaceMesh', surfaceMesh);
+		console.log( 'surfaceMesh', surfaceMesh );
 		intersected = surfaceMesh;
-		return surfaceMesh;
+
 	};
 
 
@@ -388,14 +387,13 @@
 
 		} else if ( spaceRef === 2 ) {
 
-			const spaceId2 = selSpace2.value;
-			surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef = spaceId2;
-			butSpace2.innerText = spaceId2
+			const spaceId = selSpace2.value;
+			surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef = spaceId;
+			butSpace2.innerText = spaceId;
 
 			adjacentNew = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
-			adjacentNew.setAttribute( "spaceIdRef", spaceId2 );
+			adjacentNew.setAttribute( "spaceIdRef", spaceId );
 			surfaceXml.appendChild( adjacentNew );
-			console.log( 'surfaceXml', surfaceXml );
 
 			GBV.surfaceChanges.twoAdjacent.push( { id:surfaceId, spaceId: [ surfaceJson.AdjacentSpaceId[ 0 ].spaceIdRef, surfaceJson.AdjacentSpaceId[ 1 ].spaceIdRef ] } )
 
@@ -463,7 +461,7 @@
 				const removedId2 = adjSpace2.getAttribute( 'spaceIdRef' );
 				const removed2 = surfaceXml.removeChild( adjSpace2 );
 
-				//				delete( surfaceJson.AdjacentSpaceId );
+		//				delete( surfaceJson.AdjacentSpaceId );
 
 				console.log( 'old 2 / new 0 / removed id1: ', removedId1, ' id2: ', removedId2, surfaceXml );
 
@@ -507,9 +505,9 @@
 
 				surfaceJson.AdjacentSpaceId= [ { "spaceIdRef": "none" }, { "spaceIdRef": "none" }];
 
-				//				adjacentSpaceId = surfaceJson.AdjacentSpaceId;
-				//				adjacentSpaceId[ 0 ] = { spaceIdRef: 'none' };
-				//				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
+		//				adjacentSpaceId = surfaceJson.AdjacentSpaceId;
+		//				adjacentSpaceId[ 0 ] = { spaceIdRef: 'none' };
+		//				adjacentSpaceId[ 1 ] = { spaceIdRef: 'none' };
 
 				console.log( 'old 0 / new 2 / adjacentSpaceId', surfaceJson.adjacentSpaceId );
 
@@ -542,9 +540,9 @@
 
 			} else { // type prev is no adjacent
 
-				//				const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
-				//				newAdj.setAttribute( "spaceIdRef", "none" ) ;
-				//				const newAdjTxt = surfaceXml.appendChild( newAdj );
+		//				const newAdj = GBX.gbxmlResponseXML.createElement( "AdjacentSpaceId" );
+		//				newAdj.setAttribute( "spaceIdRef", "none" ) ;
+		//				const newAdjTxt = surfaceXml.appendChild( newAdj );
 
 				surfaceJson.AdjacentSpaceId = { spaceIdRef: 'none' };
 
@@ -619,18 +617,7 @@
 
 		} else {
 
-			//alert( 'There is no cad object id associated with this surface. \n\n A future release will allow you to add one.')
-
-			surfaceXml.setAttribute( "CADObjectId", that.value );
-
-			console.log( 'surfaceXml', surfaceXml);
-			//const newCadIdTxt = surfaceXml.appendChild( newCadId );
-			//console.log( 'newCadIdTxt', newCadIdTxt);
-
-			surfaceMesh = GBP.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
-			surfaceMesh.userData.data.CADObjectId = that.value;
-
-			GBI.surfaceChanges.cadObjs.push( { id: id, cadId: that.value } );
+			alert( 'There is no cad object id associated with this surface. \n\n A future release will allow you to add one.')
 
 		}
 

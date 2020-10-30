@@ -1,0 +1,200 @@
+﻿@page "/viewer"
+@model Asharea_viewer.Pages.viewerModel
+@{
+    ViewData["Title"] = "Viewer";
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Open, view and investigate gbXML files in 3D in your browser with free, open source entry-level Three.js JavaScript">
+    <meta name="keywords" content="gbXML,Three.js,WebGL,JavaScript,Markdown,GitHub,FOSS,3D,STEM">
+    <meta name="date" content="2020-10-07">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" type="text/css" href="~/css/lv1-viewer.css">
+    <link rel="stylesheet" id="stylesheetW3schools" type="text/css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129035557-1"></script>
+    <script>window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-129035557-1');</script>
+
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r108/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r108/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/showdownjs/showdown@1.9.0/dist/showdown.min.js"></script>
+
+    <script src="https://ladybug-tools.github.io/spider-gbxml-tools/lib/mas-menu-app-switch/mas-menu-app-switch-2020-10-07.js"></script>
+
+    <script src="~/lib/old_spider_lib/gv-cor/gv-cor.js"></script>
+    <script src="~/lib/old_spider_lib/gv-gbx/gv-gbx.js"></script>
+    <script src="~/lib/old_spider_lib/gv-thr/gv-thr.js"></script>
+    <script src="~/lib/old_spider_lib/gv-gbv/gv-gbv.js"></script>
+    <script src="~/lib/old_spider_lib/gv-hud/gv-hud.js"></script>
+
+    <!-- Copyright 2019 Ladybug Tools authors. MIT License -->
+
+
+    <div id="divMenuInWorld" title="This is called the 'in-world menu'">
+
+        <div id="divTitle"></div>
+
+        <p style="margin-top: 10px;">
+
+            <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="THR.controls.autoRotate =!THR.controls.autoRotate" ; title="toggle the scene spinning">rotation</button>
+
+            <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceMeshes.visible =!GBX.surfaceMeshes.visible" ; title="toggle the flat bits">surfaces</button>
+
+            <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick="GBX.surfaceEdges.visible =!GBX.surfaceEdges.visible" ; title="toggle the side lines">edges</button>
+
+            <button class="w3-theme-d1 w3-hover-theme w3-hover-border-theme" onclick=GBX.setAllVisible();GBV.zoomObjectBoundingSphere(GBX.surfaceMeshes); title="Go to the home view">reset view</button>
+
+        </p>
+
+        <div id=divLog></div>
+
+    </div>
+    <div id="divContainer" style="display: none;">
+
+        <div id="divContainerHeader" class="w3-theme-d2 w3-hover-theme">
+            pop-up window / click here to move / click outside to close
+            
+        </div>
+
+        <div id="divContents"></div>
+
+    </div>
+
+
+    <div id="divHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight();> &#9776; </div>
+
+
+    <div id="divHeadsUp" class=w3-theme-l5>
+
+        <div id=divHeadsUpHeader class="w3-theme-d2 w3-hover-theme" title="Open JavaScript console to see more data">
+            right menu / click here to move
+            <!--
+            <button onclick=divHeadsUp.style.display="none"; style=float:right;z-index:20; >&#x2716;</button>
+            -->
+        </div>
+
+        <div id=divHUDheader class=mnuRightDiv></div>
+        <div id=divHUDItems class=mnuRightDiv></div>
+        <div id=divHUDfooter class=mnuRightDiv></div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/js/common.js"></script>
+    <script src="~/js/software.js"></script>
+    <script>var APP = {};
+        $(function () {
+            var software_id = localStorage.getItem("software_id");
+            var file_type = localStorage.getItem("lv1_file_type");
+            get_lv1_gbxml_link(software_id, file_type).then(function (link) {
+                console.log(link);
+                //GBX.defaultURL = '../../../gbxml-sample-files/bristol-clifton-down-road-small.xml';
+                GBX.defaultURL = link;
+                //GBX.defaultURL = '../../../gbxml-sample-files/old-factory.xml';
+
+                COR.initCore();
+                THR.initThree();
+                HUD.initHeadsUp();
+
+                THR.animate();
+                COR.onHashChange(); // loads splash screen and gets things rolling
+
+
+                initApp(); // loads default gbXML
+
+            });
+        })
+
+
+        function initApp() {
+
+            let color = localStorage.getItem('GbxmlViewerStyleColor');
+            color = 'blue';
+            stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+          
+            txt = '';
+
+            
+
+            stylesheetW3schools.onload = function () {
+
+                //console.log( 'stylesheetW3schools', stylesheetW3schools );
+                classElement = document.querySelector('.w3-theme-d1');
+                //console.log( 'w3-theme-d1', style = getComputedStyle(classElement).backgroundColor );
+                APP.backgroundColor = getComputedStyle(classElement).backgroundColor;
+
+            }
+
+
+            if (location.hash && (location.hash.endsWith('.xml') || location.hash.endsWith('.gbxml'))) {
+
+                const url = location.hash.slice(1);
+
+                COR.requestFileAndProgress(url, GBX.callbackGbXML);
+
+            } else {
+
+                COR.requestFileAndProgress(GBX.defaultURL, GBX.callbackGbXML);
+
+            }
+
+            THR.controls.enableKeys = false;
+
+        }
+
+
+
+        function onloadThreejs() {
+
+            divLog.innerHTML += '<div>Loading Time (Millisecond): ' + (Date.now() - COR.timeStart).toLocaleString() + '<div>';
+            APP.resetMenu();
+        }
+
+
+        APP.callbackJson = function (xhr) {
+
+            const response = xhr.target.response;
+            GBV.surfaceChanges = JSON.parse(response)
+
+            SAV.getUpdates();
+
+        };
+
+
+
+        APP.resetMenu = function () {
+
+            menuButtons = document.querySelectorAll("button.app-menu");
+
+            menuButtons.forEach(element => {
+                element.style.backgroundColor = ''; element.style.fontStyle = ''; element.style.fontWeight = '';
+            });
+
+            menuDetails = document.querySelectorAll("details.app-menu");
+
+            menuDetails.forEach(element => element.remove());
+
+        };
+
+
+        function setStyle(color) {
+
+            stylesheetW3schools.href = "https://www.w3schools.com/lib/w3-theme-" + color + ".css";
+
+            localStorage.setItem('GbxmlViewerStyleColor', color);
+
+        }</script>
+</body>
+</html>

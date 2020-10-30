@@ -57,6 +57,10 @@
     border: 2px solid green;
 }
 
+.red-border {
+    border: 2px solid red;
+}
+
 /*gbxml viewer*/
 #output-list .output-item p{
     font-size: small;

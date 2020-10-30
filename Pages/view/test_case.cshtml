@@ -57,7 +57,11 @@
         </div>
     </div>
     <div class="row">
-        <button class="btn btn-primary mx-auto my-3" id="upload_file_btn" style="width:250px;font-size:large;">Upload Your Test Case</button>
+        <div class="mx-auto">
+            <button class="btn btn-primary my-3" id="upload_file_btn" style="width:250px;font-size:large;">Upload Your Test Case</button>
+            <button class="btn btn-secondary my-3" id="view_result_btn" style="width:250px;font-size:large; display: none;">View test result</button>
+
+        </div>
     </div>
 </div>
 
@@ -108,7 +112,8 @@
         var is_view_history = localStorage.getItem("view_history");
         console.log(is_view_history);
         if (is_view_history != "false") {
-            $("#upload_file_btn").hide();
+            $("#upload_file_btn").html("Retest");
+            $("#view_result_btn").show();
         }
         $("#upload_file_btn").click(function () {
             $("#upload-modal").modal('toggle');
@@ -116,6 +121,10 @@
         init_dropzone('dropzone-demo-1', false);
         $('#upload-modal').on('shown.bs.modal', function (e) {
 
+        })
+
+        $("#view_result_btn").click(function () {
+            window.location = '/view/test_report';
         })
 
         $('#upload-file').click(function () {

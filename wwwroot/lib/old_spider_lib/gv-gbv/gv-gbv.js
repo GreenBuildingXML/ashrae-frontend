@@ -234,64 +234,7 @@
 
 	};
 
-GBV.showSpaceStorey = function (id) {
-	//console.log( 'id', id );
-	const spaces = GBX.gbjson.Campus.Building.Space;
-	var isSpaceStorey = false;
 
-	for (let child of GBX.surfaceMeshes.children) {
-		child.visible = false;
-		adjacentSpaceId = child.userData.data.AdjacentSpaceId
-
-		if (!adjacentSpaceId) { continue; }
-
-		spaceIdRef = Array.isArray(adjacentSpaceId) ? adjacentSpaceId[1].spaceIdRef : adjacentSpaceId.spaceIdRef
-
-		if (jQuery.isArray(spaces) !== true) {
-			var element = spaces;
-			child.visible = (element.id === spaceIdRef && element.buildingStoreyIdRef === id) ? true : child.visible
-
-		} else {
-			spaces.forEach(element => {
-				child.visible = (element.id === spaceIdRef && element.buildingStoreyIdRef === id) ? true : child.visible
-			});
-		}
-		if (Array.isArray(GBX.gbjson.Campus.Building.BuildingStorey)) {
-			const storey = GBX.gbjson.Campus.Building.BuildingStorey.find(function (item) { return (item.id === id); });
-			if (storey) {
-				isSpaceStorey = true;
-			}
-		} else {
-			if (GBX.gbjson.Campus.Building.BuildingStorey && GBX.gbjson.Campus.Building.BuildingStorey.id) {
-				var storey_id = GBX.gbjson.Campus.Building.BuildingStorey.id;
-				if (storey_id == id) {
-					isSpaceStorey = true;
-				}
-			}
-			
-		}
-
-
-		if (adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef) {
-
-			//console.log( 'adjacentSpaceId', adjacentSpaceId );
-
-			child.visible = true;
-			isSpaceStorey = true;
-		} else if (Array.isArray(adjacentSpaceId) === true) {
-
-			if (id === adjacentSpaceId[0].spaceIdRef || id === adjacentSpaceId[1].spaceIdRef) {
-
-				child.visible = true;
-				isSpaceStorey = true;
-			}
-
-		}
-	}
-
-	return isSpaceStorey;
-
-};
 
 	GBV.showStorey = ( id ) => {
 
@@ -300,38 +243,21 @@ GBV.showSpaceStorey = function (id) {
 		const spaces = GBX.gbjson.Campus.Building.Space;
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
+
 		for ( let child of GBX.surfaceMeshes.children ) {
 
 			adjacentSpaceId = child.userData.data.AdjacentSpaceId
 
-			if (!adjacentSpaceId) { continue; }
-			
-			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
-			
-			if (jQuery.isArray(spaces) !== true) {
-				var element = spaces;
-				child.visible = (element.id === spaceIdRef && element.buildingStoreyIdRef === id) ? true : child.visible
-				
-			} else {
-				spaces.forEach(element => {
-					child.visible = (element.id === spaceIdRef && element.buildingStoreyIdRef === id) ? true : child.visible
-				});
-			}
-			if (Array.isArray(GBX.gbjson.Campus.Building.BuildingStorey)) {
-				const storey = GBX.gbjson.Campus.Building.BuildingStorey.find(function (item) { return (item.id === id); });
-				if (storey) {
-					return true;
-				}
-			} else {
-				var storey_id = GBX.gbjson.Campus.Building.BuildingStorey.id;
-				if (storey_id == id) {
-					return true;
-				}
-			}
-		}
-		return null;
+			if ( !adjacentSpaceId ) { continue; }
 
-		
+			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
+
+			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.buildingStoreyIdRef === id ? true : child.visible );
+
+		}
+
+		const storey = GBX.gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
+
 		//	console.log( 'storey', storey );
 
 	};

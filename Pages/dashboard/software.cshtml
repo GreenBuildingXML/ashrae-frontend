@@ -17,26 +17,24 @@
             </h5>
             <div class="mb-2">
                 <span class="text-muted">Email Address:</span>
-                <div class="mt-2 font-weight-bold text-dark u_email">Mike.Mills@autodesk.com</div>
+                <div class="mt-2 font-weight-bold text-dark u_email"></div>
             </div>
 
             <div class="mb-2">
                 <span class="text-muted">Phone</span>
-                <div class="font-weight-bold text-dark mt-2 u_phone">+0 (123) 456 7891</div>
+                <div class="font-weight-bold text-dark mt-2 u_phone"></div>
             </div>
 
             <div class="mb-2">
                 <span class="text-muted">Organization</span>
-                <div class="font-weight-bold text-dark mt-2 u_organization">1051 Audeskdesk way, San Jose, CA 96254</div>
+                <div class="font-weight-bold text-dark mt-2 u_organization"></div>
             </div>
         </div>
-        <hr class="border-light m-0">
+        @*<hr class="border-light m-0">
         <div class="card-body">
             <div class='mb-4'>
-                <span class="text-muted">Last Login:</span>&nbsp;
-                08:43am
             </div>
-        </div>
+        </div>*@
     </div>
     <!-- / Side info -->
 }
@@ -49,9 +47,9 @@
 <!-- / Info -->
 <div class="nav-tabs-top nav-responsive-sm">
     <ul class="nav nav-tabs nav-justified tabs-alt" id="tab-text">
-        <li class="nav-item">
+        @*<li class="nav-item">
             <a class="nav-link active" data-toggle="tab" href="#software">Software</a>
-        </li>
+        </li>*@
         <!--
             <li class="nav-item">
                 <a class="nav-link" data-toggle="tab" href="#events">Events</a>
@@ -347,7 +345,7 @@
                 <i class="ion ion-md-create ml-3 edit_icon_btn"></i>
             </div>
             <a href="javascript:void(0)" class="font-weight-bold text-dark new_sw_name">Autodesk Revit</a>
-            <i class="ion ion-md-calendar ml-4"></i><span class="text-muted ml-3 new_sw_date">03/25/2020</span>
+            <span class="text-muted ml-3 new_sw_date">03/25/2020</span>
             <br>
             <small class="text-muted">Description: <span class="new_sw_desc"></span></small>
             <br>
@@ -422,7 +420,7 @@
 
     function add_new_software_item(item) {
         let holder = $(document.getElementById("new_software_row").content.cloneNode(true));
-        holder.find(".new_sw_name").html(item['name']);
+        holder.find(".new_sw_name").html(item['name'] + " " + item['version']);
         holder.find(".new_sw_date").html(moment(item['createdDate']).format('MM/DD/YYYY'));
         holder.find(".new_sw_desc").html(item['description']);
         holder.find(".new_sw_level").html(item['certificationLevel'] ? item['certificationLevel'] : "N/A");

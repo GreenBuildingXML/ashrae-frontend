@@ -340,9 +340,9 @@
 		GBX.surfaceMeshes.children.forEach( function( element ) { element.visible = element.userData.data.id === id ? true : false; } );
 
 		const surfaceMesh = GBX.surfaceMeshes.children.find( ( element ) => element.userData.data.id === id );
-		console.log('surfaceMesh', surfaceMesh);
+		console.log( 'surfaceMesh', surfaceMesh );
 		intersected = surfaceMesh;
-		return surfaceMesh;
+
 	};
 
 

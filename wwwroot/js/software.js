@@ -89,7 +89,7 @@ function get_certification(id) {
     });
 }
 
-function update_certification_lv1(id) {
+function update_certification_lv1(id, isPassed) {
     return $.ajax({
         type: 'PUT',
         url: get_root_Api() + 'api/PassedLevel1',
@@ -97,12 +97,36 @@ function update_certification_lv1(id) {
             xhr.setRequestHeader('Authorization', get_token());
         },
         data: {
-            id: id
+            id: id,
+            isPassed: isPassed
         },
         success: function (data) {
         },
         error: function (error) {
             process_error(error);
+        }
+    });
+}
+function upload_lv1_gbxml_file(id, files) {
+    let forms = assemble_file_upload_formdata_separate(files);
+    let form = forms[0];
+    let data = form['form'];
+    data.append('id', id);
+    return $.ajax({
+        type: 'POST',
+        url: get_root_Api() + 'api/uploadLv1gbxmlFile',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', get_token());
+        },
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+        },
+        error: function (error) {
+            process_error(error);
+
         }
     });
 }
@@ -165,6 +189,26 @@ function get_gbxml_link(id, test_case_id, file_type) {
         data: {
             id: id,
             testName: test_case_id,
+            type: file_type
+        },
+        success: function (data) {
+        },
+        error: function (error) {
+            process_error(error);
+        }
+    });
+}
+
+function get_lv1_gbxml_link(id, file_type) {
+    file_type = file_type != null ? file_type : "gbxml";
+    return $.ajax({
+        type: 'GET',
+        url: get_root_Api() + 'api/getLv1TestgbXMLFile',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', get_token());
+        },
+        data: {
+            id: id,
             type: file_type
         },
         success: function (data) {

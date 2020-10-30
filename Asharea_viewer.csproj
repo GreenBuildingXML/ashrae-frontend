@@ -19,7 +19,7 @@
 </PackageReference>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
-    <PackageReference Include="DOEgbxml" Version="1.0.5" />
+    <PackageReference Include="DOEgbxml" Version="1.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +32,8 @@
     <Folder Include="wwwroot\imgs\test_case\" />
     <Folder Include="Data\model\" />
     <Folder Include="Data\controller\" />
+    <Folder Include="wwwroot\tests\" />
+    <Folder Include="wwwroot\lib\old_spider_lib\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Pages\_ViewImports.cshtml" />

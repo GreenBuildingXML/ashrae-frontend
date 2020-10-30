@@ -26,6 +26,7 @@
 		}
 
 		if ( GBV.butGbxmlView.style.backgroundColor !== 'var( --but-bg-color )' ) {
+			divMenuItems.style.zIndex = 50;
 
 			divMenuItems.innerHTML =
 
@@ -33,7 +34,8 @@
 
 					<summary>gbXML View</summary>
 
-					<div id = "divGbxmlView" style=width:300px; ><div>
+					<div id = "divGbxmlView" style=width:300px; >
+					<div>
 
 					<hr>
 
@@ -53,9 +55,56 @@
 
 		}
 
-	}();
+	};
+	/*
 
 
+
+					toggle the visible items<br>
+					<button onclick=intersected.visible=!intersected.visible; accesskey="z" title = "access key + Z" >surface</button>
+					<button onclick=GBX.surfaceMeshes.visible=!GBX.surfaceMeshes.visible; accesskey="x" title = "access key +  X" >surfaces</button>
+					<button onclick=GBX.surfaceEdges.visible=!GBX.surfaceEdges.visible; accesskey="c" title = "access key + C"  >edges</button>
+					<button onclick=GBV.setAllVisible(); accesskey="v" title = "access key + V" >all</button>
+					<br>
+
+					<hr>
+
+						<details open>
+						<summary><b>surfaces</b></summary>
+						<div class=flex-container2 >
+							<div style=padding-right:15px; >
+								<input oninput=HUD.updateSelect(this,selSurface); size=6 placeholder="surface id" ><br>
+								<select id=selSurface2 onclick=HUD.updateSurface(this.value); onchange=HUD.updateSurface(this.value); size=8 >` + GBX.surfacesOptions + `</select><br>
+								<button onclick=HUD.setHeadsUp(); >update</button>
+							</div>
+
+						</div>
+						</details>
+
+
+	<!--
+	edit the surface<br>
+	<button class=toggle onclick=GBV.deleteSurface("` + data.id + `"); >delete surface</button>
+	<button onclick=GBV.addModifiedBy(); title='add name, app, date and time of the edits' >modified by </button>
+	<button onclick=GBV.saveFile(); title="creates a new file with the changes" >save edits</button>
+	<br>
+	-->
+							<div style=max-width:270px; >
+
+								id <button onclick=GBV.showSurface(this.innerText) title="show only this surface" >` + data.id + `</button>
+								<button onclick=GBV.zoomIntoSurface("` + data.id + `"); title="zoom into just this surface" >zoom</button>
+								<br>`
+								+ ( data.Name ? 'name <i>' + data.Name + '</i>' +b : '' ) +
+								`type <button butType onclick=GBV.showSurfaceType(this.innerText); title="show all of this type" >` + data.surfaceType + `</button>` + b +
+								` update <select id = "selType" onchange=HUD.updateType(this.value); title="change to another type of surface" >` + GBX.surfaceTypeOptions + `</select>
+								<br>`
+								+ ( data.CADObjectId ? 'cad object id <button onclick=GBV.showCadId("' +
+									encodeURI( data.CADObjectId ) + `"); title="Show all surfaces in this CAD object" >` + data.CADObjectId + `</button><br>` : `` ) +
+									`<select id=selCadId onchange=HUD.updateCadId(this);>` + GBX.surfacesCadObj +`</select><br>` +
+									`area <i>` + Number( surfaceArea ).toFixed( 1 ) + `</i>` +
+									` ln <i title="length" >` + height.toFixed( 3 ) + `</i> wd <i title="width" >` + width.toFixed( 3 ) + `</i>` +
+							`<div>
+	*/
 
 	function initMenuGbxmlView() {
 
@@ -90,7 +139,7 @@
 
 		getMenuItems();
 
-	};
+	}
 
 
 
@@ -115,7 +164,7 @@
 		selSpace.innerHTML = txt;
 		selSpace.selectedIndex = 0; //Math.floor( Math.random() * selSurface.length );
 
-	};
+	}
 
 
 
@@ -152,7 +201,9 @@
 
 		}
 
-	};
+	}
+
+
 
 
 
@@ -173,20 +224,19 @@
 
 
 
-	GBV.showSurfacesInSurfaceArray = ( surfaces ) => {
 
-		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
+	GBV.showCadId = CADObjectId => {
+
+		GBX.surfaceMeshes.children.forEach( element =>
+			element.visible = encodeURI( element.userData.data.CADObjectId ) === CADObjectId ? true : false );
 
 	};
 
 
 
-	GBV.showCadId = function( CADObjectId ) {
-		//console.log( 'CADObjectId', CADObjectId );
+	GBV.showSurfaceType = type => {
 
-		CADObjectId = decodeURI( CADObjectId );
-		GBX.surfaceMeshes.children.forEach( element =>
-			element.visible = element.userData.data.CADObjectId === CADObjectId ? true : false );
+		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
 
 	};
 
@@ -202,11 +252,11 @@
 
 		return space;
 
-	};
+	}
 
 
 
-	GBV.showSpace = function( id ) {
+	GBV.showSpace = id => {
 		//console.log( 'id', id );
 
 		for ( let child of GBX.surfaceMeshes.children ) {
@@ -219,6 +269,7 @@
 
 				//console.log( 'adjacentSpaceId', adjacentSpaceId );
 				child.visible = true;
+
 
 			} else if ( Array.isArray( adjacentSpaceId ) === true ) {
 
@@ -234,214 +285,33 @@
 
 	};
 
-GBV.showSpaceStorey = function (id) {
-	//console.log( 'id', id );
-	const spaces = GBX.gbjson.Campus.Building.Space;
-	var isSpaceStorey = false;
 
-	for (let child of GBX.surfaceMeshes.children) {
-		child.visible = false;
-		adjacentSpaceId = child.userData.data.AdjacentSpaceId
-
-		if (!adjacentSpaceId) { continue; }
-
-		spaceIdRef = Array.isArray(adjacentSpaceId) ? adjacentSpaceId[1].spaceIdRef : adjacentSpaceId.spaceIdRef
-
-		if (jQuery.isArray(spaces) !== true) {
-			var element = spaces;
-			child.visible = (element.id === spaceIdRef && element.buildingStoreyIdRef === id) ? true : child.visible
-
-		} else {
-			spaces.forEach(element => {
-				child.visible = (element.id === spaceIdRef && element.buildingStoreyIdRef === id) ? true : child.visible
-			});
-		}
-		if (Array.isArray(GBX.gbjson.Campus.Building.BuildingStorey)) {
-			const storey = GBX.gbjson.Campus.Building.BuildingStorey.find(function (item) { return (item.id === id); });
-			if (storey) {
-				isSpaceStorey = true;
-			}
-		} else {
-			if (GBX.gbjson.Campus.Building.BuildingStorey && GBX.gbjson.Campus.Building.BuildingStorey.id) {
-				var storey_id = GBX.gbjson.Campus.Building.BuildingStorey.id;
-				if (storey_id == id) {
-					isSpaceStorey = true;
-				}
-			}
-			
-		}
-
-
-		if (adjacentSpaceId && adjacentSpaceId.spaceIdRef && id === adjacentSpaceId.spaceIdRef) {
-
-			//console.log( 'adjacentSpaceId', adjacentSpaceId );
-
-			child.visible = true;
-			isSpaceStorey = true;
-		} else if (Array.isArray(adjacentSpaceId) === true) {
-
-			if (id === adjacentSpaceId[0].spaceIdRef || id === adjacentSpaceId[1].spaceIdRef) {
-
-				child.visible = true;
-				isSpaceStorey = true;
-			}
-
-		}
-	}
-
-	return isSpaceStorey;
-
-};
 
 	GBV.showStorey = ( id ) => {
 
 		//console.log( 'id', id );
 
-		const spaces = GBX.gbjson.Campus.Building.Space;
+		spaces = GBX.gbjson.Campus.Building.Space;
 
 		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
+
 		for ( let child of GBX.surfaceMeshes.children ) {
 
 			adjacentSpaceId = child.userData.data.AdjacentSpaceId
 
-			if (!adjacentSpaceId) { continue; }
-			
-			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
-			
-			if (jQuery.isArray(spaces) !== true) {
-				var element = spaces;
-				child.visible = (element.id === spaceIdRef && element.buildingStoreyIdRef === id) ? true : child.visible
-				
-			} else {
-				spaces.forEach(element => {
-					child.visible = (element.id === spaceIdRef && element.buildingStoreyIdRef === id) ? true : child.visible
-				});
-			}
-			if (Array.isArray(GBX.gbjson.Campus.Building.BuildingStorey)) {
-				const storey = GBX.gbjson.Campus.Building.BuildingStorey.find(function (item) { return (item.id === id); });
-				if (storey) {
-					return true;
-				}
-			} else {
-				var storey_id = GBX.gbjson.Campus.Building.BuildingStorey.id;
-				if (storey_id == id) {
-					return true;
-				}
-			}
-		}
-		return null;
+			if ( !adjacentSpaceId ) { continue; }
 
-		
+			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
+
+			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.buildingStoreyIdRef === id ? true : child.visible );
+
+		}
+
+		const storey = GBX.gbjson.Campus.Building.BuildingStorey.find( function( item ) { return item.id === id; } );
+
 		//	console.log( 'storey', storey );
 
-	};
-
-
-
-	GBV.showFloorSlabs = function( id ) {
-
-		//console.log( 'id', id );
-
-		const spaces = GBX.gbjson.Campus.Building.Space;
-
-		const types = ['InteriorFloor', 'SlabOnGrade', 'RaisedFloor', 'UndergroundSlab']
-
-		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			adjacentSpaceId = child.userData.data.AdjacentSpaceId
-
-			if ( !adjacentSpaceId ) { continue; }
-
-			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
-
-			spaces.forEach( element => { child.visible = element.id === spaceIdRef
-				&& element.buildingStoreyIdRef === id  && types.includes( child.userData.data.surfaceType )  ? true : child.visible;
-
-			} );
-
-		}
-
-		GBV.floorSlabs = GBX.surfaceMeshes.children.filter( child => child.visible === true );
-		//console.log( 'GBV.floorSlabs', GBV.floorSlabs);
-
-	};
-
-
-
-	GBV.showZone = function ( zoneIdRef ) {
-
-		console.log( 'zoneIdRef', zoneIdRef );
-
-		const spaces = GBX.gbjson.Campus.Building.Space;
-
-		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			adjacentSpaceId = child.userData.data.AdjacentSpaceId
-
-			if ( !adjacentSpaceId ) { continue; }
-
-			spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
-
-			spaces.forEach( element => child.visible = element.id === spaceIdRef && element.zoneIdRef === zoneIdRef ? true : child.visible );
-
-		}
-
-		let zone;
-
-		if ( Array.isArray( GBX.gbjson.Zone ) ) {
-
-			zone = GBX.gbjson.Zone.find( function( item ) { return item.id === zoneIdRef; } );
-
-		} else {
-
-			zone = GBX.gbjson.Zone;
-
-		}
-
-		console.log( 'zone', zone );
-
-	};
-
-
-
-	GBV.showSurfaceType = type => {
-
-		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.surfaceType === type? true : false );
-
-	};
-
-
-
-	GBV.showBySurfaceTypeArray = function( types ) {
-
-		console.log( 'types', types );
-
-		const spaces = GBX.gbjson.Campus.Building.Space;
-
-		GBX.surfaceMeshes.children.forEach( element => element.visible = false );
-
-		for ( let child of GBX.surfaceMeshes.children ) {
-
-			//adjacentSpaceId = child.userData.data.AdjacentSpaceId
-
-			//if ( !adjacentSpaceId ) { continue; }
-
-			//spaceIdRef = Array.isArray( adjacentSpaceId ) ? adjacentSpaceId[ 1 ].spaceIdRef : adjacentSpaceId.spaceIdRef
-
-			spaces.forEach( element => { child.visible = types.includes( child.userData.data.surfaceType )  ? true : child.visible;
-
-			} );
-
-		}
-
-		GBV.floorSlabs = GBX.surfaceMeshes.children.filter( child => child.visible === true );
-		//console.log( 'GBV.floorSlabs', GBV.floorSlabs);
-
-	};
+	}
 
 
 
@@ -538,13 +408,12 @@ GBV.showSpaceStorey = function (id) {
 
 		element =  document.getElementById( 'divSurface' + id );
 		// console.log( 'element', element );
-
 		if ( element ) {
 			element.innerHTML = '<p>Surface deleted</p>' + element.innerHTML
 			element.style.opacity = 0.2;
 		}
 
-		//initGbxmlView();
+		initGbxmlView();
 
 	};
 
@@ -585,7 +454,7 @@ GBV.showSpaceStorey = function (id) {
 
 		alert( 'Adding to gbXML:\n\n' + GBX.gbxmlResponseXML.getElementsByTagName( "ModifiedBy" )[0].outerHTML );
 
-	};
+	}
 
 
 

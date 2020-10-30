@@ -56,16 +56,16 @@
 	// handle location.hash change events
 
 	COR.onHashChange = function() {
-		
+
 		const url = !location.hash ? COR.uriDefaultFile : location.hash.slice( 1 );
 		const ulc = url.toLowerCase();
-		console.log(ulc);
+
 		COR.timeStart = Date.now();
 
 		if ( ulc.endsWith( '.md' ) ) {
 
-			//COR.requestFile( url, callbackMarkdown );
-		
+			COR.requestFile( url, callbackMarkdown );
+
 			if ( window.divHeadsUp ) { divHeadsUp.style.display="none"; }
 
 		} else if ( ulc.endsWith( '.xml' ) ) {
@@ -73,13 +73,18 @@
 			console.log( 'url', url );
 
 			COR.requestFileAndProgress( url, GBX.callbackGbXML );
+
+			//} else if ( ulc.endsWith( '.html' ) ) {
+
+			//setIfrThree();
+
 		} else if ( ulc.endsWith( '.gif' ) || ulc.endsWith( '.png' ) || ulc.endsWith( '.jpg' ) || ulc.endsWith( '.svg' )) {
 
 			divContainerContents.innerHTML = '<img src=' + url + ' >';
 
 		} else {
-			// todo .gbxml file
-			COR.requestFileAndProgress(url, GBX.callbackGbXML);
+
+			COR.requestFile( urlGitHubPage + url, callbackToTextarea );
 
 		}
 
@@ -93,7 +98,7 @@
 		xhr.crossOrigin = 'anonymous';
 		xhr.open( 'GET', url, true );
 		xhr.onerror = function( xhr ) { console.log( 'error:', xhr  ); };
-		xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
+		//xhr.onprogress = function( xhr ) { console.log(  'bytes loaded: ' + xhr.loaded.toLocaleString() ) }; /// or something
 		xhr.onload = callback;
 		xhr.send( null );
 
@@ -134,7 +139,7 @@
 
 			//			divContainer.innerHTML = '<div id=divContainerContents >' + html + '</div>';
 			divContents.innerHTML = html;
-			divContainer.style.display = 'block';
+			divContainer.style.display = 'none';
 			window.scrollTo( 0, 0 );
 			divContainer.scrollTop = 0;
 			//			divContainerContents.scrollTop = 0;
@@ -346,7 +351,7 @@
 	COR.toggleNavRight = function() {
 
 		const menuRightWidth = divHeadsUp.style.width ? divHeadsUp.style.width.slice( 0, -2 ) : '420' ;
-		const menuRightLeft = ( window.innerWidth - menuRightWidth + 80 ) + 'px';
+		const menuRightLeft = ( window.innerWidth - menuRightWidth - 20 ) + 'px';
 		//console.log( 'menuRightLeft', menuRightLeft );
 
 		divContainer.style.display = "none";
