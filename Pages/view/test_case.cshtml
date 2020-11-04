@@ -108,7 +108,12 @@
             var image_path = "/test/" + selected_test_case + "/f" + i + ".png";
             $("#test-image-list").append("<div><img src=" + image_path +" class='image-custom-1 my-2' /><p>Figure "+ i + "</p></div>");
         }
-    
+        get_certification(software_id).then(function (data) {
+            var is_passed = data['isLevel2Passed'];
+            if (is_passed) {
+                $("#upload_file_btn").hide();
+            }
+        });
         var is_view_history = localStorage.getItem("view_history");
         console.log(is_view_history);
         if (is_view_history != "false") {

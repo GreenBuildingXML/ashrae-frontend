@@ -227,7 +227,8 @@
 <template id="test-info-row">
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="test-info" style="font-size: 14px;"></div>
-        <div class="test-badge badge-success btn"></div>
+        @*<div class="test-badge badge-success btn"></div>*@
+        <button type="button" class="btn btn-default test-badge test-badge badge-success" data-toggle="tooltip" data-placement="top" data-state="primary" title="" data-original-title="">Primary</button>
     </li>
 </template>
 <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@r108/build/three.min.js"></script>
@@ -252,8 +253,11 @@
     var next_model = "";
     var isOverallPassed = false;
     var is_view_history = false;
-    $(function () {
 
+    $(function () {
+        $('body').tooltip({
+            selector: '.test-badge'
+        });
         let selected_test_case = localStorage.getItem("selected_test_case");
         let software_id = localStorage.getItem("software_id");
         is_view_history = localStorage.getItem("view_history");
@@ -262,9 +266,9 @@
         standard_link = buildLink(selected_test_case);
         console.log(selected_test_case + " : " + software_id);
         if (location.hash.indexOf("standard-cases") != -1) {
-            next_model = "Test Model";
+            next_model = "Submitted Model";
         } else {
-            next_model = "Standard Model";
+            next_model = "Reference Model";
         }
 
         get_certification(software_id).then(function (data) {
@@ -305,7 +309,8 @@
                                 $.each(test.infos, function (_, info) {
                                     let holder2 = $(document.getElementById("test-info-row").content.cloneNode(true));
                                     if (info['key']) {
-                                        holder2.find(".test-badge").html(info['key']).attr("key", info['key']);
+                                        var key_info = get_key_content(info['key']);
+                                        holder2.find(".test-badge").html(key_info).attr("key", info['key']).attr("data-original-title", info['key']).attr("source", info['source'].toLowerCase());
                                     }
                                     holder2.find(".test-info").html(info['content']);
                                     holder.find(".tests-list").append(holder2);
@@ -343,27 +348,34 @@
 
             $("#output-list").on('click', '.test-badge', function () {
                 var key = $(this).attr("key");
-                console.log("surface id: " + key);
+                var source = $(this).attr("source");
+                console.log("surface id: " + key + " source:" + source);
                 reset_view();
                 try {
+                    var obj;
+                    switch (source) {
+                        case "space":
+                            obj = GBV.showSpace(key);
+                            break;
+                        case "surface":
+                            obj = GBV.showSurface(key);
+                            break;
+                        case "multisurfaces":
+                            console.log("multi surface");
+                            break;
+                        case "level":
+                            obj = GBV.showStorey(key);
+                            break;
+                        case "hvac":
+                            break;
 
-                    var obj = GBV.showSpaceStorey(key);
-                    if (!obj) {
-                        reset_view();
-                        var obj2 = HUD.updateSurface(key);
-                        if (!obj2) {
-                            pop_info("Notice", "We can't find the current id, please switch to " + next_model + " model!");
-
-                        }
                     }
+
                 } catch (err) {
                     console.log(err);
                     reset_view();
-                    var obj = HUD.updateSurface(key);
-                    if (!obj) {
-                        pop_info("Notice", "We can't find the current id, please switch to " + next_model + " model!");
+                    pop_info("Notice", "We can't find the current id, please switch to " + next_model + " model!");
 
-                    }
                 }
 
 
@@ -372,13 +384,13 @@
         })
         $("#switch-to-standard").click(function () {
             console.log("switch to standard model");
-            next_model = "Test Model";
+            next_model = "Submitted Model";
             buttonToggle("standard");
             window.location.href = "/view/test_report#" + standard_link + Math.random();
         })
         $("#switch-to-test").click(function () {
             console.log("switch to test model");
-            next_model = "Standard Model";
+            next_model = "Reference Model";
             buttonToggle("test");
             window.location.href = "/view/test_report#" + test_link + Math.random();
         })
@@ -421,6 +433,13 @@
             downloader(log_result, type, name)
         })
     })
+    function get_key_content(keys) {
+        var arr = keys.split(",");
+        if (arr.length > 1) {
+            return arr[0] + "...";
+        }
+        return arr;
+    }
     function buttonToggle(cur_model) {
         $("#switch-to-test").removeClass("btn-primary btn-secondary");
         $("#switch-to-standard").removeClass("btn-primary btn-secondary");

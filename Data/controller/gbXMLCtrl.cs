@@ -53,6 +53,7 @@ namespace Asharea_viewer.Data.controller
                     HtmlNode title = tc.SelectSingleNode(".//h3");
                     HtmlNode success_result = tc.SelectSingleNode(".//h4[@class='text-success']");
                     HtmlNode error_result = tc.SelectSingleNode(".//h4[@class='text-error']");
+                    HtmlNode warning_result = tc.SelectSingleNode(".//h4[@class='text-warning']");
                     HtmlNodeCollection info_nodes = tc.SelectNodes(".//p[@class='text-info']");
                     string title_str = title.InnerText;
                     bool isPassed = false;
@@ -61,6 +62,9 @@ namespace Asharea_viewer.Data.controller
                     {
                         isPassed = true;
                         result = success_result.InnerText;
+                    } else if (warning_result != null) {
+                        isPassed = true;
+                        result =warning_result.InnerText;
                     }
                     else if (error_result != null)
                     {
@@ -72,10 +76,18 @@ namespace Asharea_viewer.Data.controller
                     {
                         foreach (HtmlNode node in info_nodes)
                         {
+                         
                             HtmlNode key = node.SelectSingleNode(".//a");
-                            var key_str = key == null ? null : key.Attributes["class"].Value;
+                            var key_str = "";
+                            var source = "";
                             var info_str = node.InnerText;
-                            Info info = new Info(key_str, info_str);
+                            if (key != null && node.Attributes["source"] != null)
+                            {
+                                key_str = key.Attributes["class"].Value;
+                                source = node.Attributes["source"].Value;
+                            }
+                            Info info = new Info(key_str, info_str, source);
+                            Console.WriteLine(info.key + " : " + info.source);
                             infos.Add(info);
                         }
                         test.infos = infos.ToArray();
