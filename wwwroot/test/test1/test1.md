@@ -6,9 +6,10 @@ There is one space in this test model named as “level_1_space_1”.
 ## Special Considerations:
 1.	The model is 10’ x 10’ x 10’ (middle line), and the total wall thickness is 8”
 2.	There are two walls in this model, one is the primary wall that consist of interior finish, structure, and sheetrock, and the other one is the external layer. In this test case, there are two external layers, one is exterior insulation finish system (EIFS), and the other is a rain screen system.
-3.	All the walls face to an orientation shall be named as: “[orientation]_wall_[custom index]”
-4.	All the other surfaces shall be named as their function, such as “interior_wall_[custom index]
-5.	The custom index is an index to differentiate the same type surfaces. The tester can decide how to label the custom index.
+### Space Volumes and Areas
+| Name            | Volume    | Area  |
+|-----------------|-----------|-------|
+| level_1_space_1 | 812.25 CF | 90 SF |
 ### Table 1. Primary wall assembly details
 
 |     Function     |     Material   Name     |     Thickness   (inches)    |     R   (ft2-F-hr/Btu)    |     Conductivity     (BTU/h.ft.F)    |     Density   (lb/ft3)    |     Specific   Heat (Btu/lb-F)    |

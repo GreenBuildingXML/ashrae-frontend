@@ -6,10 +6,12 @@ There are two spaces in this test model. Both of them are on the same level, sep
 ## Special Considerations:
 1.	The model is 10’ x 10’ x 10’ (center line)
 2.	The interior wall is located in the middle of the building, with a thickness of 8”.
-3.	All the walls face to an orientation shall be named as: “[orientation]_wall_[custom index]”
-4.	All the other surfaces shall be named as their function, such as “interior_wall_[custom index]
-5.	The custom index is an index to differentiate the same type surfaces. The tester can decide how to label the custom index.
 
+### Space Volumes and Areas
+| Name            | Volume    | Area  |
+|-----------------|-----------|-------|
+| level_1_space_1 | 378.00 CF | 42 SF |
+| level_1_space_2 | 350.00 CF | 39 SF |
 
 ## Description of Test Case:
 ### Figure 1. Isometric View

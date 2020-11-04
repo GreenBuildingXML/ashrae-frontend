@@ -9,9 +9,10 @@ There is just one spaces in this test model. It is located at the first floor, n
 3.	Exterior wall is a typical brick wall, and its structure is 2x6 wood stud.
 4.	Roof is a typical metal roof, and its structure is 2x10 roof rafter.
 5.	Floor is a slab on grade floor.
-6.	All the walls face to an orientation shall be named as: “[orientation]_wall_[custom index]”
-7.	All the other surfaces shall be named as their function, such as “interior_wall_[custom index]
-8.	The custom index is an index to differentiate the same type surfaces. The tester can decide how to label the custom index.
+### Space Volumes and Areas
+| Name            | Volume    | Area  |
+|-----------------|-----------|-------|
+| level_1_space_1 | 590.98 CF | 59 SF |
 
 ### Table 1. Wall assembly details
 |     Function                 |     Material   Name       |     Thickness   (inches)    |     R   (ft2-F-hr/Btu)    |     Conductivity     (BTU/h.ft.F)    |     Density   (lb/ft3)    |     Specific   Heat (Btu/lb-F)    |

@@ -12,9 +12,10 @@ c.	A gas furnace with constant thermal efficiency equal to 0.8
 d.	Zone design OA is 5.3 CFM/person and 0.64 CFM/m2
 e.	Design heating temperature is 70F and design cooling temperature is 74F
 3.	The order of the equipment should be on/off or constant volume fan, direct expansion cooling coil, gas furnace. The specification for each of the components are listed in Table 1, Table 2, Table 3. Operation schedule is detailed in Table 4.
-4.	All the walls face to an orientation shall be named as: “[orientation]_wall_[custom index]”
-5.	All the other surfaces shall be named as their function, such as “interior_wall_[custom index]”
-6.	The custom index is an index to differentiate the same type surfaces. The tester can decide how to label the custom index.
+### Space Volumes and Areas
+| Name            | Volume    | Area  |
+|-----------------|-----------|-------|
+| level_1_space_1 | 784.00 CF | 87 SF |
 ### Table 1. Fan Properties
 |     Property                 |     Unit    |     Value      |
 |------------------------------|-------------|----------------|

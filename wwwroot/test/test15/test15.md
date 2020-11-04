@@ -7,10 +7,11 @@ There is only one space in this test model. It is named as “level_1_space_1”
 1.	The model is 10’ x 10’ x 10’ (Center line)
 2.	The wall thickness is 8”
 3.	The both thicknesses of roof and slab on grade are 1’.
-4.	All the walls face to an orientation shall be named as: “[orientation]_wall_[custom index]”
-5.	All the other surfaces shall be named as their function, such as “interior_wall_[custom index]”
-6.	The custom index is an index to differentiate the same type surfaces. The tester can decide how to label the custom index.
+### Space Volumes and Areas
 
+| Name            | Volume    | Area  |
+|-----------------|-----------|-------|
+| level_1_space_1 | 784.00 CF | 87 SF |
 
 
 ## Description of Test Case:

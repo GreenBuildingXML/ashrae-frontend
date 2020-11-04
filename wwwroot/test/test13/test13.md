@@ -8,10 +8,12 @@ There are two spaces in this test model. One space is located at the first floor
 2.	The model has two stories and each story is one space.
 3.	Wall thickness is 8”
 4.	The balcony platform is 16’8” x 16’ 8” surround the floor on the second story. The thickness of the platform is 1’.
-5.	All the walls face to an orientation shall be named as: “[orientation]_wall_[custom index]”
-6.	All the other surfaces shall be named as their function, such as “interior_wall_[custom index]”
-7.	The custom index is an index to differentiate the same type surfaces. The tester can decide how to label the custom index.
 
+### Space Volumes and Areas
+| Name            | Volume    | Area  |
+|-----------------|-----------|-------|
+| level_1_space_1 | 784.00 CF | 87 SF |
+| level_2_space_1 | 784.00 CF | 87 SF |
 
 
 
