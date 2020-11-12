@@ -151,3 +151,9 @@
 }
 
 /*end of view progress bar*/
+
+/*test case page css*/
+.pswp img {
+    max-width: none;
+    object-fit: contain;
+}

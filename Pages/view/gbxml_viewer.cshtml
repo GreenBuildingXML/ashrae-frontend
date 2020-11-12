@@ -82,7 +82,7 @@
                 Upload Again
             </button>
             <button class="btn btn-secondary btn-block text-medium" type="button" id="finish-btn" style="display: none;">
-                Complete
+                Test Another Case
             </button>
             @*<button class="btn btn-secondary btn-block text-medium" type="button" id="getCertificationBtn" style="display: none;">
                 Complete
@@ -286,6 +286,12 @@
                     success: function (data) {
                         console.log(data);
                         overallPassed = data['isOverallPassed'];
+                        if (overallPassed) {
+                            updatelv2(software_id, selected_test_case, "success", file_type);
+                        } else {
+                            updatelv2(software_id, selected_test_case, "failure", file_type);
+
+                        }
                         tests = data['tests'];
                         log_result = data['log'];
                         var failed_tests = data['failCounter'];
@@ -370,6 +376,10 @@
                             break;
 
                     }
+                    if (obj == null) {
+                        pop_info("Notice", "We can't find the current id, please switch to " + next_model + " model!");
+
+                    }
 
                 } catch (err) {
                     console.log(err);
@@ -406,12 +416,7 @@
             updatelv2(software_id, selected_test_case, "failure", file_type, "/view/test_case");
         })
         $("#finish-btn").click(function () {
-            if (overallPassed) {
-                updatelv2(software_id, selected_test_case, "success", file_type, "/view/select");
-            } else {
-                updatelv2(software_id, selected_test_case, "failure", file_type, "/view/select");
-
-            }
+            window.location = "/view/select";
 
         })
         @*$("#getCertificationBtn").click(function () {
@@ -457,9 +462,9 @@
 
 
     }
-    function updatelv2(software_id, selected_test_case, status, file_type, redirect_link) {
+    function updatelv2(software_id, selected_test_case, status, file_type) {
         update_certification_lv2(software_id, selected_test_case, status, file_type).then(function (data) {
-            window.location = redirect_link;
+            @*window.location = redirect_link;*@
         })
     }
     function reset_view() {

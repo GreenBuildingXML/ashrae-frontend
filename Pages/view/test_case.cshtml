@@ -47,10 +47,8 @@
         <div class="card-body">
             <div class="row">
                 <div>
-                    <div class="row">
-                        <div style="display: flex;" class="text-center" id="test-image-list">
-                           
-                        </div>
+                    <div id="test-image-list" class="row" itemscope>
+                        
                     </div>
                 </div>
             </div>
@@ -64,7 +62,14 @@
         </div>
     </div>
 </div>
-
+<template id="test-image-item">
+    <figure itemprop="associatedMedia" itemscope>
+        <a href="~/assets/img/bg/1.jpg" itemprop="contentUrl" data-size="1920x1280">
+            <img src="~/assets/img/bg/1.jpg" class="image-custom-1" itemprop="thumbnail" alt="Image description">
+        </a>
+        <p class="text-center">Figure 1</p>
+    </figure>
+</template>
 <!-- Modal template -->
 <div class="modal fade" id="upload-modal">
     <div class="modal-dialog modal-lg">
@@ -97,16 +102,24 @@
     $(function () {
         var selected_test_case = localStorage.getItem("selected_test_case");
         let software_id = localStorage.getItem("software_id");
-        
+
+        initPhotoSwipeFromDOM('#test-image-list');
+
         var test_md = "/test/" + selected_test_case + "/" + selected_test_case + ".md";
         $("#markdown").append("<zero-md src=" + test_md + "></zero-md>");
         var img_cnt = 3;
         if (selected_test_case == "test13") {
             img_cnt = 4;
         }
+        $("#test-image-list").html("");
         for (var i = 1; i <= img_cnt; i++){
             var image_path = "/test/" + selected_test_case + "/f" + i + ".png";
-            $("#test-image-list").append("<div><img src=" + image_path +" class='image-custom-1 my-2' /><p>Figure "+ i + "</p></div>");
+            let holder = $(document.getElementById("test-image-item").content.cloneNode(true));
+            holder.find("a").attr("href", image_path);
+            holder.find("img").attr("src", image_path);
+            holder.find("p").html("Figure " + i);
+            $("#test-image-list").append(holder);
+            @*$("#test-image-list").append("<div><img src=" + image_path +" class='image-custom-1 my-2' /><p>Figure "+ i + "</p></div>");*@
         }
         get_certification(software_id).then(function (data) {
             var is_passed = data['isLevel2Passed'];
