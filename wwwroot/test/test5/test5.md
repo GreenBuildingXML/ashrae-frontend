@@ -2,7 +2,7 @@
 ## Test Description:
 Raised floor and drop ceilings are commonly seen structures in many commercial buildings. Raised floor provides an elevated floor above the substrate to create a hidden passage for various reasons such as air flows or mechanical and electrical service passage. Similarly, drop ceiling creates a plenum space to hide building infrastructures such as piping, wiring and duck work. It is important to identify these spaces as plenum and exported into gbXML. This test case will include both structures in a two-story BIM model. The first story will have an 8” drop ceiling space with 4” thick ceiling. The second story will have an 8” raised floor space with 4” thick flooring.
 ## Spaces / Rooms:
-There are four spaces in this test model. One space is located below the first floor ceiling, named as “level_1_space_1”. One space is located in between the first floor ceiling and second floor flooring, named as “level_1_space_2”. One is located above the second floor raised floor, named as “level_2_space_1”. One space is located in between the second floor flooring and second floor raised floor, named as “level_2_space_2”.
+There are four spaces in this test model. One space is located below the first floor ceiling, named as “level_1_space_1”. One space is located in between the first floor ceiling and second floor flooring, named as “level_1_plenum_1”, must be identified as plenum. One is located above the second floor raised floor, named as “level_2_space_1”. One space is located in between the second floor flooring and second floor raised floor, named as “level_2_plenum_1”, must be identified as plenum.
 ## Special Considerations:
 1.	The model is 10’ x 10’ x 21’ (including floor and roof thickness, using center line)
 2.	The model has two stories and each story is one space.
@@ -15,8 +15,7 @@ There are four spaces in this test model. One space is located below the first f
 |-----------------|-----------|-------|
 | level_1_space_1 | 696.89 CF | 87 SF |
 | level_2_space_1 | 696.89 CF | 87 SF |
-| level_1_space_2 | 72.59 CF  | 87 SF |
-| level_2_space_2 | 72.59 CF  | 87 SF |
+
 
 
 
