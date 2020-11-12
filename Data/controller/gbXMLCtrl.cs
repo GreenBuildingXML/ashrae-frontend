@@ -86,9 +86,12 @@ namespace Asharea_viewer.Data.controller
                                 key_str = key.Attributes["class"].Value;
                                 source = node.Attributes["source"].Value;
                             }
-                            Info info = new Info(key_str, info_str, source);
-                            Console.WriteLine(info.key + " : " + info.source);
-                            infos.Add(info);
+                            if (key_str.Length > 0) {
+                                Info info = new Info(key_str, info_str, source);
+                                Console.WriteLine(info.key + " : " + info.source);
+                                infos.Add(info);
+                            }
+                            
                         }
                         test.infos = infos.ToArray();
                     }

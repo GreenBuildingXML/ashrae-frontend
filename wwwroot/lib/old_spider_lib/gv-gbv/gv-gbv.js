@@ -173,9 +173,12 @@
 
 
 
-	GBV.showSurfacesInSurfaceArray = ( surfaces ) => {
-
-		GBX.surfaceMeshes.children.forEach( element => element.visible = element.userData.data.id === id ? true : false );
+	GBV.showSurfacesInSurfaceArray = (surfaces) => {
+		surfaces.forEach(id => {
+			if (id.length > 0) {
+				GBX.surfaceMeshes.children.forEach(element => element.visible = element.userData.data.id === id ? true : false);
+			}
+		});
 
 	};
 

@@ -368,6 +368,9 @@
                             break;
                         case "multisurfaces":
                             console.log("multi surface");
+                            var keys = key.split(",");
+                            console.log(keys);
+                            GBV.showSurfacesInSurfaceArray(keys);
                             break;
                         case "level":
                             obj = GBV.showStorey(key);
@@ -376,10 +379,10 @@
                             break;
 
                     }
-                    if (obj == null) {
+                    @*if (obj == null) {
                         pop_info("Notice", "We can't find the current id, please switch to " + next_model + " model!");
 
-                    }
+                    }*@
 
                 } catch (err) {
                     console.log(err);
@@ -413,7 +416,8 @@
             $("#container-1").show();
         })
         $("#reupload-btn").click(function () {
-            updatelv2(software_id, selected_test_case, "failure", file_type, "/view/test_case");
+            @*updatelv2(software_id, selected_test_case, "failure", file_type, "/view/test_case");*@
+            window.location = "/view/test_case";
         })
         $("#finish-btn").click(function () {
             window.location = "/view/select";
