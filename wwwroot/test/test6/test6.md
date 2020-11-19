@@ -5,14 +5,14 @@ Building envelope contains critical information for performance analysis, includ
 There is just one spaces in this test model. It is located at the first floor, named as “level_1_space_1”.
 ## Special Considerations:
 1.	The model is 10’ x 10’ (outer line).
-2.	The thickness of wall assembly is 1’1-7/8”. Table 1, 2 and 3 illustrate the layer by layer assemblies as well as the thermal properties for each layer.
+2.	The thickness of wall assembly is 1’1-1/8”. Table 1, 2 and 3 illustrate the layer by layer assemblies as well as the thermal properties for each layer.
 3.	Exterior wall is a typical brick wall, and its structure is 2x6 wood stud.
 4.	Roof is a typical metal roof, and its structure is 2x10 roof rafter.
 5.	Floor is a slab on grade floor.
 ### Space Volumes and Areas
 | Name            | Volume    | Area  |
 |-----------------|-----------|-------|
-| level_1_space_1 | 590.98 CF | 59 SF |
+| level_1_space_1 | 549.32 CF | 61 SF |
 
 ### Table 1. Wall assembly details
 |     Function                 |     Material   Name       |     Thickness   (inches)    |     R   (ft2-F-hr/Btu)    |     Conductivity     (BTU/h.ft.F)    |     Density   (lb/ft3)    |     Specific   Heat (Btu/lb-F)    |
