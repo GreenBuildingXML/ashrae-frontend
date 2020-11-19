@@ -10,6 +10,8 @@
             <h5 class="mb-2 u_full_name"></h5>
             <div class="text-muted small"></div>
             <button class="btn-outline-primary btn btn-round mt-3" id="edit_profile_btn"><i class="fas fa-user-edit"></i> Edit Profile</button>
+            <button class="btn-outline-primary btn btn-round mt-3" id="reset_password_btn"><i class="fas fa-key"></i> Reset Password</button>
+
         </div>
         <hr class="border-light m-0">
         <div class="card-body">
@@ -341,6 +343,38 @@
         </form>
     </div>
 </div>
+<div class="modal fade" id="reset-password-model">
+    <div class="modal-dialog">
+        <form class="modal-content" method="post" id="validation-form" novalidate="novalidate" class="my-5">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Reset
+                    <span class="font-weight-light">Password</span>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Old Password *</label>
+                    <input type="password" class="form-control reuqired is_invalid" id="old_password" name="old_password">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password *</label>
+                    <input type="password" class="form-control reuqired is_invalid" id="password" name="password">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Confirm Password *</label>
+                    <input type="password" class="form-control required is_invalid" id="confirm" name="confirm">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onClick="validatePassword(event);">Change password</button>
+
+            </div>
+        </form>
+    </div>
+</div>
 <div class="modal fade" id="add-software-model">
     <div class="modal-dialog">
         <form class="modal-content">
@@ -416,6 +450,15 @@
                 add_new_software_item(item);
             });
         });
+        $.validator.addMethod("pwcheck", function (value, element) {
+            return /[a-z]/.test(value) // has a lowercase letter
+                && /\d/.test(value) // has a digit
+        }, "At least one lowercase letter and one number digit");
+
+        $.validator.addMethod("notEqual", function (value, element, param) {
+            return this.optional(element) || value != $(param).val();
+        }, "Your new password cannot be same as old password.");
+
         $(".new_sw_status").click(function () {
             let id = $(this).attr("id");
             localStorage.setItem("software_id", id);
@@ -440,7 +483,9 @@
                 
             });
         });
-
+        $("#reset_password_btn").click(function () {
+            $("#reset-password-model").modal('toggle');
+        })
         $("#update_software_btn").click(function () {
             console.log("update software");
             let id = $(this).attr("sw_id");
@@ -554,6 +599,61 @@
         }
         
         $("#software_list").append(holder);
+    }
+    function validatePassword(e) {
+        e.preventDefault();
+
+
+        var validator = $("#validation-form").validate({
+            errorPlacement: function (error, element) {
+                var $parent = $(element).parents('.form-group');
+                $parent.append(
+                    error.addClass('jquery-validation-error small form-text invalid-feedback')
+                );
+            },
+            rules: {
+
+                old_password: {
+                    notEqual: "#password"
+                },
+                confirm: {
+                    equalTo: "#password"
+                },
+                password: {
+                    required: true,
+                    pwcheck: true,
+                    minlength: 5
+                }
+            },
+            message: {
+                password: {
+                    pwcheck: "Your password must contain at least one lowercase letter and one number digit",
+                    minlength: "Your password must be at least 5 characters long"
+                }
+            }
+        });
+        if (validator.form()) {
+            let password = $("#confirm").val();
+            let old_password = $('#old_password').val();
+            let url = window.location.href;
+            let uuid = url.split("?")[1];
+            $.ajax({
+                type: 'POST',
+                url: get_root_Api() + 'api/ResetPassword',
+                data: {
+                    oldPassword: old_password,
+                    password: password
+                },
+                success: function (data) {
+                    pop_info_go("Notice", "Password has been updated!\nPlease login again", "./login");
+                },
+                error: function (error) {
+                    $("#password").val("");
+                    $("#confirm").val("");
+                    process_error(error);
+                }
+            });
+        }
     }
 
 </script>
