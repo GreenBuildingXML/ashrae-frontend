@@ -5,35 +5,15 @@
 }
 @section NavTop {
     <div id="nav-top" class="text-center">
-        @*<div class="btn-icon-1 my-auto btn" onclick="closeVerification()">
-            <i class="fa fa-chevron-left"></i>
-        </div>
-        <div class="btn-box btn active">
-            <i class="fa fa-plus-circle"></i>
-            Select
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-edit"></i>
-            Test Case
-        </div>
-        <div class="btn-box btn">
-            <i class="far fa-file-alt"></i>
-            Test Report
-        </div>
-        <div class="btn-box btn">
-            <i class="fa fa-certificate"></i>
-            Certification
-        </div>
-        <div class="btn-icon-1 my-auto btn btn-box" onclick="closeVerification()">
-            <i class="fa fa-times-circle"></i>
-        </div>*@
         <ul id="progress">
             <li class="btn-icon-1" onclick="closeVerification()">
                 <i class="fa fa-chevron-left"></i>
             </li>
             <li class="active">
-                <i class="fa fa-plus-circle"></i>
-                Select
+                <a href="/view/select">
+                    <i class="fa fa-plus-circle"></i>
+                    Select
+                </a>
             </li>
             <li >
                 <i class="fa fa-edit"></i>
@@ -92,8 +72,8 @@
 </div>
 <div class="view_footer">
     <div class="mx-auto">
+        <button class="btn btn-secondary my-3" id="get-certification-btn" style="width:250px;font-size:large;display:none;">View Certification</button>
         <button class="btn btn-primary my-3" id="nextBtn" style="width:150px;font-size:large;" disabled>Next</button>
-        <button class="btn btn-primary my-3" id="get-certification-btn" style="width:250px;font-size:large;display:none;">Get Certification</button>
     </div>
 </div>
 <template id="new_test_case_row">
@@ -117,7 +97,6 @@
 <script>
     $(function () {
         let software_id = localStorage.getItem("software_id");
-
         $("#nextBtn").click(function(){
             $("#testList").hide();
             $("#uploadTestCase").show();
@@ -132,7 +111,7 @@
             var is_passed = data['isLevel2Passed'];
             if (is_passed) {
                 $("#get-certification-btn").show();
-                $("#nextBtn").hide();
+                @*$("#nextBtn").hide();*@
             }
             $.getJSON({
                 url: "/json/test_cases.json",
@@ -201,8 +180,9 @@
             $(this).addClass("selected");
             $("#nextBtn").removeAttr('disabled');
             let selected = $(this).parent().attr("id");
+            let selected_text_case = $(this).find(".new_tc_label").html();
+            $("#nextBtn").html("Next: " + selected_text_case);
             let selected_type = $(this).find(".view_history").attr("type");
-            console.log(selected_type);
             if (selected_type != null) {
                 localStorage.setItem("view_history", true);
                 localStorage.setItem("file_type", selected_type);

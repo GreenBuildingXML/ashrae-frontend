@@ -121,7 +121,7 @@
 			//console.log( 'xhr', xhr );
 
 			GBX.fileAttributes = { name: xhr.target.responseURL.split( '/').pop() };
-			divLog.innerHTML = GBX.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
+			//divLog.innerHTML = GBX.fileAttributes.name + '<br>bytes loaded: ' + xhr.loaded.toLocaleString() + ' of ' + xhr.total.toLocaleString() ;
 
 		}
 

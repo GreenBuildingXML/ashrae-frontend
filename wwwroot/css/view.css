@@ -140,6 +140,16 @@
     background: #357bfb;
     color: white;
 }
+#progress li.active a{
+    color: white;
+}
+#progress li a {
+    margin: 0px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+   
 
 #progress li.active:after {
     border-left-color: #357bfb;

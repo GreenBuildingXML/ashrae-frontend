@@ -9,8 +9,8 @@
             <img src="assets/img/avatars/profile_default.jpg" alt="" class="ui-w-80 rounded-circle mt-2 mb-3 user-image">
             <h5 class="mb-2 u_full_name"></h5>
             <div class="text-muted small"></div>
-            <button class="btn-outline-primary btn btn-round mt-3" id="edit_profile_btn"><i class="fas fa-user-edit"></i> Edit Profile</button>
-            <button class="btn-outline-primary btn btn-round mt-3" id="reset_password_btn"><i class="fas fa-key"></i> Reset Password</button>
+            <button class="btn-outline-primary btn btn-round mt-3 edit_profile_btn"><i class="fas fa-user-edit"></i> Edit Profile</button>
+            @*<button class="btn-outline-primary btn btn-round mt-3" id="reset_password_btn"><i class="fas fa-key"></i> Reset Password</button>*@
 
         </div>
         <hr class="border-light m-0">
@@ -434,7 +434,7 @@
             <br>
             <small class="text-muted">Description: <span class="new_sw_desc"></span></small>
             <br>
-            <small class="text-muted">Certification Level: <span class="new_sw_level">Lv2</span>  <span class="font-weight-bold text-primary ml-5 btn new_sw_status btn">Start</span> </small>
+            <small class="text-muted">Certification Level: <span class="new_sw_level">Lv2</span>  <span class="font-weight-bold text-primary ml-5 btn new_sw_status btn p-0">Start</span> </small>
         </div>
     </div>
 </template>
@@ -501,7 +501,7 @@
                 $("#update-software-model").modal('toggle');
             })
         });
-        $("#edit_profile_btn").click(function () {
+        $(".edit_profile_btn").click(function () {
             get_user_info().then(function (data) {
                 $("#mem_first_name").val(data['firstName']);
                 $("#mem_last_name").val(data['lastName']);
