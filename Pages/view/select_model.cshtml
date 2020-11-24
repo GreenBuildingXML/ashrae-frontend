@@ -175,6 +175,7 @@
                     break;
             }
         });
+        /* single click test case*/
         $("#test_case_list").on('click', '.test_case_row .card', function () {
             $("#test_case_list .test_case_row .card").removeClass("selected");
             $(this).addClass("selected");
@@ -193,7 +194,27 @@
             localStorage.setItem("selected_test_case", selected);
 
         });
-        
+        /* double click test case */
+        $("#test_case_list").on('dblclick', '.test_case_row .card', function () {
+            $("#test_case_list .test_case_row .card").removeClass("selected");
+            $(this).addClass("selected");
+            $("#nextBtn").removeAttr('disabled');
+            let selected = $(this).parent().attr("id");
+            let selected_text_case = $(this).find(".new_tc_label").html();
+            $("#nextBtn").html("Next: " + selected_text_case);
+            let selected_type = $(this).find(".view_history").attr("type");
+            if (selected_type != null) {
+                localStorage.setItem("view_history", true);
+                localStorage.setItem("file_type", selected_type);
+            } else {
+                localStorage.setItem("view_history", false);
+            }
+            
+            localStorage.setItem("selected_test_case", selected);
+            $("#testList").hide();
+            $("#uploadTestCase").show();
+            window.location = "/view/test_case";
+        });
     })
 
 </script>

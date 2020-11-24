@@ -100,7 +100,7 @@
     background: white;
 }
 #progress li:not(:first-child):not(:last-child) {
-    width: calc((88% - 18px)/4);
+    width: calc(88%/4);
 }
 #progress li {
     float: left;
