@@ -158,6 +158,11 @@
                 pop_info("Notice", "Please upload the test case");
                 return;
             }
+            let type = getExtension(file.name);
+            if (type != "xml" && type != "gbxml") {
+                pop_info("Notice", "Please upload the valid XML file");
+                return;
+            }
             loading_page();
             readFileContent(file).then(content => {
                 let result = validateXML(content);

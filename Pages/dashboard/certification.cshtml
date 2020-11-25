@@ -185,7 +185,17 @@
         })
         $("#validate_xml_btn").click(function () {
             let dropzone = document.getElementById('dropzone-demo').dropzone;
-            let file = dropzone.files[0];
+            let files = dropzone.files;
+            let file = files[0];
+            if (!file) {
+                pop_info("Notice", "Please upload the test case");
+                return;
+            }
+            let type = getExtension(file.name);
+            if (type != "xml" && type != "gbxml") {
+                pop_info("Notice", "Please upload the valid XML file");
+                return;
+            }
             loading_page();
             readFileContent(file).then(content => {
                 let result = validateXML(content);

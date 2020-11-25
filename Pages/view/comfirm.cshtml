@@ -228,14 +228,17 @@
                 pop_info("Notice", "Please upload the test case");
                 return;
             }
+            let type = getExtension(file.name);
+            if (type != "xml" && type != "gbxml") {
+                pop_info("Notice", "Please upload the valid XML file");
+                return;
+            }
             loading_page();
             readFileContent(file).then(content => {
                 let result = validateXML(content);
                 if (result) {
                     upload_gbxml_file(software_id, selected_test_case, files).then(function (data) {
-                        console.log(data);
                         let type = getExtension(file.name);
-                        console.log(type);
                         localStorage.setItem("file_type", type);
                         setTimeout(function () {
                             unloading_page();
