@@ -5,18 +5,18 @@
     }
 });
 function get_root() {
-
+    /*development frontend test env*/
     //return "http://localhost:8080/";
+    /*production frontend test env*/
     return "https://gbxml-viewer.azurewebsites.net/";
-    //return "http://ashrae.biimport.com/";
 }
 
 
 function get_root_Api() {
-
+    /*development backend test env*/
     //return "http://localhost:8786/";
+    /*production backend test env*/
     return "https://gbxml-api.azurewebsites.net/";
-    //return "http://biimport.com/";
 }
 
 function pop_info_go(title, text, url) {
