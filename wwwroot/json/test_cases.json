@@ -44,7 +44,7 @@
   {
     "id": "test7",
     "label": "Test 7",
-    "name": "HVAC system and schedule",
+    "name": "Room inside a room",
     "description": "",
     "image": "test7.png"
   },
@@ -127,8 +127,8 @@
   },
   {
     "id": "test19",
-    "label": "Test 19",
-    "name": "Room inside a room",
+    "label": "Test 19 (Optional)",
+    "name": "HVAC system and schedule",
     "description": "",
     "image": "test19.png"
   }

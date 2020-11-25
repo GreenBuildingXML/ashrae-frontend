@@ -142,7 +142,7 @@
 
         });
 
-        let total_tests = 19;
+        let total_tests = 18;
         get_certification(software_id).then(function (data) {
             let is_level1_passed = data['isLevel1Passed'];
             let is_level2_passed = data['isLevel2Passed'];
@@ -151,8 +151,8 @@
             if (file_type && file_type.length > 0) {
                 $("#view_lv1_btn").show();
             }
-@* update validate work flow  original: cerfiticate 1 -> certificate 2*@
-            @*if (is_level1_passed) {
+    @* update validate work flow  original: cerfiticate 1 -> certificate 2*@
+             @*if (is_level1_passed) {
                 $("#start_level1").hide();
                 $("#complete_level1").show();
                 $("#level1_image").removeClass("border-success circle-icon");
