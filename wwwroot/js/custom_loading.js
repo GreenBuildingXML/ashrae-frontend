@@ -22,7 +22,7 @@ function unloading_with_message(info, message) {
     setTimeout(function () {
         unloading_page();
         pop_info(info, message);
-    }, 5000);
+    }, 3000);
 }
 function loading_component_ele(ele) {
     $(ele).block({

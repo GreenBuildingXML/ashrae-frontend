@@ -157,45 +157,6 @@
     <div id="divContents"></div>
 
 </div>
-@*<div id="divMenuLeft" class=w3-theme-l5>
-
-        <p id="pMenuLeftHeader" class="w3-theme-d2 w3-hover-theme" title="There's a lot to move here. Be slow and gentle!" style=text-align:right;>
-
-            left menu / click to move
-
-        </p>
-
-        <div id="divMenuContents">
-
-            <details open>
-                <h2>
-                    <a href="" title="Reload gbXML Viewer">
-                        <script>document.write(document.title);</script>
-                    </a>
-                </h2>
-
-                <div id=divRowButtonsStyle></div>
-
-                <p id=dragArea class=dragDropArea>
-                    drag or drop gbXML files here<br>
-                    or <input type="file" id="inpFile" onchange="GBX.openGbxmlFile(this);"><br>
-                    or enter a default file path &nbsp;<a href=#../assets/file-open.md>&#x24D8;</a>
-                    <input id=inpFilePath onchange=THR.updateDefaultFilePath(); style=width:100%; title='paste a file path or URL here then press Enter'>
-
-                    or explore sample files<br>
-
-                <p>
-
-                    <hr>
-
-            </details>
-            <div id="divMenuItems"></div>
-
-        </div>
-
-    </div>
-    <div id="divHamburgerLeft" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavLeft(); title="click to hide this menu"> slide &#9776; </div>*@
-
 <div id="divHamburgerRight" class="w3-theme-l4 w3-hover-theme" onclick=COR.toggleNavRight();> &#9776; </div>
 
 
@@ -233,7 +194,6 @@
 <template id="test-info-row">
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <div class="test-info" style="font-size: 14px;"></div>
-        @*<div class="test-badge badge-success btn"></div>*@
         <button type="button" class="btn btn-default test-badge test-badge badge-success" data-toggle="tooltip" data-placement="top" data-state="primary" title="" data-original-title="">Primary</button>
     </li>
 </template>

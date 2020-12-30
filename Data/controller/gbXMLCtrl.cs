@@ -9,6 +9,10 @@ using System.Xml;
 using HtmlAgilityPack;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Xml.Schema;
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using System.Xml.Linq;
 
 namespace Asharea_viewer.Data.controller
 {
@@ -19,6 +23,28 @@ namespace Asharea_viewer.Data.controller
         {
             return View();
         }
+        [HttpPost]
+        public void ValidateXML(String xmlContent)
+        {
+            Console.WriteLine("path \n");
+            XmlSchemaSet schema = new XmlSchemaSet();
+            schema.Add("urn:books", "wwwroot/assets/xsd/book.xsd");
+            //XmlReader rd = XmlReader.Create("wwwroot/assets/xsd/book.xml");
+            //XDocument doc = XDocument.Load(rd);
+            XDocument doc = XDocument.Parse(xmlContent);
+            doc.Validate(schema, ValidationEventHandler);
+        }
+
+        public void ValidationEventHandler(object sender, ValidationEventArgs e)
+        {
+            XmlSeverityType type = XmlSeverityType.Warning;
+            if (Enum.TryParse<XmlSeverityType>("Error", out type))
+            {
+                if (type == XmlSeverityType.Error) throw new Exception(e.Message);
+            }
+        }
+
+
         [HttpGet]
         public TestResult ValidategbXML(string url, string test_case)
         {

@@ -33,6 +33,7 @@
     <Folder Include="Data\model\" />
     <Folder Include="Data\controller\" />
     <Folder Include="wwwroot\lib\old_spider_lib\" />
+    <Folder Include="wwwroot\assets\xsd\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Pages\_ViewImports.cshtml" />

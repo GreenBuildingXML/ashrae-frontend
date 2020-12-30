@@ -10,7 +10,8 @@ namespace Asharea_viewer.Pages.dashboard
     public class certificationModel : PageModel
     {
         public void OnGet()
-        {
+        {           
         }
+        
     }
 }
