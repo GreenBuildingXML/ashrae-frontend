@@ -24,24 +24,36 @@ namespace Asharea_viewer.Data.controller
             return View();
         }
         [HttpPost]
-        public void ValidateXML(String xmlContent)
+        public string ValidateXML(String xmlContent)
         {
             Console.WriteLine("path \n");
             XmlSchemaSet schema = new XmlSchemaSet();
-            schema.Add("urn:books", "wwwroot/assets/xsd/book.xsd");
+            schema.Add("http://www.gbxml.org/schema", "wwwroot/assets/xsd/GreenBuildingXML.xsd");
+            // test case 
+            //schema.Add("urn:books", "wwwroot/assets/xsd/book.xsd");
             //XmlReader rd = XmlReader.Create("wwwroot/assets/xsd/book.xml");
             //XDocument doc = XDocument.Load(rd);
+            HashSet<String> errors = new HashSet<String>();
             XDocument doc = XDocument.Parse(xmlContent);
-            doc.Validate(schema, ValidationEventHandler);
-        }
+            doc.Validate(schema, (object sender, ValidationEventArgs e) =>{
+                XmlSeverityType type = XmlSeverityType.Warning;
 
-        public void ValidationEventHandler(object sender, ValidationEventArgs e)
-        {
-            XmlSeverityType type = XmlSeverityType.Warning;
-            if (Enum.TryParse<XmlSeverityType>("Error", out type))
-            {
-                if (type == XmlSeverityType.Error) throw new Exception(e.Message);
-            }
+                if (Enum.TryParse<XmlSeverityType>("Error", out type))
+                {
+                    switch (e.Severity)
+                    {
+                        case XmlSeverityType.Error:
+                            Console.WriteLine("Error: {0}", e.Message);
+                            errors.Add(e.Message);
+                            break;
+                        case XmlSeverityType.Warning:
+                            Console.WriteLine("Warning {0}", e.Message);
+                            break;
+                    }
+                }
+
+            });
+            return string.Join("", errors.ToArray());
         }
 
 

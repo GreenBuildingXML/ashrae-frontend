@@ -203,7 +203,7 @@
                 $(".u_email").html(data['email'] ? data['email'] : "N/A");
                 $(".u_organization").html(data['organization'] ? data['organization'] : "N/A");
                 $(".u_phone").html(data['phone'] ? data['phone'] : "N/A");
-                $(".user-image").attr("src", data['picUrl']);
+                $(".user-image").attr("src", data['picUrl'] ? data['picUrl'] :"assets/img/avatars/profile_default.jpg");
             })
         })</script>
 

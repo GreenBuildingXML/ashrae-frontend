@@ -50,21 +50,7 @@
 <!-- / Info -->
 <div class="nav-tabs-top nav-responsive-sm">
     <ul class="nav nav-tabs nav-justified tabs-alt" id="tab-text">
-        @*<li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#software">Software</a>
-        </li>*@
-        <!--
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#events">Events</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#messages">Messages</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#documents">Documents</a>
-            </li>
-        -->
-
+       
     </ul>
     <div class="tab-content">
         <div class="tab-pane fade show active" id="software">
@@ -78,26 +64,9 @@
                     </div>
                 </h5>
                 <div class="card-body" id="software_list">
-                    @*example 1*@
-                    @*<div class="pb-1 mb-3 row">
-                        <div class="col-2">
-                            <img class="ui-w-65" src="~/imgs/icons/revit.png" alt="">
-                        </div>
-                        <div class="col">
-                            <div class="float-right icon-size">
-                                <i class="ion ion-md-eye"></i> <i class="ion ion-md-create ml-3"></i>
-                            </div>
-                            <a href="javascript:void(0)" class="font-weight-bold text-dark">Autodesk Revit</a>
-                            <i class="ion ion-md-calendar ml-4"></i><span class="text-muted ml-3">03/25/2020</span>
-                            <br>
-                            <small class="text-muted">Description: xxxxxxxxxxx</small>
-                            <br>
-                            <small class="text-muted">Certification Level: Lv2  <span class="font-weight-bold text-primary ml-5 btn">View</span> </small>
-                        </div>
-                    </div>*@
+                    
               
                 </div>
-                @*<a href="javascript:void(0)" class="card-footer d-block text-center text-body small font-weight-semibold">SHOW MORE</a>*@
             </div>
         </div>
         <div class="tab-pane fade" id="events">
@@ -639,7 +608,10 @@
             let uuid = url.split("?")[1];
             $.ajax({
                 type: 'POST',
-                url: get_root_Api() + 'api/ResetPassword',
+                url: get_root_Api() + 'api/UpdatePassword',
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', get_token());
+                },
                 data: {
                     oldPassword: old_password,
                     password: password
@@ -650,7 +622,8 @@
                 error: function (error) {
                     $("#password").val("");
                     $("#confirm").val("");
-                    process_error(error);
+                    console.log(error);
+                    pop_info("Error", "Reset password failed.");
                 }
             });
         }
