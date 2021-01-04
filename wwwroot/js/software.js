@@ -125,6 +125,7 @@ function upload_lv1_gbxml_file(id, files) {
         success: function (data) {
         },
         error: function (error) {
+            unloading_page();
             process_error(error);
 
         }

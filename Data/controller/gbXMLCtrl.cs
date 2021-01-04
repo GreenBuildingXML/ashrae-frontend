@@ -24,36 +24,40 @@ namespace Asharea_viewer.Data.controller
             return View();
         }
         [HttpPost]
-        public string ValidateXML(String xmlContent)
+        public string ValidateXML(IFormFile file)
         {
-            Console.WriteLine("path \n");
-            XmlSchemaSet schema = new XmlSchemaSet();
-            schema.Add("http://www.gbxml.org/schema", "wwwroot/assets/xsd/GreenBuildingXML.xsd");
-            // test case 
-            //schema.Add("urn:books", "wwwroot/assets/xsd/book.xsd");
-            //XmlReader rd = XmlReader.Create("wwwroot/assets/xsd/book.xml");
-            //XDocument doc = XDocument.Load(rd);
-            HashSet<String> errors = new HashSet<String>();
-            XDocument doc = XDocument.Parse(xmlContent);
-            doc.Validate(schema, (object sender, ValidationEventArgs e) =>{
-                XmlSeverityType type = XmlSeverityType.Warning;
+            try
+            {
+                Console.WriteLine("path \n");
+                XmlSchemaSet schema = new XmlSchemaSet();
+                schema.Add("http://www.gbxml.org/schema", "wwwroot/assets/xsd/GreenBuildingXML.xsd");
+                HashSet<String> errors = new HashSet<String>();
+                XDocument doc = XDocument.Load(XmlReader.Create(file.OpenReadStream()));
+                doc.Validate(schema, (object sender, ValidationEventArgs e) => {
+                    XmlSeverityType type = XmlSeverityType.Warning;
 
-                if (Enum.TryParse<XmlSeverityType>("Error", out type))
-                {
-                    switch (e.Severity)
+                    if (Enum.TryParse<XmlSeverityType>("Error", out type))
                     {
-                        case XmlSeverityType.Error:
-                            Console.WriteLine("Error: {0}", e.Message);
-                            errors.Add(e.Message);
-                            break;
-                        case XmlSeverityType.Warning:
-                            Console.WriteLine("Warning {0}", e.Message);
-                            break;
-                    }
-                }
+                        if (e.Severity == XmlSeverityType.Warning)
+                        {
+                            String warningMessage = "<p class='text-warning'>" + "WARNING: " + e.Exception.Message + " Line Position " + e.Exception.LinePosition + " Line Number: " + e.Exception.LineNumber + "</p>";
+                            errors.Add(warningMessage);
+                        }
+                        else if (!e.Exception.Message.Contains("The element cannot contain white space. Content model is empty."))
+                        {
 
-            });
-            return string.Join("", errors.ToArray());
+                            String errorMessage = "<p class='text-error'>" + "ERROR: " + e.Exception.Message + " Line Position " + e.Exception.LinePosition + " Line Number: " + e.Exception.LineNumber + "</p>";
+                            errors.Add(errorMessage);
+                        }
+                    }
+
+                });
+                return string.Join("", errors.ToArray());
+            }
+            catch(Exception error) {
+                String BigError = "BIG ERROR: " + error + "<br />";
+                throw new Exception(BigError);
+            }
         }
 
 

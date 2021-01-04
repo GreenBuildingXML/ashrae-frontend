@@ -107,7 +107,7 @@
                 <div class="card mb-4">
                     <div class="card-body">
 
-                        <div action="#" id="dropzone-demo" class="dropzone">
+                        <div action="#" id="dropzone-demo" class="dropzone text-center">
                             <div class="dz-message" data-dz-message><span>Drag files here or browse to upload</span></div>
                         </div>
                     </div>
@@ -211,19 +211,18 @@
                 return;
             }
             loading_page();
-
+            var fdata = new FormData();
+            fdata.append("File", file);
 
            // gxbml validation via xsd file
-            readFileContent(file).then(content => {
                  $.ajax({
                         type: 'POST',
                         url: "@Url.Action("ValidateXML")",
-                        data: {
-                            xmlContent: content
-                        },
+                        data: fdata,
+                        processData: false,
+                        contentType: false,
                      success: function (warnings) {
                          console.log("validate success");
-                         console.log("warnings: " + warnings);
                          log_result = warnings;
                          upload_lv1_gbxml_file(software_id, dropzone.files).then(function (data) {
                              file_type = data;
@@ -254,36 +253,13 @@
 
                         },
                         error: function (err) {
+                            unloading_page();
                             unloading_with_message("Failure", 'Please upload validate XML file');
 
                         }
                     });
 
-            }).catch(error => console.log(error))
-            @*readFileContent(file).then(content => {
-                let result = validateXML(content);
-                if (result) {
-                    upload_lv1_gbxml_file(software_id, dropzone.files).then(function (data) {
-                        file_type = data;
-                        $("#view_lv1_btn").show();
-                        update_certification_lv1(software_id, true).then(function (data) {
-                            if (data) {
-                                $(".certification_level").html("Level1");
-                                setTimeout(function () {
-                                    unloading_page();
-                                    pop_info("Success", "You have passed the level1 Certification");
-                                    $("#upload-modal").modal('toggle');
-                                }, 5000);
-                            }
-
-
-                        })
-
-                    })
-
-
-                }
-            }).catch(error => console.log(error))*@
+            
 
         });
         $("#download-report-btn").click(function () {
