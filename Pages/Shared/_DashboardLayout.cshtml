@@ -109,12 +109,12 @@
                         <hr class="d-lg-none w-100 my-2">
 
                         <div class="navbar-nav align-items-lg-center">
-                            
+
                         </div>
 
                         <div class="navbar-nav align-items-lg-center ml-auto">
                             <div class="demo-navbar-notifications nav-item dropdown mr-lg-3">
-                            
+
                             </div>
                             <!-- Divider -->
                             <div class="nav-item d-none d-lg-block text-big font-weight-light line-height-1 opacity-25 mr-3 ml-1">|</div>
@@ -170,7 +170,86 @@
         <div class="layout-overlay layout-sidenav-toggle"></div>
     </div>
 
+    <div class="modal fade" id="edit-profile-model">
+        <div class="modal-dialog">
+            <form class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Profile
+                        <span class="font-weight-light">Information</span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="ui-w-65" style="padding: 10px">
+                            <img src="assets/img/avatars/profile_default.jpg" alt="" class="ui-w-80 rounded-circle mt-2 mb-3 user-image" />
+                        </div>
+                        <div style="margin: auto 10px;">
+                            <input type="file" id="profile-upload" hidden accept="image/*" />
+                            <label for="profile-upload" class="btn btn-primary btn-sm">Select Image</label>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col mb-0">
+                            <label class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="mem_first_name">
+                        </div>
+                        <div class="form-group col mb-0">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="mem_last_name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label class="form-label">Organization</label>
+                            <input type="text" class="form-control" id="mem_organization" placeholder="...">
+                        </div>
+                        <div class="form-group col">
+                            <label class="form-label">phone</label>
+                            <input type="text" class="form-control" id="mem_phone">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="update_profile_btn">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal fade" id="reset-password-model">
+        <div class="modal-dialog">
+            <form class="modal-content" method="post" id="validation-form" novalidate="novalidate" class="my-5">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Reset
+                        <span class="font-weight-light">Password</span>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label">Old Password *</label>
+                        <input type="password" class="form-control reuqired is_invalid" id="old_password" name="old_password">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password *</label>
+                        <input type="password" class="form-control reuqired is_invalid" id="password" name="password">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Confirm Password *</label>
+                        <input type="password" class="form-control required is_invalid" id="confirm" name="confirm">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onClick="validatePassword(event);">Change password</button>
 
+                </div>
+            </form>
+        </div>
+    </div>
     <!-- Core scripts -->
     <script src="~/assets/vendor/libs/popper/popper.js"></script>
     <script src="~/assets/vendor/js/bootstrap.js"></script>
@@ -203,9 +282,102 @@
                 $(".u_email").html(data['email'] ? data['email'] : "N/A");
                 $(".u_organization").html(data['organization'] ? data['organization'] : "N/A");
                 $(".u_phone").html(data['phone'] ? data['phone'] : "N/A");
-                $(".user-image").attr("src", data['picUrl'] ? data['picUrl'] :"assets/img/avatars/profile_default.jpg");
+                $(".user-image").attr("src", data['picUrl'] ? data['picUrl'] : "assets/img/avatars/profile_default.jpg");
             })
-        })</script>
+            $("#reset_password_btn").click(function () {
+                $("#reset-password-model").modal('toggle');
+            })
+    $(".edit_profile_btn").click(function () {
+        get_user_info().then(function (data) {
+            $("#mem_first_name").val(data['firstName']);
+            $("#mem_last_name").val(data['lastName']);
+            $("#mem_organization").val(data['organization']);
+            $("#mem_phone").val(data['phone']);
+        });
+        $("#edit-profile-model").modal('toggle');
+    });
+    $("#update_profile_btn").click(function () {
+        let first_name = $("#mem_first_name").val();
+        let last_name = $("#mem_last_name").val();
+        let organization = $("#mem_organization").val();
+        let phone = $("#mem_phone").val();
+        update_user_info(first_name, last_name, organization, phone).then(function (data) {
+            $(".u_full_name").html(data["fullname"]);
+            $(".u_email").html(data['email'] ? data['email'] : "N/A");
+            $(".u_organization").html(data['organization'] ? data['organization'] : "N/A");
+            $(".u_phone").html(data['phone'] ? data['phone'] : "N/A");
+            $("#edit-profile-model").modal('toggle');
+        })
+    })
+    $("#profile-upload").on('change', function () {
+        let input = this;
+        if (input.files && input.files[0]) {
+            update_profile_image(input.files[0]).then(function (data) {
+                $('.user-image').attr('src', data);
+            })
+        }
+    });
+})
+        function validatePassword(e) {
+            e.preventDefault();
+
+
+            var validator = $("#validation-form").validate({
+                errorPlacement: function (error, element) {
+                    var $parent = $(element).parents('.form-group');
+                    $parent.append(
+                        error.addClass('jquery-validation-error small form-text invalid-feedback')
+                    );
+                },
+                rules: {
+
+                    old_password: {
+                        notEqual: "#password"
+                    },
+                    confirm: {
+                        equalTo: "#password"
+                    },
+                    password: {
+                        required: true,
+                        pwcheck: true,
+                        minlength: 5
+                    }
+                },
+                message: {
+                    password: {
+                        pwcheck: "Your password must contain at least one lowercase letter and one number digit",
+                        minlength: "Your password must be at least 5 characters long"
+                    }
+                }
+            });
+            if (validator.form()) {
+                let password = $("#confirm").val();
+                let old_password = $('#old_password').val();
+                let url = window.location.href;
+                let uuid = url.split("?")[1];
+                $.ajax({
+                    type: 'POST',
+                    url: get_root_Api() + 'api/UpdatePassword',
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader('Authorization', get_token());
+                    },
+                    data: {
+                        oldPassword: old_password,
+                        password: password
+                    },
+                    success: function (data) {
+                        pop_info_go("Notice", "Password has been updated!\nPlease login again", "./login");
+                    },
+                    error: function (error) {
+                        $("#password").val("");
+                        $("#confirm").val("");
+                        console.log(error);
+                        pop_info("Error", "Reset password failed.");
+                    }
+                });
+            }
+        }
+    </script>
 
 </body>
 </html>
