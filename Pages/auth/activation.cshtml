@@ -1,0 +1,54 @@
+﻿@page "/activate"
+@model Asharea_viewer.Pages.auth.activationModel
+@{ ViewData["Title"] = "Activate"; }
+<div class="page-loader">
+    <div class="bg-primary"></div>
+</div>
+
+<!-- Content -->
+
+<div class="authentication-wrapper authentication-2 px-4">
+    <div class="authentication-inner py-5">
+        
+
+
+        <div class="card mb-4">
+            <div class="p-4 p-sm-5">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="">
+                        <div class="w-100 position-relative text-center">
+                            <img src="imgs/icons/gbxml.png" class="w-75" />
+                        </div>
+                    </div>
+                </div>
+                <hr class="mt-0 mb-4">
+                <p id="text-message" class="text-center  p-3"> </p>
+                <a href="/login" id="redirect-btn" class="btn btn-primary btn-block">Login</a>
+            </div>
+
+
+        </div>
+</div>
+<script>$(document).ready(function () {
+        let uuid = get_url_parameter("uuid", true);
+        $.ajax({
+            type: 'GET',
+            url: get_root_Api() + 'ActivateUser',
+            data: {
+                uuid: uuid
+            },
+            success: function (data) {
+                $("#text-message").html("Success: the page will auto-direct to the log in page in 3 seconds or click the link");
+                $("#redirect-btn").show();
+                setTimeout(function () {
+                    window.location.href = "/login";
+                }, 3000)
+            },
+            error: function (error) {
+                $("#text-message").html(error['responseJSON']['message'] + ", please contact: <a href = 'mailto: info@carmelsoft.com'>info@carmelsoft.com</a>");
+            }
+        });
+        $("#redirect-btn").click(function () {
+            window.location.href = "/login";
+        })
+    });</script>

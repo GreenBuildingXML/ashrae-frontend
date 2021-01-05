@@ -18,23 +18,19 @@
                 </div>
             </div>
         </div>
-        
-        <!-- / Logo -->
+   
         <!-- Form -->
-        <form onsubmit="return sign_up(event)" class="my-5">
-            @*<div class="form-group">
-                <label class="form-label">Your username</label>
-                <input type="text" class="form-control" id="username" required="required">
-            </div>*@
+        <form id="validation-form" novalidate="novalidate" class="my-5">
+           
             <div class="form-group">
                 <label class="form-label">Your email</label>
-                <input type="email" class="form-control" id="email" required="required">
+                <input type="email" class="form-control reuqired" id="email" required="required">
             </div>
             <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" required="required">
+                <input type="password" class="form-control reuqired is_invalid" id="password" name="password">
             </div>
-            <button type="submit" class="btn btn-primary btn-block mt-4">Sign Up</button>
+            <button class="btn btn-primary btn-block mt-4" onClick="sign_up(event);">Sign Up</button>
             <div class="bg-lightest text-muted small p-2 mt-4">
                 By clicking "Sign Up", you agree to our
                 <a href="javascript:void(0)">terms of service and privacy policy</a>. We’ll occasionally send you account related emails.
@@ -50,30 +46,55 @@
 </div>
 <script>
     $(document).ready(function () {
-        
+        $.validator.addMethod("pwcheck", function (value, element) {
+            return /[a-z]/.test(value) // has a lowercase letter
+                && /\d/.test(value) // has a digit
+        }, "At least one lowercase letter and one number digit");
+
     });
 
+   
     function sign_up(e) {
         e.preventDefault();
-
-        let email = $("#email").val();
-        @*let usermame = $("#username").val();*@
-        let password = $("#password").val();
-        $.ajax({
-            type: 'POST',
-            url: get_root_Api() + 'Register',
-            data: {
-                email: email,
-                @*username: usermame,*@
-                password: password
+        var validator = $("#validation-form").validate({
+            errorPlacement: function (error, element) {
+                var $parent = $(element).parents('.form-group');
+                $parent.append(
+                    error.addClass('jquery-validation-error small form-text invalid-feedback')
+                );
             },
-            success: function (data) {
-                window.location.href = "./register_validate";
+            rules: {
+                password: {
+                    required: true,
+                    pwcheck: true,
+                    minlength: 5
+                }
             },
-            error: function (error) {
-                process_error(error);
+            message: {
+                password: {
+                    pwcheck: "Your password must contain at least one lowercase letter and one number digit",
+                    minlength: "Your password must be at least 5 characters long"
+                }
             }
         });
-        return false;  // prevent form submit jump to action link
-    };
+        if (validator.form()) {
+            let email = $("#email").val();
+            let password = $("#password").val();
+            $.ajax({
+                type: 'POST',
+                url: get_root_Api() + 'Register',
+                data: {
+                    email: email,
+                    password: password
+                },
+                success: function (data) {
+                    window.location.href = "./register_validate";
+                },
+                error: function (error) {
+                    process_error(error);
+                }
+            });
+            return false;  // prevent form submit jump to action link
+        }
+    }
 </script>

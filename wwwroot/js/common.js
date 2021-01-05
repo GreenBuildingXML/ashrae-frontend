@@ -19,6 +19,26 @@ function get_root_Api() {
     return "https://gbxml-api.azurewebsites.net/";
 }
 
+function get_url_parameter(sParam, no_decode) {
+    let sPageURL = window.location.search.substring(1);
+    if (!no_decode) {
+        sPageURL = decodeURIComponent(sPageURL);
+    }
+    let sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+
+    return "";
+}
+
 function pop_info_go(title, text, url) {
     Swal.fire({
         title: title,
