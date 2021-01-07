@@ -213,7 +213,7 @@
             loading_page();
             var fdata = new FormData();
             fdata.append("File", file);
-
+            
            // gxbml validation via xsd file
                  $.ajax({
                         type: 'POST',
@@ -221,7 +221,7 @@
                         data: fdata,
                         processData: false,
                         contentType: false,
-                     success: function (warnings) {
+                        success: function (warnings) {
                          console.log("validate success");
                          log_result = warnings;
                          upload_lv1_gbxml_file(software_id, dropzone.files).then(function (data) {
@@ -253,21 +253,21 @@
 
                         },
                         error: function (err) {
-                            unloading_page();
                             unloading_with_message("Failure", 'Please upload validate XML file');
-
-                        }
+                           
+                         }
                     });
 
             
 
         });
         $("#download-report-btn").click(function () {
-            let type = "application/text";
-            let name = "report.txt";
+            let type = "text/html";
+            let name = "report.html";
             downloader(log_result, type, name)
         })
         $("#upload_file_btn").click(function () {
+            document.getElementById('dropzone-demo').dropzone.removeAllFiles(true);
             $("#upload-modal").modal('toggle');
         });
         init_dropzone('dropzone-demo',false);

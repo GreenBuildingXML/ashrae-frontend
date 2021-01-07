@@ -15,7 +15,7 @@ function init_dropzone(ele_id, is_multi, drop_callback) {
     dropZone.dropzone.on("error", function (file) {
         if (!file.accepted) this.removeFile(file);
     });
-
+    
     function showDropZone() {
         dropZone.style.display = "block";
     }
@@ -83,11 +83,16 @@ function init_dropzone(ele_id, is_multi, drop_callback) {
             pop_info("", "Please drop a file");
             return;
         }
-
         if (!is_multi) {
             handel_new_file(files);
         }
+        let file = dz_files[0];
+        var ext = file.name.split('.').pop();
+        if (ext == "gbxml" || ext == "xml") {
+            $(file.previewElement).find(".dz-thumbnail img").attr("src", "/imgs/icons/xml.svg");
+        }
     });
+    
 }
 
 

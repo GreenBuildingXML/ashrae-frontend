@@ -1,23 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DOEgbXML;
 using Asharea_viewer.Data.model;
 using System.Xml;
 using HtmlAgilityPack;
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using System.Xml.Schema;
-using System.IO;
 using Microsoft.AspNetCore.Http;
-using System.Xml.Linq;
 
 namespace Asharea_viewer.Data.controller
 {
     public class gbXMLCtrl : Controller
     {
+        private HashSet<String> errors = new HashSet<String>();
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -29,29 +25,21 @@ namespace Asharea_viewer.Data.controller
             try
             {
                 Console.WriteLine("path \n");
-                XmlSchemaSet schema = new XmlSchemaSet();
-                schema.Add("http://www.gbxml.org/schema", "wwwroot/assets/xsd/GreenBuildingXML.xsd");
-                HashSet<String> errors = new HashSet<String>();
-                XDocument doc = XDocument.Load(XmlReader.Create(file.OpenReadStream()));
-                doc.Validate(schema, (object sender, ValidationEventArgs e) => {
-                    XmlSeverityType type = XmlSeverityType.Warning;
+                XmlReaderSettings rs = new XmlReaderSettings();
+                rs.ValidationType = ValidationType.Schema;
+                rs.ValidationFlags |= XmlSchemaValidationFlags.ProcessSchemaLocation | XmlSchemaValidationFlags.ReportValidationWarnings;
+                rs.ValidationEventHandler += new ValidationEventHandler(rs_ValidationEventHandler);
+                //add schema
+                rs.Schemas.Add(null, "wwwroot/assets/xsd/GreenBuildingXML.xsd");
 
-                    if (Enum.TryParse<XmlSeverityType>("Error", out type))
+
+                using (XmlReader xmlValidatingReader = XmlReader.Create(file.OpenReadStream(), rs))
+                {
+                    while (xmlValidatingReader.Read())
                     {
-                        if (e.Severity == XmlSeverityType.Warning)
-                        {
-                            String warningMessage = "<p class='text-warning'>" + "WARNING: " + e.Exception.Message + " Line Position " + e.Exception.LinePosition + " Line Number: " + e.Exception.LineNumber + "</p>";
-                            errors.Add(warningMessage);
-                        }
-                        else if (!e.Exception.Message.Contains("The element cannot contain white space. Content model is empty."))
-                        {
-
-                            String errorMessage = "<p class='text-error'>" + "ERROR: " + e.Exception.Message + " Line Position " + e.Exception.LinePosition + " Line Number: " + e.Exception.LineNumber + "</p>";
-                            errors.Add(errorMessage);
-                        }
                     }
-
-                });
+                }
+           
                 return string.Join("", errors.ToArray());
             }
             catch(Exception error) {
@@ -59,7 +47,28 @@ namespace Asharea_viewer.Data.controller
                 throw new Exception(BigError);
             }
         }
+        void rs_ValidationEventHandler(object sender, ValidationEventArgs e)
+        {
+            if (e.Exception.Message.Contains("Could not find schema information for the element"))
+            {
+                String BigError = "BIG ERROR: " + e.Exception.Message + "<br />";
+                throw new Exception(BigError);
+            }
+            else if (e.Severity == XmlSeverityType.Warning)
+            {
+                String warningMessage = "<p class='text-warning'>" + "WARNING: " + e.Exception.Message + " Line Position " + e.Exception.LinePosition + " Line Number: " + e.Exception.LineNumber + "</p>";
+                Console.WriteLine("Warning: " + e.Exception.Message);
+                errors.Add(warningMessage);
+            }
+            else if (!e.Exception.Message.Contains("The element cannot contain white space. Content model is empty."))
+            {
 
+                String errorMessage = "<p class='text-error'>" + "ERROR: " + e.Exception.Message + " Line Position " + e.Exception.LinePosition + " Line Number: " + e.Exception.LineNumber + "</p>";
+                Console.WriteLine("Error: " + e.Exception.Message);
+                errors.Add(errorMessage);
+            }
+             
+        }
 
         [HttpGet]
         public TestResult ValidategbXML(string url, string test_case)
