@@ -207,7 +207,7 @@
             }
             let type = getExtension(file.name);
             if (type != "xml" && type != "gbxml") {
-                pop_info("Notice", "Please upload the valid XML file");
+                pop_info("Notice", "Invalid gbXML file");
                 return;
             }
             loading_page();
@@ -253,8 +253,8 @@
 
                         },
                         error: function (err) {
-                            unloading_with_message("Failure", 'Please upload validate XML file');
-                           
+                            unloading_with_message("Failure", 'Invalid gbXML file');
+                      
                          }
                     });
 

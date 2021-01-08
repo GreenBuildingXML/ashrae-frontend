@@ -86,7 +86,8 @@ function init_dropzone(ele_id, is_multi, drop_callback) {
         if (!is_multi) {
             handel_new_file(files);
         }
-        let file = dz_files[0];
+    });
+    dropZone.dropzone.on('addedfile', function (file) {
         var ext = file.name.split('.').pop();
         if (ext == "gbxml" || ext == "xml") {
             $(file.previewElement).find(".dz-thumbnail img").attr("src", "/imgs/icons/xml.svg");
