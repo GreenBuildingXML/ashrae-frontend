@@ -196,7 +196,6 @@
         var file_type = localStorage.getItem("file_type");
         $("#test-no").html(selected_test_case);
         get_gbxml_link(software_id, selected_test_case, file_type).then(function (link) {
-            console.log(link);
             GBX.defaultURL = link;
             COR.initCore();
             THR.initThree();

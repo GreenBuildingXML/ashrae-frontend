@@ -160,32 +160,45 @@
             }
             let type = getExtension(file.name);
             if (type != "xml" && type != "gbxml") {
-                pop_info("Notice", "Please upload the valid XML file");
+                pop_info("Notice", "Invalid gbXML file");
                 return;
             }
             loading_page();
-            readFileContent(file).then(content => {
-                let result = validateXML(content);
-                if (result) {
-                    upload_gbxml_file(software_id, selected_test_case, files).then(function (data) {
-                        let type = getExtension(file.name);
-                        console.log(type);
-                        localStorage.setItem("file_type", type);
-                        setTimeout(function () {
-                            unloading_page();
-                            $("#upload-modal").modal('toggle');
-                            window.location = '/view/confirm';
-                        }, 3000);
-                    })
+            var fdata = new FormData();
+            fdata.append("File", file);
 
-                }
-            }).catch(error => {
-                unloading_page();
-                console.log(error);
-            }
-            )
+           // gxbml validation via xsd file
+                 $.ajax({
+                        type: 'POST',
+                        url: "@Url.Action("ValidateXML")",
+                        data: fdata,
+                        processData: false,
+                        contentType: false,
+                        success: function (warnings) {
+                            console.log("validate success");
+                            upload_gbxml_file(software_id, selected_test_case, files).then(function (data) {
+                                let type = getExtension(file.name);
+                                localStorage.setItem("file_type", type);
+                                setTimeout(function () {
+                                    unloading_page();
+                                    $("#upload-modal").modal('toggle');
+                                    window.location = '/view/confirm';
+                                }, 3000);
+                            })
 
-        })
+
+                        },
+                        error: function (err) {
+                            unloading_with_message("Failure", 'Invalid gbXML file');
+
+                         }
+                    });
+
+
+
+        });
+         
+
     })
 
 </script>
