@@ -62,21 +62,6 @@
             <button class="btn btn-warning btn-block text-medium" type="button" id="view-detail-btn">
                 Detail Result
             </button>
-
-            @*<div>
-                    <div class="dropdown mt-3">
-                        <button class="btn btn-danger dropdown-toggle btn-block" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Errors
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Error 1</a>
-                            <a class="dropdown-item" href="#">Error 2</a>
-                            <a class="dropdown-item" href="#">Error 3</a>
-                        </div>
-                    </div>
-                </div>*@
-
         <div style="padding-top: 20%;">
             <button class="btn btn-primary btn-block text-medium" type="button" id="download-report-btn">
                 Download Report
@@ -90,9 +75,6 @@
             <button class="btn btn-secondary btn-block text-medium" type="button" id="finish-btn" style="display: none;">
                 Test Another Case
             </button>
-            @*<button class="btn btn-secondary btn-block text-medium" type="button" id="getCertificationBtn" style="display: none;">
-                Complete
-            </button>*@
         </div>
 
         </div>
@@ -144,9 +126,6 @@
         <button type="button" class="btn text-medium btn-secondary" id="switch-to-standard">Reference Model</button>
     </div>
 </div>
-<!-- Copyright 2019 Ladybug Tools authors. MIT License -->
-
-
 
 <div id="divContainer">
 
@@ -343,10 +322,7 @@
                             break;
 
                     }
-                    @*if (obj == null) {
-                        pop_info("Notice", "We can't find the current id, please switch to " + next_model + " model!");
-
-                    }*@
+                  
 
                 } catch (err) {
                     console.log(err);
@@ -387,15 +363,9 @@
             window.location = "/view/select";
 
         })
-        @*$("#getCertificationBtn").click(function () {
-            update_certification_lv2(software_id, selected_test_case, "success", file_type).then(function (data) {
-                window.location = "/view/select";
-            })
-
-        });*@
+       
 
         $("#download-report-btn").click(function () {
-            @*document.location = 'data:Application/text,' + encodeURIComponent(JSON.stringify(tests));*@
             let type = "application/json";
             let name = "output_" + selected_test_case + ".json";
             downloader(JSON.stringify(tests), type, name)
@@ -432,7 +402,6 @@
     }
     function updatelv2(software_id, selected_test_case, status, file_type) {
         update_certification_lv2(software_id, selected_test_case, status, file_type).then(function (data) {
-            @*window.location = redirect_link;*@
         })
     }
     function reset_view() {
@@ -449,13 +418,6 @@
             APP.backgroundColor = getComputedStyle(classElement).backgroundColor;
 
         }
-         @*MNUdivAppSwitch.innerHTML = MAS.getAppSwitch();*@
-
-        @*const thrFilePath = localStorage.getItem('thrFilePath');
-
-         inpFilePath.value = thrFilePath;*@
-
-        @*GBX.defaultURL = parent.inpFilePath.value ? parent.inpFilePath.value : GBX.defaultURL;*@
         // for testing
         if (location.hash && (location.hash.indexOf(".gbxml") != -1 || location.hash.indexOf(".xml") != 1)) {
             const url = location.hash.slice(1);
@@ -474,7 +436,6 @@
 
     function onloadThreejs() {
 
-        @*divLog.innerHTML += '<div>Loading Time (Millisecond): ' + (Date.now() - COR.timeStart).toLocaleString() + '<div>';*@
 
         APP.resetMenu();
     }
@@ -515,9 +476,9 @@
     }
 
     function buildLink(test_id) {
-        var url = "https://ashraedev01.file.core.windows.net/gbxml-test-file/standard-cases/";
+        var url = "https://schemaserverstorage.file.core.windows.net/gbxml-test-file/standard-cases/";
         url += test_id + ".gbxml";
-        url += "?sv=2019-12-12&ss=bfqt&srt=sco&sp=rwdlacupx&se=2022-01-04T14:49:59Z&st=2020-10-02T05:49:59Z&spr=https&sig=IH52C5thjGkKceqf0dPGxclZ302gpSqiUOqbeJQVxHw%3D";
+        url += "?sv=2019-12-12&ss=bfqt&srt=sco&sp=rwdlacupx&se=2030-01-12T00:05:25Z&st=2021-01-11T16:05:25Z&spr=https&sig=Dxl2qXpPcoQ85EHMK7onFVR%2FBH31mdzy83tXy4Vzfq4%3D";
         url += "&random=" + Math.random();
         return url;
     }
