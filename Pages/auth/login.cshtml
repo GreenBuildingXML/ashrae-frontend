@@ -49,13 +49,13 @@
 
     </div>
 </div>
-<script src="https://www.google.com/recaptcha/api.js?render=6LeYVscZAAAAAKu6caCFE-WH2OsBO9-nNZmhNzek"></script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LeBOBwaAAAAADuiZxzkebzGqplbsRRaSp8BYeT2"></script>
 <script>function sign_in(e) {
         e.preventDefault();
         let username = $("#username").val();
         let pwd = $("#password").val();
         grecaptcha.ready(function () {
-            grecaptcha.execute('6LeYVscZAAAAAKu6caCFE-WH2OsBO9-nNZmhNzek', { action: 'validate_captcha' }).then(function (token) {
+            grecaptcha.execute('6LeBOBwaAAAAADuiZxzkebzGqplbsRRaSp8BYeT2', { action: 'validate_captcha' }).then(function (token) {
                 login(username, pwd, token).then(function (data) {
                     window.location.href = "./software";
                 });

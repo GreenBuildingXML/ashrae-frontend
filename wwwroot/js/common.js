@@ -7,16 +7,19 @@
 function get_root() {
     /*development frontend test env*/
     //return "http://localhost:8080/";
+    //return "https://gbxml-viewer.azurewebsites.net/";
     /*production frontend test env*/
-    return "https://gbxml-viewer.azurewebsites.net/";
+    return "https://gbxmlvalidatorweb.azurewebsites.net/";
 }
 
 
 function get_root_Api() {
     /*development backend test env*/
     //return "http://localhost:8786/";
+    //return "https://gbxml-api.azurewebsites.net/";
+
     /*production backend test env*/
-    return "https://gbxml-api.azurewebsites.net/";
+    return "https://gbxmlvalidatorapi.azurewebsites.net/";
 }
 
 function get_url_parameter(sParam, no_decode) {
