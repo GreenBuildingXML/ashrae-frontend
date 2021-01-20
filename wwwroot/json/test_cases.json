@@ -2,21 +2,21 @@
   {
     "id": "test1",
     "label": "Test 1",
-    "name": "Multiple exterior wall elements",
-    "description": "Often time, BIM modelers put multiple wall elements together to form an exterior wall. There are many reasons to use such technique such as creating a wall with uneven surface, or separate one layer, for instance, the exterior insulation finishes system, from the primary structure, for manufacturer quantity take-off. In these cases, the exported gbXML model should capture the multiple layers of walls and combine them into one assembly for performance analysis.",
+    "name": "Exterior Wall with Multiple Layers",
+    "description": "Often times, BIM modelers put multiple wall elements together to form an exterior wall. There are many reasons to use such technique such as creating a wall with uneven surface, or separate one layer, for instance, the exterior insulation finishes system, from the primary structure, for manufacturer quantity take-off. In these cases, the exported gbXML model should capture the multiple layers of walls and combine them into one assembly for performance analysis.",
     "image": "test1.png"
   },
   {
     "id": "test2",
     "label": "Test 2",
-    "name": "Virtual space separator",
+    "name": "Zoning with Two Spaces",
     "description": " In BIM model, spaces are built according to drawings. Such spaces are being called architectural space. However, in performance analysis, for instance, energy simulation, spaces are often divided based by thermal zones, where the zones are separated by space function, orientation, air terminals etc. It is common to subdivide architecture spaces into thermal zones. Virtual space separator is the tool that used often to perform the space subdivision in a BIM software. This test case focuses on how well the gbXML export function can translate the virtual space separator into a gbXML model, and correctly identify the two thermal zones from one architecture space.",
     "image": "test2.png"
   },
   {
     "id": "test3",
     "label": "Test 3",
-    "name": "Half wall",
+    "name": "Disconnected Roof and Interior Wall",
     "description": "It is common to have a half wall in a space. The half wall are usually smaller walls what serves as a partition, but not completely disconnect two spaces. Technically a half wall can be any height short of the ceiling but they are typically about 3’ to 5’ tall, depending on the wall’s purpose and location. The test case provides a standard interpretation of such structure in the gbXML and a guideline to verify whether the BIM software can correctly export a space with a half wall",
     "image": "test3.png"
   },
