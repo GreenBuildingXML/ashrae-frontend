@@ -190,6 +190,7 @@
     var APP = {};
     var log_result = "";
     var tests = [];
+    var output = "";
     // total tests setttings;
     var passedTests = 0;
     var test_link = "";
@@ -237,6 +238,7 @@
 
                         }
                         tests = data['tests'];
+                        output = data['output'];
                         log_result = data['log'];
                         var failed_tests = data['failCounter'];
                         var successful_tests = data['successCounter'];
@@ -366,9 +368,9 @@
        
 
         $("#download-report-btn").click(function () {
-            let type = "application/json";
-            let name = "output_" + selected_test_case + ".json";
-            downloader(JSON.stringify(tests), type, name)
+            let type = "text/html";
+            let name = "output_" + selected_test_case + ".html";
+            downloader(output, type, name)
         })
         $("#download-log-btn").click(function () {
             let type = "application/text";
