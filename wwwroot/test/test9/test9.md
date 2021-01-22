@@ -1,4 +1,4 @@
-# Test Case 09 – Interior Window
+# Test Case 09 – Window Located Within an Interior Wall
 ## Test Description:
 It is common to find a concrete patio extended from a slab on grade foundation. In BIM model, the patio and slab on grade could be drawn in a same component. In such scenario, the exported gbXML model should correctly identify the slab on grade surface and patio surface from the
 ## Spaces / Rooms:

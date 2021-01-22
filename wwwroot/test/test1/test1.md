@@ -1,4 +1,4 @@
-# Test Case 01 – Multiple exterior wall elements
+# Test Case 01 –  Exterior Wall with Multiple Layers
 ## Test Description:
 Often time, BIM modelers put multiple wall elements together to form an exterior wall. There are many reasons to use such technique such as creating a wall with uneven surface, or separate one layer, for instance, the exterior insulation finishes system, from the primary structure, for manufacturer quantity take-off. In these cases, the exported gbXML model should capture the multiple layers of walls and combine them into one assembly for performance analysis.
 ## Spaces / Rooms/Surface:

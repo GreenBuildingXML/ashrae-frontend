@@ -1,6 +1,6 @@
 # Test Case 17 – Curved Wall
 ## Test Description:
-Curved wall is an attractive design element in buildings. It can be functioned as exterior wall, partitions and even ceilings. However, such shapes have long been a problem in the BIM to gbXML. The test case exames the BIM software capabilities on exporting an curved exterior wall into gbXML.
+Curved walls are an attractive design element in buildings. It can function as an exterior wall, a partition and even a ceiling. However, such shapes have long been a problem when exporting from BIM to gbXML. The test case exames the BIM software capabilities on exporting an curved exterior wall into gbXML.
 ## Spaces / Rooms:
 There is only one space in this test model. It is named as “level_1_space_1”. The space shape is the same as the building shape.
 ## Special Considerations:

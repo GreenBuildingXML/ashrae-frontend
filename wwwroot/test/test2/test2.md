@@ -1,4 +1,4 @@
-# Test Case 02 – Virtual space separator
+# Test Case 02 – Zoning with Two Spaces
 ## Test Description:
 In BIM model, spaces are built according to drawings. Such spaces are being called architectural space. However, in performance analysis, for instance, energy simulation, spaces are often divided based by thermal zones, where the zones are separated by space function, orientation, air terminals etc. It is common to subdivide architecture spaces into thermal zones. Virtual space separator is the tool that used often to perform the space subdivision in a BIM software. This test case focuses on how well the gbXML export function can translate the virtual space separator into a gbXML model, and correctly identify the two thermal zones from one architecture space.
 ## Spaces / Rooms/Surface:

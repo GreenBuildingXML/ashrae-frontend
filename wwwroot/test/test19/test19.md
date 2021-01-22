@@ -1,6 +1,6 @@
-# Test Case 19 – HVAC system and schedule
+# Test Case 19 – HVAC System and Schedule
 ## Test Description:
-HVAC is an essential building service system in every new and retrofit construction. It is also a critical component for evaluating a building’s energy performance as well as indoor air quality. To enhance the data interoperability, it is suggested that not only geometric, but also HVAC data can be exported from a BIM model. This test case focuses on testing a BIM software, when the described data is available, is capable of exporting HVAC data into a gbXML model. The HVAC system is a simple gas-based furnace adapted from the description in ASHRAE 90.1 Appendix C.
+HVAC is an essential building system in every new and retrofit construction. It is also a critical component for evaluating a building’s energy performance as well as indoor air quality. To enhance the data interoperability, it is suggested that not only geometric, but also HVAC data can be exported from a BIM model. This test case focuses on testing a BIM software, when the described data is available, is capable of exporting HVAC data into a gbXML model. The HVAC system is a simple gas-based furnace adapted from the description in ASHRAE 90.1 Appendix C.
 ## Spaces / Rooms:
 There is one space in this test model named as “level_1_space_1”.
 ## Special Considerations:

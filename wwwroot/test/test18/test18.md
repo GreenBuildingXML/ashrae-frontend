@@ -1,4 +1,4 @@
-# Test Case 18 – Window frame
+# Test Case 18 – Window Frame
 ## Test Description:
 The test case creates an integrated glazing system (IG) that consists of glazes and frames. It exams whether the BIM software is capable of exporting
 ## Spaces / Rooms:

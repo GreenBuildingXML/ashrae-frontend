@@ -1,4 +1,4 @@
-# Test Case 3 – Half wall
+# Test Case 3 – Disconnected Roof and Interior Wall
 ## Test Description:
 It is common to have a half wall in a space. The half wall are usually smaller walls what serves as a partition, but not completely disconnect two spaces. Technically a half wall can be any height short of the ceiling but they are typically about 3’ to 5’ tall, depending on the wall’s purpose and location. The test case provides a standard interpretation of such structure in the gbXML and a guideline to verify whether the BIM software can correctly export a space with a half wall.
 ## Spaces / Rooms:
