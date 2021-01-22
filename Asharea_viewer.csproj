@@ -44,5 +44,8 @@
     <Reference Include="VectorMath">
       <HintPath>..\..\gbxml_validator\packages\VectorMath.dll</HintPath>
     </Reference>
+    <Reference Include="VectorMath">
+      <HintPath>packages\VectorMath.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
