@@ -1,4 +1,4 @@
-# Test Case 11 – Dormer on the roof
+# Test Case 11 – Vaulted Ceiling With Dormer
 ## Test Description:
 This case is developed to test a pitched roof, which has a dormer, can be recognized correctly in the exported gbXML model. If the roof is successfully exported with the correct surface type, then the test is passed, else, failed.
 ## Spaces / Rooms:
