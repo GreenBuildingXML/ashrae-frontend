@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Asharea_viewer.Data.model
+namespace gbXMLValidatorWeb.Data.model
 {
     public class Info
     {

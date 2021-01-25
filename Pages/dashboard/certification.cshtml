@@ -1,5 +1,5 @@
 ﻿@page "/certification"
-@model Asharea_viewer.Pages.dashboard.certificationModel
+@model gbXMLValidatorWeb.Pages.dashboard.certificationModel
 @{ ViewData["Title"] = "Certification"; }
 @section sideInfo {
     <!-- Side info -->
@@ -15,7 +15,7 @@
             <div class="text-muted small mt-3">Software</div>
             <h5 class="font-weight-bold mt-2 selected_software"></h5>
             <hr class="border-light m-0">
-            <div class="text-muted small pt-3 text-uppercase">Certification Level</div>
+            <div class="text-muted small pt-3">Certification Level</div>
             <h5 class="mb-4 font-weight-bold mt-2 certification_level">
             </h5>
 
@@ -43,8 +43,8 @@
                     </h5>
 
                     <div id="start_level1">
-                        <div>Start the level 1 gbXML certification validation for</div>
-                        <div>software: <strong class="selected_software">Autodesk Revit</strong></div>
+                        <div>Perform basic schema validation and view any gbXML file produced by</div>
+                        <div>the software: <strong class="selected_software">Autodesk Revit</strong></div>
                         <div class="mt-3">
                             <button class="btn btn-primary ui-w-120 upload_file_btn">Validate</button>
                             <button class="btn btn-secondary ui-w-120" id="view_lv1_btn" style="display: none;">View</button>
@@ -79,8 +79,8 @@
                         <div class="progress my-3" id="progress-bar-custom">
                             <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated level2_percentage" style="width: 0;">30%</div>
                         </div>
-                        <div>Great Job! You have completed <span class="level2_percentage">30%</span>  of the test cases.</div>
-                        <div>Keep the good Work!</div>
+                        <div>You've completed <span class="level2_percentage">30%</span>  of the 19 test cases.</div>
+                        
                         <div class="mt-3">
                             <button class="btn btn-primary ui-w-120" id="process_level2_btn">Continue</button>
                             <button class="btn btn-secondary ui-w-120" id="view_certification_btn" style="display: none;">Certification</button>

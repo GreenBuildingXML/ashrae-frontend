@@ -2,63 +2,63 @@
   {
     "id": "test1",
     "label": "Test 1",
-    "name": "Multiple exterior wall elements",
-    "description": "Often time, BIM modelers put multiple wall elements together to form an exterior wall. There are many reasons to use such technique such as creating a wall with uneven surface, or separate one layer, for instance, the exterior insulation finishes system, from the primary structure, for manufacturer quantity take-off. In these cases, the exported gbXML model should capture the multiple layers of walls and combine them into one assembly for performance analysis.",
+    "name": "Exterior Wall with Multiple Layers",
+    "description": "Often times, BIM modelers put multiple wall elements together to form an exterior wall. There are many reasons to use such technique such as creating a wall with uneven surface, or separate one layer, for instance, the exterior insulation finishes system, from the primary structure, for manufacturer quantity take-off. In these cases, the exported gbXML model should capture the multiple layers of walls and combine them into one assembly for performance analysis.",
     "image": "test1.png"
   },
   {
     "id": "test2",
     "label": "Test 2",
-    "name": "Virtual space separator",
+    "name": "Zoning with Two Spaces",
     "description": " In BIM model, spaces are built according to drawings. Such spaces are being called architectural space. However, in performance analysis, for instance, energy simulation, spaces are often divided based by thermal zones, where the zones are separated by space function, orientation, air terminals etc. It is common to subdivide architecture spaces into thermal zones. Virtual space separator is the tool that used often to perform the space subdivision in a BIM software. This test case focuses on how well the gbXML export function can translate the virtual space separator into a gbXML model, and correctly identify the two thermal zones from one architecture space.",
     "image": "test2.png"
   },
   {
     "id": "test3",
     "label": "Test 3",
-    "name": "Half wall",
+    "name": "Disconnected Roof and Interior Wall",
     "description": "It is common to have a half wall in a space. The half wall are usually smaller walls what serves as a partition, but not completely disconnect two spaces. Technically a half wall can be any height short of the ceiling but they are typically about 3’ to 5’ tall, depending on the wall’s purpose and location. The test case provides a standard interpretation of such structure in the gbXML and a guideline to verify whether the BIM software can correctly export a space with a half wall",
     "image": "test3.png"
   },
   {
     "id": "test4",
     "label": "Test 4",
-    "name": "Multi-level ceiling",
+    "name": "Multiple Ceiling Levels",
     "description": "Multi-level drop ceiling is common to find in many buildings such as hotels and offices. This test models a multi-level drop ceiling in a space and exam whether a BIM software has the capability of capturing the plenum space correctly in the exported gbXML model.",
     "image": "test4.png"
   },
   {
     "id": "test5",
     "label": "Test 5",
-    "name": "Raised floor and drop ceiling",
+    "name": "Raised Floor and Drop Ceiling",
     "description": "Raised floor and drop ceilings are commonly seen structures in many commercial buildings. Raised floor provides an elevated floor above the substrate to create a hidden passage for various reasons such as air flows or mechanical and electrical service passage. Similarly, drop ceiling creates a plenum space to hide building infrastructures such as piping, wiring and duck work. It is important to identify these spaces as plenum and exported into gbXML. This test case will include both structures in a two-story BIM model. The first story will have an 8” drop ceiling space with 4” thick ceiling. The second story will have an 8” raised floor space with 4” thick flooring.",
     "image": "test5.png"
   },
   {
     "id": "test6",
     "label": "Test 6",
-    "name": "Envelope Information",
+    "name": "Construction Information of Multiple Layers",
     "description": "",
     "image": "test6.png"
   },
   {
     "id": "test7",
     "label": "Test 7",
-    "name": "Room inside a room",
+    "name": "Room Inside a Room",
     "description": "",
     "image": "test7.png"
   },
   {
     "id": "test8",
     "label": "Test 8",
-    "name": "Appressed Floor and Ceiling with Thicknes",
+    "name": "Appressed Floor and Ceiling with Thickness",
     "description": "",
     "image": "test8.png"
   },
   {
     "id": "test9",
     "label": "Test 9",
-    "name": "Interior Window",
+    "name": "Window Located Within an Interior Wall",
     "description": "",
     "image": "test8.png"
   },
@@ -72,28 +72,28 @@
   {
     "id": "test11",
     "label": "Test 11",
-    "name": "Dormer on the roof",
+    "name": "Vaulted Ceiling With Dormer",
     "description": "",
     "image": "test11.png"
   },
   {
     "id": "test12",
     "label": "Test 12",
-    "name": "Concave Space",
+    "name": "Concave Shaped Zones",
     "description": "",
     "image": "test12.png"
   },
   {
     "id": "test13",
     "label": "Test 13",
-    "name": "Balcony",
+    "name": "Missed Balcony",
     "description": "",
     "image": "test13.png"
   },
   {
     "id": "test14",
     "label": "Test 14",
-    "name": "Roof overhang",
+    "name": "Roof With Extended Overhang",
     "description": "",
     "image": "test14.png"
   },
@@ -114,21 +114,21 @@
   {
     "id": "test17",
     "label": "Test 17",
-    "name": "Curvy Wall",
+    "name": "Curved Wall",
     "description": "",
     "image": "test17.png"
   },
   {
     "id": "test18",
     "label": "Test 18",
-    "name": "Window frame",
+    "name": "Window Frame",
     "description": "",
     "image": "test18.png"
   },
   {
     "id": "test19",
     "label": "Test 19 (Optional)",
-    "name": "HVAC system and schedule",
+    "name": "HVAC System and Schedule",
     "description": "",
     "image": "test19.png"
   }

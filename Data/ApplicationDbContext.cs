@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Asharea_viewer.Data
+namespace gbXMLValidatorWeb.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

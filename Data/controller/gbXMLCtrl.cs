@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using DOEgbXML;
-using Asharea_viewer.Data.model;
+using gbXMLValidatorWeb.Data.model;
 using System.Xml;
 using HtmlAgilityPack;
 using System.Xml.Schema;
 using Microsoft.AspNetCore.Http;
 
-namespace Asharea_viewer.Data.controller
+namespace gbXMLValidatorWeb.Data.controller
 {
     public class gbXMLCtrl : Controller
     {

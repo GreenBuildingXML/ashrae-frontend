@@ -224,10 +224,10 @@ function getCertificationLevel(lv) {
     var level = "N/A";
     switch(lv) {
         case "LEVEL1":
-            level = "Level1";
+            level = "Level 1";
             break;
         case "LEVEL2":
-            level = "Level2";
+            level = "Level 2";
             break;
         default:
             break;

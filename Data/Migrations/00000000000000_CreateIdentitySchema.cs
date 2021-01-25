@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Asharea_viewer.Data.Migrations
+namespace gbXMLValidatorWeb.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
