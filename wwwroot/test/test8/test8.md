@@ -1,4 +1,4 @@
-# Test Case 08 – Appressed Floor and Ceiling with Thickness
+# Test Case 8 – Appressed Floor and Ceiling with Thickness
 ## Test Description:
 In BIM model, floors and ceilings typically have more than 1” thickness.  When those building elements are exported into gbXML model, inconsistent geometric interpretations are found in BIM software. This test case provides a standard approach to handle floor and ceiling thickness in the exported gbXML model.
 ## Spaces / Rooms:
@@ -7,6 +7,7 @@ There are two spaces in this test model. One space is located at the first floor
 1.	The model is 10’ x 10’ x 22’ (including floor and roof thickness)
 2.	The model has two stories and each story is one space.
 3.	There is no empty space between the ceiling in lower level and the floor in upper level.
+
 ### Space Volumes and Areas
 | Name            | Volume    | Area  |
 |-----------------|-----------|-------|

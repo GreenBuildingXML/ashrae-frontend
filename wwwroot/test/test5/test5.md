@@ -1,4 +1,4 @@
-# Test Case 05 – Raised Floor and Drop Ceiling
+# Test Case 5 – Raised Floor and Drop Ceiling
 ## Test Description:
 Raised floor and drop ceilings are commonly seen structures in many commercial buildings. Raised floor provides an elevated floor above the substrate to create a hidden passage for various reasons such as air flows or mechanical and electrical service passage. Similarly, drop ceiling creates a plenum space to hide building infrastructures such as piping, wiring and duck work. It is important to identify these spaces as plenum and exported into gbXML. This test case will include both structures in a two-story BIM model. The first story will have an 8” drop ceiling space with 4” thick ceiling. The second story will have an 8” raised floor space with 4” thick flooring.
 ## Spaces / Rooms:

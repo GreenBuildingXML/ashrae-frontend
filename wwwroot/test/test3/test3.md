@@ -6,6 +6,7 @@ There is just one spaces in this test model. It is located at the first floor, n
 ## Special Considerations:
 1.	The model is 10’8” x 10’8” (outer line)
 2.	A 5’ half wall is located in the center of the space with a thickness of 8”.
+
 ### Space Volumes and Areas
 
 | Name            | Volume    | Area  |

@@ -1,4 +1,4 @@
-# Test Case 06 – Construction Information of Multiple Layers
+# Test Case 6 – Construction Information of Multiple Layers
 ## Test Description:
 Building envelope contains critical information for performance analysis, including the assembly order, the thermal resistance of each layer, and the reflectance of the outmost layer. When exporting a BIM model to gbXML, such information should be preserved and correctly mapped. This test case will exam the capability of a BIM software in exporting the envelope information.
 ## Spaces / Rooms:
@@ -9,6 +9,7 @@ There is just one spaces in this test model. It is located at the first floor, n
 3.	Exterior wall is a typical brick wall, and its structure is 2x6 wood stud.
 4.	Roof is a typical metal roof, and its structure is 2x10 roof rafter.
 5.	Floor is a slab on grade floor.
+
 ### Space Volumes and Areas
 | Name            | Volume    | Area  |
 |-----------------|-----------|-------|
