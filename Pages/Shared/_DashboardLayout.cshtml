@@ -124,7 +124,7 @@
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a href="javascript:void(0)" class="dropdown-item edit_profile_btn"><i class="fas fa-user-edit"></i> &nbsp; Edit Profile</a>
+                                    <a href="javascript:void(0)" class="dropdown-item edit_profile_btn"><i class="fas fa-user-edit"></i> &nbsp;Edit Profile</a>
                                     <a href="javascript:void(0)" class="dropdown-item" id="reset_password_btn"><i class="fas fa-key"></i> &nbsp; Reset Password</a>
                                     <div class="dropdown-divider"></div>
                                     <a href="javascript:void(0)" class="dropdown-item logout_btn" id=""><i class="ion ion-ios-log-out text-danger"></i> &nbsp; Log Out</a>
@@ -191,21 +191,21 @@
                     <div class="form-row">
                         <div class="form-group col mb-0">
                             <label class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="mem_first_name">
+                            <input type="text" class="form-control" id="mem_first_name" placeholder="First Name">
                         </div>
                         <div class="form-group col mb-0">
                             <label class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="mem_last_name">
+                            <input type="text" class="form-control" id="mem_last_name" placeholder="Last Name">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col">
                             <label class="form-label">Organization</label>
-                            <input type="text" class="form-control" id="mem_organization" placeholder="...">
+                            <input type="text" class="form-control" id="mem_organization" placeholder="Organization">
                         </div>
                         <div class="form-group col">
-                            <label class="form-label">phone</label>
-                            <input type="text" class="form-control" id="mem_phone">
+                            <label class="form-label">Phone</label>
+                            <input type="text" class="form-control" id="mem_phone" placeholder="Phone">
                         </div>
                     </div>
                 </div>
@@ -229,20 +229,20 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="form-label">Old Password *</label>
-                        <input type="password" class="form-control reuqired is_invalid" id="old_password" name="old_password">
+                        <input type="password" class="form-control reuqired is_invalid" id="old_password" name="old_password" placeholder="Old Password">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Password *</label>
-                        <input type="password" class="form-control reuqired is_invalid" id="password" name="password">
+                        <label class="form-label">New Password *</label>
+                        <input type="password" class="form-control reuqired is_invalid" id="password" name="password" placeholder="New Password">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Confirm Password *</label>
-                        <input type="password" class="form-control required is_invalid" id="confirm" name="confirm">
+                        <label class="form-label">Confirm New Password *</label>
+                        <input type="password" class="form-control required is_invalid" id="confirm" name="confirm" placeholder="Confirm New Password">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onClick="validatePassword(event);">Change password</button>
+                    <button type="button" class="btn btn-primary" onClick="validatePassword(event);">Change Password</button>
 
                 </div>
             </form>
@@ -343,8 +343,8 @@
                 },
                 message: {
                     password: {
-                        pwcheck: "Your password must contain at least one lowercase letter and one number digit",
-                        minlength: "Your password must be at least 5 characters long"
+                        pwcheck: "Your password must contain at least one lowercase letter and one number digit.",
+                        minlength: "Your password must be at least 5 characters long."
                     }
                 }
             });
