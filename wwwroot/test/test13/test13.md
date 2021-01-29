@@ -1,6 +1,6 @@
 # Test Case 13 – Missed Balcony
 ## Test Description:
-A balcony is a platform that is part of an upper floor with a balustrade only at the front. Besides being an extra open space to the building, balconies provide shade to the lower floors. Therefore, it is important to capture this type of structure correctly in the gbXML model.
+A balcony is a platform that is part of an upper floor with a balustrade only at the front. Besides being an extra open space of the building, balconies provide shade to the lower floors. Therefore, it is important to capture this type of structure correctly in the gbXML model.
 ## Spaces / Rooms:
 There are two spaces in this test model. One space is located on the first floor, named “level_1_space_1”. The other one is located on the second floor, named “level_2_space_1”.
 ## Special Considerations:
