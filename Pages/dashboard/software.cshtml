@@ -1,5 +1,5 @@
 ﻿@page "/software"
-@model Asharea_viewer.Pages.dashboard.softwareModel
+@model gbXMLValidatorWeb.Pages.dashboard.softwareModel
 @{ ViewData["Title"] = "Software"; }
 
 @section sideInfo {
@@ -9,8 +9,8 @@
             <img src="assets/img/avatars/profile_default.jpg" alt="" class="ui-w-80 rounded-circle mt-2 mb-3 user-image">
             <h5 class="mb-2 u_full_name"></h5>
             <div class="text-muted small"></div>
-            @*<button class="btn-outline-primary btn btn-round mt-3 edit_profile_btn"><i class="fas fa-user-edit"></i> Edit Profile</button>*@
-            @*<button class="btn-outline-primary btn btn-round mt-3" id="reset_password_btn"><i class="fas fa-key"></i> Reset Password</button>*@
+            @*<button class="btn-outline-primary btn btn-round mt-3 edit_profile_btn"><i class="fas fa-user-edit"></i>Edit Profile</button>*@
+            @*<button class="btn-outline-primary btn btn-round mt-3" id="reset_password_btn"><i class="fas fa-key"></i>  Reset Password</button>*@
 
         </div>
         <hr class="border-light m-0">
@@ -19,7 +19,7 @@
                 Contact Information
             </h5>
             <div class="mb-2">
-                <span class="text-muted">Email Address:</span>
+                <span class="text-muted">Email Address</span>
                 <div class="mt-2 font-weight-bold text-dark u_email"></div>
             </div>
 
@@ -56,7 +56,7 @@
         <div class="tab-pane fade show active" id="software">
             <div class="card mb-4">
                 <h5 class="card-header with-elements">
-                    <div class="card-header-title">Software (<span id="software_cnt">0</span>)</div>
+                    <div class="card-header-title">Software List (<span id="software_cnt">0</span>)</div>
                     <div class="card-header-elements ml-auto">
                         <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#add-software-model">
                             <i class="ion ion-md-add"></i> Add
@@ -80,12 +80,12 @@
                             <div class="card-body">
 
                                 <div class="text-center">
-                                    <h6>Ashrae gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webinar</h6>
                                 </div>
                                 <hr class="d-lg-none w-100 my-2">
                                 <small class="text-danger text-left py-3 d-block font-weight-bold">Sun, July 19,2020 1:15 PM PDT</small>
                                 <div class="text-center">
-                                    <h6>Ashrae gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webinar</h6>
                                     <h6>Validator Education 101</h6>
                                 </div>
                             </div>
@@ -96,12 +96,12 @@
                             <div class="card-body">
 
                                 <div class="text-center">
-                                    <h6>Ashrae gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webinar</h6>
                                 </div>
                                 <hr class="d-lg-none w-100 my-2">
                                 <small class="text-danger text-left py-3 d-block font-weight-bold">Sun, July 19,2020 1:15 PM PDT</small>
                                 <div class="text-center">
-                                    <h6>Ashrae gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webinar</h6>
                                     <h6>Validator Education 101</h6>
                                 </div>
                             </div>
@@ -112,12 +112,12 @@
                             <div class="card-body">
 
                                 <div class="text-center">
-                                    <h6>Ashrae gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webinar</h6>
                                 </div>
                                 <hr class="d-lg-none w-100 my-2">
                                 <small class="text-danger text-left py-3 d-block font-weight-bold">Sun, July 19,2020 1:15 PM PDT</small>
                                 <div class="text-center">
-                                    <h6>Ashrae gbXML Webniar</h6>
+                                    <h6>Ashrae gbXML Webinar</h6>
                                     <h6>Validator Education 101</h6>
                                 </div>
                             </div>
@@ -241,11 +241,11 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col mb-0">
-                        <label class="form-label">Software Name*</label>
+                        <label class="form-label">Software Name *</label>
                         <input type="text" class="form-control" id="new_sw_name" placeholder="Software Name">
                     </div>
                     <div class="form-group col mb-0">
-                        <label class="form-label">Version*</label>
+                        <label class="form-label">Version *</label>
                         <input type="text" class="form-control" id="new_sw_version" placeholder="Version">
                     </div>
                 </div>
@@ -287,11 +287,11 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col mb-0">
-                        <label class="form-label">Software Name*</label>
+                        <label class="form-label">Software Name *</label>
                         <input type="text" class="form-control" id="sw_name" placeholder="Software Name">
                     </div>
                     <div class="form-group col mb-0">
-                        <label class="form-label">Version*</label>
+                        <label class="form-label">Version *</label>
                         <input type="text" class="form-control" id="sw_version" placeholder="Version">
                     </div>
                 </div>
@@ -343,11 +343,11 @@
         $.validator.addMethod("pwcheck", function (value, element) {
             return /[a-z]/.test(value) // has a lowercase letter
                 && /\d/.test(value) // has a digit
-        }, "At least one lowercase letter and one number digit");
+        }, "Include at least one lowercase letter and one numerical digit.");
 
         $.validator.addMethod("notEqual", function (value, element, param) {
             return this.optional(element) || value != $(param).val();
-        }, "Your new password cannot be same as old password.");
+        }, "Your new password cannot be the same as the old password.");
 
         $(".new_sw_status").click(function () {
             let id = $(this).attr("id");

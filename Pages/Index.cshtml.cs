@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 
-namespace Asharea_viewer.Pages
+namespace gbXMLValidatorWeb.Pages
 {
     public class IndexModel : PageModel
     {
