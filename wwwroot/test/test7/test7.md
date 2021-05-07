@@ -1,4 +1,4 @@
-# Test Case 7 – Space inside another space
+# Test Case 7 – Room Inside a Room
 ## Test Description:
 Space enclosing other space is common to find in many commercial buildings. Such layout challenges BIM software to correctly identify the inner room spaces whose bounding surfaces are internal (partition walls).
 ## Spaces / Rooms:

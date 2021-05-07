@@ -1,4 +1,4 @@
-# Test Case 12 – Concave Space
+# Test Case 12 – Concave Shaped Zones
 ## Test Description:
 Most space in buildings are rectangular, and they can be successfully exported into a gbXML model. However, sometimes designers design space in a concave shape, which means one of the inner angles is greater than 180 degree. These spaces could results issues in exported gbXML models. In this test case, software should successfully export a concave shape space to a gbXML model.
 ## Spaces / Rooms:

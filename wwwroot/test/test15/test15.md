@@ -1,6 +1,6 @@
 # Test Case 15 – Curtain Wall
 ## Test Description:
-Curtain wall is a thin, aluminum framed building cladding system that is used to keep the interior of the building remains airtight. The system usually uses glass as the panel between its frame. This test case creates a curtain wall system in a 10’x10’ building. The purpose is to test the capability of exporting the curtain wall into a gbXML model.
+A curtain wall is a thin, aluminum framed building cladding system that is used to keep the interior of the building remains airtight. The system usually uses glass as the panel between its frame. This test case creates a curtain wall system in a 10’x10’ building. The purpose is to test the capability of exporting the curtain wall into a gbXML model.
 ## Spaces / Rooms:
 There is only one space in this test model. It is named as “level_1_space_1”. The space shape is the same as the building shape.
 ## Special Considerations:

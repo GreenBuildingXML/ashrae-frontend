@@ -1,4 +1,4 @@
-# Test Case 14 – Roof overhang
+# Test Case 14 – Roof With Extended Overhang
 ## Test Description:
 Typically, a roof will have overhangs for various functions, such as roof ventilation and rainwater controls. Overhangs also provide shading to the walls under them. Therefore, it is critical to model overhangs in performance analysis. This test case will demonstrate how overhang can be modeled in the gbXML as well as helps the software developer to test the gbXML export function regarding roof overhangs.
 ## Spaces / Rooms:

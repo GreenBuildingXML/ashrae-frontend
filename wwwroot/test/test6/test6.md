@@ -1,4 +1,4 @@
-# Test Case 06 – Envelope Information
+# Test Case 06 – Construction Information of Multiple Layers
 ## Test Description:
 Building envelope contains critical information for performance analysis, including the assembly order, the thermal resistance of each layer, and the reflectance of the outmost layer. When exporting a BIM model to gbXML, such information should be preserved and correctly mapped. This test case will exam the capability of a BIM software in exporting the envelope information.
 ## Spaces / Rooms:

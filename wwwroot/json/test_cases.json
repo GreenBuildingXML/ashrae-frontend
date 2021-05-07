@@ -23,42 +23,42 @@
   {
     "id": "test4",
     "label": "Test 4",
-    "name": "Multi-level ceiling",
+    "name": "Multiple Ceiling Levels",
     "description": "Multi-level drop ceiling is common to find in many buildings such as hotels and offices. This test models a multi-level drop ceiling in a space and exam whether a BIM software has the capability of capturing the plenum space correctly in the exported gbXML model.",
     "image": "test4.png"
   },
   {
     "id": "test5",
     "label": "Test 5",
-    "name": "Raised floor and drop ceiling",
+    "name": "Raised Floor and Drop Ceiling",
     "description": "Raised floor and drop ceilings are commonly seen structures in many commercial buildings. Raised floor provides an elevated floor above the substrate to create a hidden passage for various reasons such as air flows or mechanical and electrical service passage. Similarly, drop ceiling creates a plenum space to hide building infrastructures such as piping, wiring and duck work. It is important to identify these spaces as plenum and exported into gbXML. This test case will include both structures in a two-story BIM model. The first story will have an 8” drop ceiling space with 4” thick ceiling. The second story will have an 8” raised floor space with 4” thick flooring.",
     "image": "test5.png"
   },
   {
     "id": "test6",
     "label": "Test 6",
-    "name": "Envelope Information",
+    "name": "Construction Information of Multiple Layers",
     "description": "",
     "image": "test6.png"
   },
   {
     "id": "test7",
     "label": "Test 7",
-    "name": "Room inside a room",
+    "name": "Room Inside a Room",
     "description": "",
     "image": "test7.png"
   },
   {
     "id": "test8",
     "label": "Test 8",
-    "name": "Appressed Floor and Ceiling with Thicknes",
+    "name": "Appressed Floor and Ceiling with Thickness",
     "description": "",
     "image": "test8.png"
   },
   {
     "id": "test9",
     "label": "Test 9",
-    "name": "Interior Window",
+    "name": "Window Located Within an Interior Wall",
     "description": "",
     "image": "test8.png"
   },
@@ -72,28 +72,28 @@
   {
     "id": "test11",
     "label": "Test 11",
-    "name": "Dormer on the roof",
+    "name": "Vaulted Ceiling With Dormer",
     "description": "",
     "image": "test11.png"
   },
   {
     "id": "test12",
     "label": "Test 12",
-    "name": "Concave Space",
+    "name": "Concave Shaped Zones",
     "description": "",
     "image": "test12.png"
   },
   {
     "id": "test13",
     "label": "Test 13",
-    "name": "Balcony",
+    "name": "Missed Balcony",
     "description": "",
     "image": "test13.png"
   },
   {
     "id": "test14",
     "label": "Test 14",
-    "name": "Roof overhang",
+    "name": "Roof With Extended Overhang",
     "description": "",
     "image": "test14.png"
   },
@@ -114,21 +114,21 @@
   {
     "id": "test17",
     "label": "Test 17",
-    "name": "Curvy Wall",
+    "name": "Curved Wall",
     "description": "",
     "image": "test17.png"
   },
   {
     "id": "test18",
     "label": "Test 18",
-    "name": "Window frame",
+    "name": "Window Frame",
     "description": "",
     "image": "test18.png"
   },
   {
     "id": "test19",
     "label": "Test 19 (Optional)",
-    "name": "HVAC system and schedule",
+    "name": "HVAC System and Schedule",
     "description": "",
     "image": "test19.png"
   }
